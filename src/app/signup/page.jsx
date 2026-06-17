@@ -1,143 +1,165 @@
-'use client'
+'use client';
 
-import Link from "next/link";
-import React from "react";
-import { FaEnvelope, FaGoogle, FaLock, FaUser } from "react-icons/fa";
-import { PiBracketsCurlyBold } from "react-icons/pi";
-
+import Link from 'next/link';
+import React from 'react';
+import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa';
+import { PiBracketsCurlyBold } from 'react-icons/pi';
 
 function Signuppage() {
-
-
-
   return (
-    <section className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md bg-[#111111] border border-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-amber-50 px-4 py-10">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center text-3xl">
+            🍽️
+          </div>
+        </div>
 
         {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+          <h1 className="text-3xl font-bold text-gray-900">
             Create Account
           </h1>
-          <p className="text-gray-400 mt-2">
-            Join us and start your journey today
+
+          <p className="text-gray-500 mt-2">
+            Join RecipeHub and start sharing delicious recipes
           </p>
         </div>
 
         {/* Form */}
-        <form    className="space-y-5">
+        <form className="space-y-5">
 
-          {/* Full Name */}
+          {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Full Name
             </label>
 
-            <div className="flex items-center border border-gray-700 rounded-lg px-3 py-3 bg-[#1A1A1A] focus-within:border-cyan-500 transition">
-              <FaUser className="text-gray-500 mr-3" />
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition">
+              <FaUser className="text-gray-400 mr-3" />
 
               <input
                 name="Name"
                 type="text"
                 required
                 placeholder="Enter your full name"
-                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
+                className="w-full bg-transparent outline-none text-gray-800 placeholder:text-gray-400"
               />
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Email Address
             </label>
 
-            <div className="flex items-center border border-gray-700 rounded-lg px-3 py-3 bg-[#1A1A1A] focus-within:border-cyan-500 transition">
-              <FaEnvelope className="text-gray-500 mr-3" />
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition">
+              <FaEnvelope className="text-gray-400 mr-3" />
 
               <input
                 name="Email"
                 type="email"
                 required
                 placeholder="Enter your email"
-                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
+                className="w-full bg-transparent outline-none text-gray-800 placeholder:text-gray-400"
               />
             </div>
           </div>
 
-          {/* Image URL */}
+          {/* Profile Image */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Profile Image URL
             </label>
 
-            <div className="flex items-center border border-gray-700 rounded-lg px-3 py-3 bg-[#1A1A1A] focus-within:border-cyan-500 transition">
-              <PiBracketsCurlyBold className="text-gray-500 mr-3" />
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition">
+              <PiBracketsCurlyBold className="text-gray-400 mr-3" />
 
               <input
                 name="Image"
                 type="url"
                 required
                 placeholder="Enter profile image URL"
-                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
+                className="w-full bg-transparent outline-none text-gray-800 placeholder:text-gray-400"
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Password
             </label>
 
-            <div className="flex items-center border border-gray-700 rounded-lg px-3 py-3 bg-[#1A1A1A] focus-within:border-cyan-500 transition">
-              <FaLock className="text-gray-500 mr-3" />
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition">
+              <FaLock className="text-gray-400 mr-3" />
 
               <input
                 name="Password"
                 type="password"
                 required
                 placeholder="Create a strong password"
-                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
+                className="w-full bg-transparent outline-none text-gray-800 placeholder:text-gray-400"
               />
             </div>
           </div>
 
-         
-          {/* Register Button */}
+          {/* Terms */}
+          <label className="flex items-start gap-2 text-sm text-gray-600 cursor-pointer">
+            <input
+              type="checkbox"
+              required
+              className="mt-1 accent-orange-500"
+            />
+            <span>
+              I agree to the{" "}
+              <span className="text-orange-500 font-medium">
+                Terms & Conditions
+              </span>{" "}
+              and{" "}
+              <span className="text-orange-500 font-medium">
+                Privacy Policy
+              </span>
+            </span>
+          </label>
+
+          {/* Signup Button */}
           <button
             type="submit"
-            className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-medium transition duration-300"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
           >
             Create Account
           </button>
 
-
           {/* Divider */}
-          <div className="relative text-center text-sm text-gray-500">
-            <span className="bg-[#111111] px-3 relative z-10">
+          <div className="relative flex items-center justify-center py-2">
+            <div className="absolute w-full border-t border-gray-200"></div>
+
+            <span className="relative bg-white px-4 text-sm text-gray-400">
               Or continue with
             </span>
-
-            <div className="absolute top-1/2 left-0 w-full border-t border-gray-700"></div>
           </div>
 
-          {/* Google Button */}
+          {/* Google Signup */}
           <button
-      
             type="button"
-            className="w-full border border-gray-700 bg-[#1A1A1A] py-3 rounded-lg flex items-center justify-center gap-2 text-gray-300 hover:bg-[#222222] transition"
+            className="w-full border border-gray-200 bg-white py-3 rounded-xl flex items-center justify-center gap-3 text-gray-700 hover:bg-gray-50 transition-all duration-300"
           >
             <FaGoogle className="text-red-500" />
-            <span className="text-sm">Continue with Google</span>
+            <span className="font-medium">
+              Continue with Google
+            </span>
           </button>
 
-          {/* Login Link */}
-          <p className="text-center text-sm text-gray-400">
+          {/* Sign In */}
+          <p className="text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link
               href="/signin"
-              className="text-cyan-400 font-medium hover:text-cyan-300 transition"
+              className="text-orange-500 font-semibold hover:text-orange-600 transition"
             >
               Sign In
             </Link>

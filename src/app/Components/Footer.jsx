@@ -11,7 +11,7 @@ function FooterPage() {
         <div className="space-y-4">
           <div className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-white tracking-wider">
-              Recipes<span className="text-green-500">Hub</span>
+              Recipe<span className="text-orange-500">Hub</span>
             </span>
           </div>
           <p className="text-sm text-gray-400 leading-relaxed">

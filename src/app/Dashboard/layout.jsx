@@ -1,12 +1,12 @@
-import React from 'react'
+import { SideNavigation } from "../Components/DashboardSidebar";
 
-function Dashboardlayout (children) {
+
+export default function DashboardLayout({ children }) {
   return (
-    <div>
-        
-<div>{children}</div>
+    <div className=" md:flex   min-h-screen">
+      <SideNavigation></SideNavigation>
+      <main className="flex-1">{children}</main>
+      
     </div>
-  )
+  );
 }
-
-export default Dashboardlayout 
