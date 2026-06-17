@@ -50,7 +50,7 @@ export default function Navbarpage() {
         {/* Right Actions */}
         <div className="flex items-center gap-2">
           {/* Profile Button - Desktop */}
-          <Link
+          {/* <Link
             href="/profile"
             className="hidden md:flex items-center gap-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors"
           >
@@ -59,8 +59,13 @@ export default function Navbarpage() {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
             <span>Profile</span>
+          </Link> */}
+          <Link
+            href="/signin"
+            className="px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-black hover:bg-gray-100 transition-all duration-200"
+          >
+            Login
           </Link>
-
           
 
           {/* Hamburger */}
