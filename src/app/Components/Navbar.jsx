@@ -17,13 +17,13 @@ export default function Navbarpage() {
 
   return (
   <div className="sticky top-0 z-50 bg-white/70 backdrop-blur-md">
- <nav className="bg-orange-50 px-3  mt-5  w-11/12 rounded-3xl mx-auto  font-sans">
+ <nav className="bg-orange-50 px-3  mt-5 mb-5 mx-5  w-11/12 rounded-3xl mx-auto  font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 {/* Logo */}
 <Link href="/" className="flex items-center gap-2 flex-shrink-0">
  
   <span className="text-lg font-medium text-gray-900">
-    Recipe <span className="text-green-600">Hub</span>
+    Recipes <span className="text-green-600">Hub</span>
   </span>
 </Link>
 

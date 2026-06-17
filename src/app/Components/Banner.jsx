@@ -26,7 +26,7 @@ export default function BannerPage() {
 
           <p className="text-[#4A6080] text-base sm:text-lg max-w-md mb-8 leading-relaxed">
             Explore thousands of homemade recipes from around the world. Whether
-            you&apos;re a beginner or a pro chef, RecipeHub helps you find,
+            you &apos;re a beginner or a pro chef, RecipeHub helps you find,
             share, and save your favorites.
           </p>
 
