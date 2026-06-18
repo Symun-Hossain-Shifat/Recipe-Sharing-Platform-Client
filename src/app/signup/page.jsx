@@ -1,8 +1,11 @@
 'use client';
 
 import { authClient } from '@/lib/auth-client';
+
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa';
 import { PiBracketsCurlyBold } from 'react-icons/pi';
 
@@ -23,7 +26,12 @@ function Signuppage() {
     image: image ,
     callbackURL: '/signin',
 });
-
+if (data?.user) {
+  toast.success("Registration Successful 🎉");
+  redirect('/signin')
+} else if (error) {
+  toast.error(`Registration Failed! ${error?.message}`);
+}
 
 console.log(error)
 console.log(data )

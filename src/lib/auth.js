@@ -15,4 +15,23 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    additionalFields: {
+      role: {
+        defaultValue: 'User' ,
+      },
+      isPremium : {
+         defaultValue  : false 
+      },
+      isBlocked : {
+        defaultValue : false 
+      } ,
+      createdAt : {
+        defaultValue : new Date()
+      },
+      updatedAt : {
+        defaultValue : 'Never Updated'
+      }
+    }, 
+  }
 });
