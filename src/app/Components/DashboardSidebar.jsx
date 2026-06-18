@@ -9,10 +9,12 @@ import {
   BiHeart,
   BiPlusCircle,
 } from "react-icons/bi";
-import { BsHouse, BsPerson } from "react-icons/bs";
+import { BsFileEarmarkBarGraph, BsHouse, BsPeople, BsPerson } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
+import { FiBookOpen } from "react-icons/fi";
+import { AiOutlineTransaction } from "react-icons/ai";
 
 
 export function SideNavigation() {
@@ -52,6 +54,40 @@ export function SideNavigation() {
       label: "Profile",
     },
   ];
+  const AdminNavItems = [
+  {
+    href: "/dashboard/overview",
+    icon: BsHouse,
+    label: "Overview",
+  },
+  {
+    href: "/dashboard/manage-users",
+    icon: BsPeople,
+    label: "Manage User",
+  },
+  {
+    href: "/dashboard/manage-recipes",
+    icon: FiBookOpen,
+    label: "Manage Recipes",
+  },
+  {
+    href: "/dashboard/recipes-report",
+    icon: BsFileEarmarkBarGraph ,
+    label: "Recipes Report",
+  },
+  {
+    href: "/dashboard/transactions",
+    icon: AiOutlineTransaction ,
+    label: "Transaction",
+  },
+  {
+    href: "/dashboard/profile",
+    icon: BsPerson,
+    label: "Profile",
+  },
+];
+
+ const FinalLinks = user?.role === 'Admin' ? AdminNavItems : UserNavItems ;
 
   const Navmenu = (
     <div className="w-full">
@@ -79,7 +115,7 @@ export function SideNavigation() {
         </div>
 
         {/* Nav Items */}
-        {UserNavItems.map((item) => {
+        {FinalLinks.map((item) => {
           const isActive = pathname === item.href;
 
           return (

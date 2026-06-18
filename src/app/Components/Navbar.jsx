@@ -8,6 +8,8 @@ import { BsMoonStars, BsSun } from "react-icons/bs";
 import { useTheme } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { FaUser } from "react-icons/fa";
+import { IoMenu } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 
 export default function Navbarpage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +33,7 @@ export default function Navbarpage() {
     ];
 
     if (user) {
-      base.push({ label: "Dashboard", href: "/Dashboard/User" });
+      base.push({ label: "Dashboard", href: `/Dashboard/${user?.role}` });
     }
 
     return base;
@@ -109,7 +111,7 @@ export default function Navbarpage() {
               onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden p-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-700"
             >
-              {menuOpen ? "✕" : "☰"}
+              {menuOpen ? <IoMdClose /> : <IoMenu /> }
             </button>
           </div>
         </div>
