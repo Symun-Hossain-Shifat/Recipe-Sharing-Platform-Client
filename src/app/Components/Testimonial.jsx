@@ -1,4 +1,5 @@
 import React from "react";
+import { FaRegStar } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
 import { TbFreeRights } from "react-icons/tb";
 
@@ -12,7 +13,7 @@ function StarRating({ rating }) {
           key={index}
           className={index < rating ? "text-amber-400" : "text-gray-200"}
         >
-          ★
+          <FaRegStar  />
         </span>
       ))}
       <span className="ml-1 text-xs text-gray-400">{rating}.0</span>
@@ -48,8 +49,8 @@ function ReviewCard({ review }) {
       {/* Fixed Badge Area */}
       <div className="h-8 mb-3">
         {review.featured && (
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
-            ⭐ Top Review
+          <span className="inline-flex gap-1 items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
+            <FaRegStar /> Top Review
           </span>
         )}
       </div>
@@ -189,7 +190,7 @@ const reviews = [
 
       {/* Footer */}
       <div className="text-center mt-12">
-        <div className="text-amber-400 text-xl mb-2">★★★★★</div>
+        <div className="text-amber-400 text-xl flex gap-1 items-center justify-center mb-2"><FaRegStar /><FaRegStar /><FaRegStar /><FaRegStar /><FaRegStar /></div>
         <p className="font-medium text-gray-800">
           4.8 out of 5 rating
         </p>
