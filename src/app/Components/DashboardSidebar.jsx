@@ -12,13 +12,17 @@ import {
 import { BsHouse, BsPerson } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
+import { authClient } from "@/lib/auth-client";
+
 
 export function SideNavigation() {
   const pathname = usePathname();
-
+   const { data: session } = authClient.useSession();
+    const user = session?.user;
+    console.log(user?.role)
   const UserNavItems = [
     {
-      href: "/dashboard/overview",
+      href: "/Dashboard/User",
       icon: BsHouse,
       label: "Overview",
     },
@@ -43,7 +47,7 @@ export function SideNavigation() {
       label: "Favorites",
     },
     {
-      href: "/dashboard/profile",
+      href: "/Dashboard/User/profile",
       icon: BsPerson,
       label: "Profile",
     },
@@ -55,11 +59,18 @@ export function SideNavigation() {
 
         {/* User Card */}
         <div className="flex items-center gap-3 p-3 rounded-2xl bg-orange-50 border border-orange-100 mb-4">
-          <div className="w-12 h-12 rounded-full bg-orange-200" />
+          
+          <div className="w-15 h-15 rounded-full bg-orange-200 overflow-hidden">
+            <img
+              src={user?.image || "/default-avatar.png"}
+              alt="User Image"
+             
+            />
+          </div>
 
           <div>
             <h1 className="font-semibold text-gray-800">
-              Shifat
+             {user?.name}
             </h1>
             <p className="text-xs text-gray-500">
               Welcome back 👋

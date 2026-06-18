@@ -1,10 +1,38 @@
 'use client';
 
+import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa';
 
 function SigninPage() {
+
+   const Handlesignin = async(e) => {
+    e.preventDefault()
+    const FormData = e.target 
+   
+    const email = FormData.Email.value 
+   
+    const password = FormData.Password.value 
+    
+    const { data, error } = await authClient.signIn.email({
+    email: email , // required
+    password: password , // required
+    rememberMe: false ,
+    callbackURL: "/",
+});
+  if (data?.user) {
+    toast.success("Login Successful 🎉");
+    redirect('/signin')
+  } else if (error) {
+    toast.error(`Login Failed! ${error?.message}`);
+  }
+  
+  console.log(error)
+  console.log(data )
+    }
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-amber-50 px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
@@ -28,7 +56,7 @@ function SigninPage() {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form onSubmit={Handlesignin} className="space-y-5">
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
