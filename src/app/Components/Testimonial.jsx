@@ -1,8 +1,97 @@
-const stats = [
-  { id: 1, value: "12,400+", label: "Active Users" },
-  { id: 2, value: "4.8 / 5", label: "Average Rating" },
-  { id: 3, value: "38,000+", label: "Recipes Shared" },
-];
+import React from "react";
+import { MdWorkspacePremium } from "react-icons/md";
+import { TbFreeRights } from "react-icons/tb";
+
+
+function StarRating({ rating }) {
+
+  return (
+    <div className="flex items-center gap-1">
+      {[...Array(5)].map((_, index) => (
+        <span
+          key={index}
+          className={index < rating ? "text-amber-400" : "text-gray-200"}
+        >
+          ★
+        </span>
+      ))}
+      <span className="ml-1 text-xs text-gray-400">{rating}.0</span>
+    </div>
+  );
+}
+
+function PlanBadge({ plan }) {
+  const isPremium = plan === "Premium";
+
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-medium mt-1 ${
+        isPremium
+          ? "bg-violet-100 text-violet-700"
+          : "bg-emerald-100 text-emerald-700"
+      }`}
+    >
+      {isPremium ? <span className="flex items-center justify-center gap-1"><MdWorkspacePremium /> Premium</span>  : <span className="flex items-center justify-center gap-1"><TbFreeRights /> Free</span>}
+    </span>
+  );
+}
+
+function ReviewCard({ review }) {
+  return (
+    <div
+      className={`bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full ${
+        review.featured
+          ? "border-2 border-orange-400"
+          : "border border-gray-100"
+      }`}
+    >
+      {/* Fixed Badge Area */}
+      <div className="h-8 mb-3">
+        {review.featured && (
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
+            ⭐ Top Review
+          </span>
+        )}
+      </div>
+
+      {/* Rating */}
+      <StarRating rating={review.rating} />
+
+      {/* Text (Fixed Height) */}
+      <div className="h-28 mt-3 overflow-hidden">
+        <p className="text-sm text-gray-600 leading-relaxed">
+          "{review.text}"
+        </p>
+      </div>
+
+      {/* Footer (Always Bottom) */}
+      <div className="mt-auto border-t pt-4">
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${review.avatarColor}`}
+          >
+            {review.initials}
+          </div>
+
+          <div>
+            <h4 className="font-medium text-gray-900">
+              {review.name}
+            </h4>
+
+            <p className="text-xs text-gray-500">
+              {review.role}
+            </p>
+
+            <PlanBadge plan={review.plan} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function TestimonialsSection() {
+
 
 const reviews = [
   {
@@ -72,94 +161,6 @@ const reviews = [
     avatarColor: "bg-green-100 text-green-700",
   },
 ];
-
-function StarRating({ rating }) {
-  return (
-    <div className="flex items-center gap-1">
-      {[...Array(5)].map((_, index) => (
-        <span
-          key={index}
-          className={index < rating ? "text-amber-400" : "text-gray-200"}
-        >
-          ★
-        </span>
-      ))}
-      <span className="ml-1 text-xs text-gray-400">{rating}.0</span>
-    </div>
-  );
-}
-
-function PlanBadge({ plan }) {
-  const isPremium = plan === "Premium";
-
-  return (
-    <span
-      className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-medium mt-1 ${
-        isPremium
-          ? "bg-violet-100 text-violet-700"
-          : "bg-emerald-100 text-emerald-700"
-      }`}
-    >
-      {isPremium ? "👑 Premium" : "🟢 Free"}
-    </span>
-  );
-}
-
-function ReviewCard({ review }) {
-  return (
-    <div
-      className={`bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full ${
-        review.featured
-          ? "border-2 border-orange-400"
-          : "border border-gray-100"
-      }`}
-    >
-      {/* Fixed Badge Area */}
-      <div className="h-8 mb-3">
-        {review.featured && (
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
-            ⭐ Top Review
-          </span>
-        )}
-      </div>
-
-      {/* Rating */}
-      <StarRating rating={review.rating} />
-
-      {/* Text (Fixed Height) */}
-      <div className="h-28 mt-3 overflow-hidden">
-        <p className="text-sm text-gray-600 leading-relaxed">
-          "{review.text}"
-        </p>
-      </div>
-
-      {/* Footer (Always Bottom) */}
-      <div className="mt-auto border-t pt-4">
-        <div className="flex items-center gap-3">
-          <div
-            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${review.avatarColor}`}
-          >
-            {review.initials}
-          </div>
-
-          <div>
-            <h4 className="font-medium text-gray-900">
-              {review.name}
-            </h4>
-
-            <p className="text-xs text-gray-500">
-              {review.role}
-            </p>
-
-            <PlanBadge plan={review.plan} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function TestimonialsSection() {
   return (
     <section className="max-w-7xl mx-auto px-4 py-20">
       {/* Header */}
@@ -178,20 +179,6 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
-        {stats.map((stat) => (
-          <div
-            key={stat.id}
-            className="bg-orange-50 rounded-2xl p-6 text-center"
-          >
-            <h3 className="text-3xl font-bold text-orange-600">
-              {stat.value}
-            </h3>
-            <p className="text-gray-600 mt-2">{stat.label}</p>
-          </div>
-        ))}
-      </div>
 
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
