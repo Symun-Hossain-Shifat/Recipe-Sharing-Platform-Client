@@ -148,7 +148,7 @@ async function RecipesPage() {
 
                   {/* Button */}
                   <Link
-                    href={`/recipes/${recipe._id}`}
+                    href={`/Recipes/${recipe._id}`}
                     className="block text-center py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-emerald-500 text-white font-semibold hover:from-orange-600 hover:to-emerald-600 transition-all"
                   >
                     View Full Recipe →

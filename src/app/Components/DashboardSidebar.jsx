@@ -29,22 +29,22 @@ export function SideNavigation() {
       label: "Overview",
     },
     {
-      href: "/dashboard/add-recipe",
+      href: "/Dashboard/User/addrecipe",
       icon: BiPlusCircle,
       label: "Add Recipe",
     },
     {
-      href: "/dashboard/my-recipes",
+      href:  "/Dashboard/User/profee",
       icon: BiBookOpen,
       label: "My Recipes",
     },
     {
-      href: "/dashboard/purchased-recipes",
+      href: "/Dashboard/User/profitttt",
       icon: CgShoppingCart,
       label: "Purchased Recipes",
     },
     {
-      href: "/dashboard/favorites",
+      href: "/Dashboard/User/profidd",
       icon: BiHeart,
       label: "Favorites",
     },
