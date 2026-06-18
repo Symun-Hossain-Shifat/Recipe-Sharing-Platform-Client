@@ -56,7 +56,7 @@ export function SideNavigation() {
   ];
   const AdminNavItems = [
   {
-    href: "/dashboard/overview",
+    href: "/Dashboard/Admin",
     icon: BsHouse,
     label: "Overview",
   },
@@ -81,7 +81,7 @@ export function SideNavigation() {
     label: "Transaction",
   },
   {
-    href: "/dashboard/profile",
+    href: "/Dashboard/Admin/profile",
     icon: BsPerson,
     label: "Profile",
   },

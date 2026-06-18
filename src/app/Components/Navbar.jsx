@@ -29,7 +29,7 @@ export default function Navbarpage() {
   const links = useMemo(() => {
     const base = [
       { label: "Home", href: "/" },
-      { label: "Browse Recipes", href: "/recipes" },
+      { label: "Browse Recipes", href: "/Recipes" },
     ];
 
     if (user) {
