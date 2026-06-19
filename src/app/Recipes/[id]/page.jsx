@@ -125,7 +125,7 @@ const recipe = Data[0]
           {/* BUY BUTTON */}
           <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-emerald-500 text-white py-3 rounded-xl">
             <ShoppingCart />
-            Buy Ingredients
+            Buy Recipe
           </button>
 
           {/* AUTHOR */}
