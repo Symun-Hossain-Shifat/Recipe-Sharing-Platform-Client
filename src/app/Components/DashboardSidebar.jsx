@@ -21,7 +21,7 @@ export function SideNavigation() {
   const pathname = usePathname();
    const { data: session } = authClient.useSession();
     const user = session?.user;
-    console.log(user?.role)
+    // console.log(user?.role)
   const UserNavItems = [
     {
       href: "/Dashboard/User",

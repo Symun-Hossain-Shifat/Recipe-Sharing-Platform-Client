@@ -16,7 +16,7 @@ import {
 async function RecipesPage() {
 
   const Datas = await Getallrecipes()
-
+  console.log(Datas)
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-emerald-50">
       {/* Hero Section */}

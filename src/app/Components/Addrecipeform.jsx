@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { Postrecipes } from "@/lib/PostData/recipepost";
 import {
   Button,
   Select,
@@ -20,31 +21,79 @@ export default function CreateRecipeForm() {
 
      const { data: session } = authClient.useSession();
       const user = session?.user;
-       console.log(user?.id)
-    const handleSubmit = (e) => {
-  e.preventDefault();
+   
+   
+  const uploadImageToImgBB = async (imageFile) => {
+    const formData = new FormData();
 
-  const form = e.target;
+    formData.append("image", imageFile);
 
-  const recipeData = {
-    Authorname : user?.name ,
-    Authoremail : user?.email ,
-    AuthorId : user?.id,
-    recipeName: form.recipename.value,
-    recipeImage: form.recipeimage.value,
-    category: form.category.value,
-    cuisineType: form.type.value,
-    difficultyLevel: form.difficulty.value,
-    preparationTime: form.preparation.value,
-    ingredients: form.ingrediants.value,
-    instructions: form.steps.value,
-    
-    isFeatured: form.featured.value,
-    status: form.status.value,
+    const response = await fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error("Image upload failed");
+    }
+
+    return data.data.display_url;
   };
 
-  console.log(recipeData);
-};
+
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+  
+      const form = e.target;
+
+      const imageFile = form.recipeimage.files[0];
+
+      if (!imageFile) {
+        alert("Please select an image");
+        return;
+      }
+
+      const imageUrl = await uploadImageToImgBB(imageFile);
+      console.log(imageUrl)
+      const Data = {
+        
+          authorName: user?.name,
+        
+         authorEmail : user?.email,
+        
+          authorId: user?.id,
+
+        recipeName: form.recipename.value,
+        recipeImage: imageUrl,
+
+        category : form.category.value ,
+        cuisineType: form.type.value,
+        difficultyLevel: form.difficulty.value,
+        preparationTime: form.preparation.value,
+        ingredients: form.ingrediants.value,
+        instructions: form.steps.value,
+         likesCount : 0 ,
+        isFeatured: form.featured.value,
+        status : form.status.value
+      };
+
+      console.log(Data);
+
+      const result = await Postrecipes(Data);
+
+      console.log(result);
+
+  };
+
 
 
   return (
@@ -67,12 +116,16 @@ export default function CreateRecipeForm() {
           {/* GRID 1 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-            <Input label="Recipe Name" type="text" name="recipename" placeholder="e.g. Vegetable Fried Rice" />
+            <Input label="Recipe Name" required type="text" name="recipename" placeholder="e.g. Vegetable Fried Rice" />
 
-            <Input label="Recipe Image URL" type="url" name="recipeimage" placeholder="Paste image link" />
-
+            <Input
+          label="Recipe Image" required
+          type="file"
+          name="recipeimage"
+          accept="image/*"
+        />
             {/* CATEGORY */}
-            <Select className="w-full" name="category" placeholder="Select category">
+            <Select className="w-full" required name="category" placeholder="Select category">
               <Label>Category</Label>
               <Select.Trigger>
                 <Select.Value />
@@ -88,10 +141,10 @@ export default function CreateRecipeForm() {
               </Select.Popover>
             </Select>
 
-            <Input label="Cuisine Type" name="type" placeholder="e.g. Chinese, Indian" />
+            <Input label="Cuisine Type" required name="type" placeholder="e.g. Chinese, Indian" />
 
             {/* DIFFICULTY */}
-            <Select className="w-full" name="difficulty" placeholder="Select difficulty">
+            <Select className="w-full" required name="difficulty" placeholder="Select difficulty">
               <Label>Difficulty Level</Label>
               <Select.Trigger>
                 <Select.Value />
@@ -107,7 +160,7 @@ export default function CreateRecipeForm() {
             </Select>
 
             <Input
-              label="Preparation Time (minutes)"
+              label="Preparation Time (minutes)" required
               name="preparation"
               placeholder="e.g. 30"
               type="number"
@@ -120,7 +173,7 @@ export default function CreateRecipeForm() {
             </label>
 
             <textarea
-            name="ingrediants"
+            name="ingrediants" required
                 placeholder="e.g. Rice, Vegetables, Soy sauce..."
                 rows={3}
                 className="w-full border rounded-xl p-3"
@@ -133,7 +186,7 @@ export default function CreateRecipeForm() {
             </label>
 
             <textarea
-            name="steps"
+            name="steps" required
                 placeholder="Write step by step cooking guide..."
                 rows={5}
                 className="w-full border rounded-xl p-3"
@@ -149,7 +202,7 @@ export default function CreateRecipeForm() {
            
 
             {/* FEATURED */}
-            <Select name="featured" className="w-full" placeholder="Select">
+            <Select name="featured" required  className="w-full" placeholder="Select">
               <Label>Featured Recipe</Label>
               <Select.Trigger>
                 <Select.Value />
@@ -164,7 +217,7 @@ export default function CreateRecipeForm() {
             </Select>
 
             {/* STATUS */}
-            <Select name="status" className="w-full" placeholder="Select status">
+            <Select name="status"  required className="w-full" placeholder="Select status">
               <Label>Status</Label>
               <Select.Trigger>
                 <Select.Value />
