@@ -4,6 +4,7 @@ import { Getspecificrecipes } from "@/lib/GetApiData/recipe";
 
 async function Home ({params}) {
   const {id} =  await params 
+  // console.log(id)
 const Data = await Getspecificrecipes(id)
 const recipe = Data[0] 
   return (

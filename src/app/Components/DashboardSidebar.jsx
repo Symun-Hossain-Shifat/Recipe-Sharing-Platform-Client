@@ -12,23 +12,18 @@ import {
 import { BsFileEarmarkBarGraph, BsHouse, BsPeople, BsPerson } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
-import { authClient } from "@/lib/auth-client";
+
 import { FiBookOpen } from "react-icons/fi";
 import { AiOutlineTransaction } from "react-icons/ai";
 
 
-export function SideNavigation({plan}) { 
-  console.log(plan)
+export function SideNavigation({plan , Userinfo}) { 
+  // console.log(plan)
   const pathname = usePathname();
-const { data: session, isPending } = authClient.useSession();
-const User = session?.user 
-console.log(User)
-if (isPending) {
-  return null;
-}
 
-const user = session?.user;
-    console.log(user?.role)
+
+const user =  Userinfo ;
+    // console.log(user?.role)
   const UserNavItems = [
     {
       href: "/Dashboard/User",
@@ -36,7 +31,7 @@ const user = session?.user;
       label: "Overview",
     },
     {
-      href:  (plan.length < 2 || User?.isPremium === "Premium") ? "/Dashboard/User/addrecipe" : "/plans"  ,
+      href:  (plan.length < 2 || user?.isPremium === "Premium") ? "/Dashboard/User/addrecipe" : "/plans"  ,
       icon: BiPlusCircle,
       label: "Add Recipe",
     },
@@ -51,7 +46,7 @@ const user = session?.user;
       label: "Purchased Recipes",
     },
     {
-      href: "/Dashboard/User/profidd",
+      href: "/Dashboard/User/favourite",
       icon: BiHeart,
       label: "Favorites",
     },

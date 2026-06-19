@@ -1,6 +1,6 @@
 
 export async  function Postfavourite (Data) {
-  console.log(Data)
+  // console.log(Data)
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/favourite` , {
           method : 'POST', 
         headers : {

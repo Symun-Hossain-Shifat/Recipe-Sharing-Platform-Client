@@ -4,13 +4,13 @@ import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
 
 
 export default async function DashboardLayout({ children }) { 
-  const User = await GetUserInserver() 
-  const email = User?.email
+  const Userinfo = await GetUserInserver() 
+  const email = Userinfo?.email
   const plan = await GetspecificrecipesByuserEmail(email) 
 
   return (
     <div className=" md:flex   min-h-screen">
-      <SideNavigation plan={plan}></SideNavigation>
+      <SideNavigation plan={plan} Userinfo={Userinfo}></SideNavigation>
       <main className="flex-1">{children}</main>
       
     </div>
