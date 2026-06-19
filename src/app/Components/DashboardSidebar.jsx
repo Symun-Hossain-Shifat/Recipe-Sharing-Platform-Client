@@ -17,11 +17,18 @@ import { FiBookOpen } from "react-icons/fi";
 import { AiOutlineTransaction } from "react-icons/ai";
 
 
-export function SideNavigation() {
+export function SideNavigation({plan}) { 
+  console.log(plan)
   const pathname = usePathname();
-   const { data: session } = authClient.useSession();
-    const user = session?.user;
-    // console.log(user?.role)
+const { data: session, isPending } = authClient.useSession();
+const User = session?.user 
+console.log(User)
+if (isPending) {
+  return null;
+}
+
+const user = session?.user;
+    console.log(user?.role)
   const UserNavItems = [
     {
       href: "/Dashboard/User",
@@ -29,7 +36,7 @@ export function SideNavigation() {
       label: "Overview",
     },
     {
-      href: "/Dashboard/User/addrecipe",
+      href:  (plan.length < 2 || User?.isPremium === "Premium") ? "/Dashboard/User/addrecipe" : "/plans"  ,
       icon: BiPlusCircle,
       label: "Add Recipe",
     },

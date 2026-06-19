@@ -1,10 +1,16 @@
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { PostPayment } from "@/lib/PostData/Payment";
+import { EditUserInfo } from "@/lib/EditData/User";
+
+import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
 
 export default async function Success({ searchParams }) {
-  const { session_id } = await searchParams;
-
+  const { session_id } = await searchParams; 
+  const User = await GetUserInserver() 
+  const UserId = User?._id
+  
   if (!session_id) {
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
   }
@@ -26,11 +32,19 @@ export default async function Success({ searchParams }) {
   if (status === "complete") {
     const Data = {
       email: customerEmail,
-      PlanID: metadata.planid,
+      UserId : UserId , 
+      amount : amount_total ,
+      recipeId : null ,
+    transactionId : payment_intent?.id  ,
+      paymentStatus : 'Paid' ,
+      PlanID: metadata.planid, 
+      AuthorName : metadata.name 
     };
-
-    // await Subscription(Data);
-
+    const response = await EditUserInfo({ isPremium: "Premium" }, customerEmail); 
+    
+    console.log(Data)
+   const result = await PostPayment(Data) 
+   console.log(result)
     const membershipRef =
       payment_intent?.id?.slice(-6).toUpperCase() ?? "------";
 
