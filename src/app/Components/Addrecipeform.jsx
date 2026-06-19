@@ -14,6 +14,9 @@ import {
   
 
 } from "@heroui/react";
+import { redirect } from "next/navigation";
+
+import toast from "react-hot-toast";
 
 
 
@@ -89,7 +92,10 @@ export default function CreateRecipeForm() {
       console.log(Data);
 
       const result = await Postrecipes(Data);
-
+      if(result){
+        toast.success('Recipe Published Successfully 🎉')
+        redirect('/Dashboard/User')
+      }
       console.log(result);
 
   };

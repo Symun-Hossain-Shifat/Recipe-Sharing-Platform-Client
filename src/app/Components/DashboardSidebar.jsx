@@ -34,7 +34,7 @@ export function SideNavigation() {
       label: "Add Recipe",
     },
     {
-      href:  "/Dashboard/User/profee",
+      href:  "/Dashboard/User/Myrecipe",
       icon: BiBookOpen,
       label: "My Recipes",
     },

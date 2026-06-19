@@ -13,3 +13,10 @@ export const Getspecificrecipes = async (id) => {
   const result = await res.json();
   return result;
 };
+
+
+export const GetspecificrecipesByuserEmail = async (email) => {
+  const res = await fetch(`${Baseurl}/api/recipes?email=${email}`);
+  const result = await res.json();
+  return result;
+};

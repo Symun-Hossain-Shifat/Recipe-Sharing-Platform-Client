@@ -105,11 +105,9 @@ const recipe = Data[0]
           <div className="bg-white p-6 rounded-2xl shadow">
             <h2 className="text-xl font-bold mb-3">Ingredients</h2>
 
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              {recipe.ingredients?.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+           <p className="text-gray-700 leading-relaxed">
+              {recipe.ingredients}
+            </p>
           </div>
 
           {/* INSTRUCTIONS */}
