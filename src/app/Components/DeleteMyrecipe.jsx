@@ -1,9 +1,20 @@
 "use client";
 
+import { DeleteRecipe } from "@/lib/DeleteData/Recipe";
 import {AlertDialog, Button} from "@heroui/react";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 
-export function DeleteRecipepage () {
+export function DeleteRecipepage ({recipe}) { 
+  const Handledelete = async (e) => {
+  e.preventDefault();
+  const result = await DeleteRecipe(recipe._id)
+  if(result){
+    toast.success('Recipe Delete Successfully')
+    redirect('/')
+  }
+  }
   return (
     <AlertDialog>
       <Button isIconOnly size="sm" className= 'text-red-600' variant="tertiary">
@@ -27,7 +38,7 @@ export function DeleteRecipepage () {
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
-              <Button slot="close" variant="danger">
+              <Button onClick={Handledelete} slot="close" variant="danger">
                 Delete Recipe
               </Button>
             </AlertDialog.Footer>

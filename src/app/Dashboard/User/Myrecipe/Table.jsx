@@ -63,7 +63,7 @@ function MYRecipespage ({Data , User}) {
                <Table.Cell>
                   <div className="flex items-center gap-1">
                     <RecipeEditPage recipe={recipe} User={User}></RecipeEditPage>
-                    <DeleteRecipepage></DeleteRecipepage>
+                    <DeleteRecipepage recipe={recipe} ></DeleteRecipepage>
                     <Button onClick={()=> {redirect(`/Recipes/${recipe._id}`)}} isIconOnly size="sm" variant="tertiary">
                      <MdOutlineRemoveRedEye />
                     </Button>

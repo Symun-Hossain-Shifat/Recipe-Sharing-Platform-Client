@@ -19,7 +19,8 @@ import Link from "next/link";
 import { Postfavourite } from "@/lib/PostData/favourite";
 import { authClient } from "@/lib/auth-client";
 import { AiOutlineLike } from "react-icons/ai";
-import { Postfavouritecount, Postlikescount } from "@/lib/PostData/likes&favourite";
+import {  Postlikescount } from "@/lib/PostData/likes&favourite";
+import { ReportPage } from "@/app/Components/Report";
 
 export default  function Detailspage({recipe , result1 , result2 , id}) {
 
@@ -101,10 +102,7 @@ const HandleLike = async (e) => {
           Save
         </button>
 
-        <button className="flex items-center gap-2 px-4 py-2 bg-white shadow rounded-xl text-red-500">
-          <Flag />
-          Report
-        </button>
+       <ReportPage recipe={recipe}></ReportPage>
       </div>
 
       {/* CONTENT */}
