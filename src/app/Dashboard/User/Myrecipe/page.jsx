@@ -14,7 +14,7 @@ async function MYRecipespage () {
     const Data = await GetspecificrecipesByuserEmail(email) 
     // console.log(Data)
   return (
-     <Table className='w-11/12 mx-auto m-5 p-5 text-center'>
+     <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
       <Table.ScrollContainer>
         <Table.Content aria-label="Team members" className="min-w-[600px]">
           <Table.Header className= 'text-center '>

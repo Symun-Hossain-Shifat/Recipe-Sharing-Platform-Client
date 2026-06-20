@@ -18,8 +18,10 @@ import Link from "next/link";
 
 import { Postfavourite } from "@/lib/PostData/favourite";
 import { authClient } from "@/lib/auth-client";
+import { AiOutlineLike } from "react-icons/ai";
+import { Postfavouritecount, Postlikescount } from "@/lib/PostData/likes&favourite";
 
-export default  function Detailspage({recipe}) {
+export default  function Detailspage({recipe , result1 , result2 , id}) {
 
  const { data: session, isPending } = authClient.useSession(); 
      const User = isPending ? null : session?.user ;
@@ -30,10 +32,22 @@ const Handlefavourite = async(e) => {
     const Data = {
         useremail : User?.email ,
         userid : User?.id ,
-        recipeid : recipe._id 
+        recipeid : recipe._id ,
+         authorEmail : recipe.authorEmail
     }
-    const result = await Postfavourite(Data)
+    const result = await Postfavourite(Data , id)
   
+}
+const HandleLike = async (e) => {
+  e.preventDefault()
+    const Data = {
+        useremail : User?.email ,
+        userid : User?.id ,
+        recipeid : recipe._id ,
+        authorEmail : recipe.authorEmail
+    }
+    const result = await Postlikescount(Data , id)
+    
 }
   return (
     <div className="w-11/12 p-7 rounded-md mx-auto my-5 bg-gradient-to-br from-orange-50 via-white to-emerald-50">
@@ -71,9 +85,15 @@ const Handlefavourite = async(e) => {
       {/* ACTION BAR */}
       <div className="flex gap-3 mt-5 flex-wrap">
 
+        <button onClick={HandleLike}  className="flex items-center gap-2 px-4 py-2 bg-white shadow rounded-xl">
+          <AiOutlineLike  className="text-blue-500" size={30} />
+          {result2.length}
+        </button>
+
+
         <button onClick={Handlefavourite} className="flex items-center gap-2 px-4 py-2 bg-white shadow rounded-xl">
           <Heart className="text-red-500" />
-          {recipe.likesCount}
+          {result1.length}
         </button>
 
         <button className="flex items-center gap-2 px-4 py-2 bg-white shadow rounded-xl">
@@ -113,7 +133,7 @@ const Handlefavourite = async(e) => {
 
             <div className="bg-white p-4 text-center rounded-xl shadow">
               <Heart className="mx-auto" />
-              {recipe.likesCount} Likes
+              {result1.length} Favourite
             </div>
           </div>
 

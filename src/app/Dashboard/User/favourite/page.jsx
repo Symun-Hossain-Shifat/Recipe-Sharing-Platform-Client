@@ -1,9 +1,11 @@
 import { Getspecificfavourites } from '@/lib/GetApiData/favourite'
 import { Getspecificrecipes } from '@/lib/GetApiData/recipe';
 import { GetUserInserver } from '@/lib/GetUser/Getuserinfo'
-import { BarChart, Clock, Heart, MapPin, Tag } from 'lucide-react';
+import { BarChart, Clock, Heart,  MapPin, Tag } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 async function Favouritehomepage () {
     const user = await GetUserInserver()
@@ -66,15 +68,7 @@ async function Favouritehomepage () {
                    
                 
 
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1 shadow">
-                    <Heart
-                      size={14}
-                      className="text-rose-500 fill-rose-500"
-                    />
-                    <span className="text-sm font-semibold">
-                      {recipe.likesCount}
-                    </span>
-                  </div>
+                 
                 </div>
 
                 {/* Content */}
@@ -123,7 +117,16 @@ async function Favouritehomepage () {
                         {recipe.difficultyLevel}
                       </span>
                     </div>
+                
                   </div>
+                       {/* Button */}
+                  <Link
+                    href={`/Recipes/${recipe._id}`}
+                    className="block flex gap-3 items-center justify-center py-3 rounded-2xl bg-red-500 text-white font-semibold  transition-all"
+                  >
+                    <RiDeleteBin6Line />
+                   Delete
+                  </Link>
 
                 </div>
               </div>

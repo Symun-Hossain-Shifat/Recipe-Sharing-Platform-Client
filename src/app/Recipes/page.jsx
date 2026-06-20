@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 async function RecipesPage() {
-
+  
   const Datas = await Getallrecipes()
   console.log(Datas)
   return (
@@ -87,15 +87,7 @@ async function RecipesPage() {
                     className="object-cover group-hover:scale-110 transition duration-700"
                   />
 
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1 shadow">
-                    <Heart
-                      size={14}
-                      className="text-rose-500 fill-rose-500"
-                    />
-                    <span className="text-sm font-semibold">
-                      {recipe.likesCount}
-                    </span>
-                  </div>
+                  
                 </div>
 
                 {/* Content */}

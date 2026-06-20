@@ -2,9 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 
-export async  function Postfavourite (Data , id) {
-  // console.log(Data)
-     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/favourite` , {
+
+
+export async  function Postlikescount (Data , id) {
+  console.log(Data)
+     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/likescount` , {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' ,
@@ -14,7 +16,7 @@ export async  function Postfavourite (Data , id) {
         })
         const result = await res.json();
         if(result){
-          revalidatePath(`/Recipes/${id}`)
-        }
+                  revalidatePath(`/Recipes/${id}`)
+                }
         return result ;
-}
+}  
