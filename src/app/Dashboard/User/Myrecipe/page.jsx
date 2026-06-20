@@ -10,7 +10,7 @@ async function Homepage () {
       // console.log(Data)
   return (
     <div>
-      <MYRecipespage Data={Data}></MYRecipespage>
+      <MYRecipespage Data={Data} User={User}></MYRecipespage>
     </div>
   )
 }

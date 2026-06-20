@@ -9,11 +9,37 @@ import React from 'react'
 
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
-function MYRecipespage ({Data}) { 
+function MYRecipespage ({Data , User}) { 
     
    
   return (
-     <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
+    <section >
+       <div className="flex flex-col md:flex-row md:items-center  gap-4 w-11/12 mx-auto text-left">
+             
+                <div>
+                   <img
+              src={User?.image || "/default-avatar.png"}
+              alt="User Image" 
+              
+              className='object-cover rounded-full w-20 
+              h-20 '
+             
+            />
+
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold">Manage My Recipes</h1>
+                <p className="text-default-500">
+                  Welcome back {User?.name} ! Here's a quick summary of your activity.
+                </p>
+
+                </div>
+                
+            
+      
+              
+            </div>
+        <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
       <Table.ScrollContainer>
         <Table.Content aria-label="Team members" className="min-w-[600px]">
           <Table.Header className= 'text-center '>
@@ -36,7 +62,7 @@ function MYRecipespage ({Data}) {
               <Table.Cell>{recipe.authorEmail}</Table.Cell>
                <Table.Cell>
                   <div className="flex items-center gap-1">
-                    <RecipeEditPage></RecipeEditPage>
+                    <RecipeEditPage recipe={recipe} User={User}></RecipeEditPage>
                     <DeleteRecipepage></DeleteRecipepage>
                     <Button onClick={()=> {redirect(`/Recipes/${recipe._id}`)}} isIconOnly size="sm" variant="tertiary">
                      <MdOutlineRemoveRedEye />
@@ -52,6 +78,9 @@ function MYRecipespage ({Data}) {
         </Table.Content>
       </Table.ScrollContainer>
     </Table>
+
+    </section>
+   
   )
 }
 
