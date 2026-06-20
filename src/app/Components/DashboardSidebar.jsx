@@ -63,7 +63,7 @@ const user =  Userinfo ;
     label: "Overview",
   },
   {
-    href: "/dashboard/manage-users",
+    href: "/Dashboard/Admin/User",
     icon: BsPeople,
     label: "Manage User",
   },
