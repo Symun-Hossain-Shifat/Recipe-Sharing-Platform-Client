@@ -73,7 +73,7 @@ const user =  Userinfo ;
     label: "Manage Recipes",
   },
   {
-    href: "/dashboard/recipes-report",
+    href: "/Dashboard/Admin/report",
     icon: BsFileEarmarkBarGraph ,
     label: "Recipes Report",
   },
