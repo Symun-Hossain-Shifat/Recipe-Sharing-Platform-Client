@@ -1,11 +1,12 @@
 'use client'
+import { DeleteRecipepage } from '@/app/Components/DeleteMyrecipe';
+import { RecipeEditPage } from '@/app/Components/RecipeEdit';
 import { Button, Table } from '@heroui/react'
 import { redirect } from 'next/navigation';
 
 
 import React from 'react'
-import { AiOutlineDelete } from 'react-icons/ai';
-import { FaEdit } from 'react-icons/fa';
+
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
 function MYRecipespage ({Data}) { 
@@ -35,12 +36,8 @@ function MYRecipespage ({Data}) {
               <Table.Cell>{recipe.authorEmail}</Table.Cell>
                <Table.Cell>
                   <div className="flex items-center gap-1">
-                    <Button isIconOnly size="sm" variant="tertiary">
-                    <FaEdit size={30} />  
-                    </Button>
-                    <Button isIconOnly size="sm" variant="tertiary">
-                        <AiOutlineDelete />
-                    </Button>
+                    <RecipeEditPage></RecipeEditPage>
+                    <DeleteRecipepage></DeleteRecipepage>
                     <Button onClick={()=> {redirect(`/Recipes/${recipe._id}`)}} isIconOnly size="sm" variant="tertiary">
                      <MdOutlineRemoveRedEye />
                     </Button>
