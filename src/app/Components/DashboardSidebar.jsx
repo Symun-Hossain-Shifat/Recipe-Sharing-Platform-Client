@@ -68,7 +68,7 @@ const user =  Userinfo ;
     label: "Manage User",
   },
   {
-    href: "/dashboard/manage-recipes",
+    href: "/Dashboard/Admin/Recipes",
     icon: FiBookOpen,
     label: "Manage Recipes",
   },
