@@ -4,6 +4,7 @@ import { DeleteRecipepage } from '@/app/Components/DeleteMyrecipe';
 import { RecipeEditPage } from '@/app/Components/RecipeEdit';
 
 import { Button, Table } from '@heroui/react';
+import { redirect } from 'next/navigation';
 import React from 'react'
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 

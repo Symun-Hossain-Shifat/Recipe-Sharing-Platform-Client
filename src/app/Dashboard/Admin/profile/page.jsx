@@ -182,18 +182,11 @@ export default function ProfilePage() {
                 <li>✔ Priority listing</li>
               </ul>
 
-              {!isPremium ? (
-                <button
-                  
-                  className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
-                >
-                  Pay with Stripe
-                </button>
-              ) : (
+             
                 <p className="text-green-600">
                   You are already Premium 🎉
                 </p>
-              )}
+              
             </div>
           )}
 

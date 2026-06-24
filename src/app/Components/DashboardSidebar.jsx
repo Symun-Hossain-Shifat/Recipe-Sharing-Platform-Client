@@ -78,7 +78,7 @@ const user =  Userinfo ;
     label: "Recipes Report",
   },
   {
-    href: "/dashboard/transactions",
+    href: "/Dashboard/Admin/Payments",
     icon: AiOutlineTransaction ,
     label: "Transaction",
   },
