@@ -2,13 +2,28 @@
 
 import { DeleteRecipepage } from '@/app/Components/DeleteMyrecipe';
 import { RecipeEditPage } from '@/app/Components/RecipeEdit';
+import { Postfeatures } from '@/lib/PostData/featured';
 
 import { Button, Table } from '@heroui/react';
-import { redirect } from 'next/navigation';
-import React from 'react'
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
-function Recipesmanagepage ({ User , Datas }) {
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
+import { GrCheckboxSelected } from 'react-icons/gr';
+import { MdOutlineFeaturedVideo, MdOutlineRemoveRedEye } from 'react-icons/md';
+
+function Recipesmanagepage ({  User , Datas }) { 
+ const [featuredIds, setFeaturedIds] = useState([]);
+ 
+ 
+ const PostFeatured = async (recipe) => {
+   
+const result = await Postfeatures(recipe) 
+    if(result){
+      toast.success('Recipe Added In Featured Successfully') 
+            setFeaturedIds((prev) => [...prev, recipe._id]);
+    
+    }
+  }
    
   return (
      <section >
@@ -62,9 +77,25 @@ function Recipesmanagepage ({ User , Datas }) {
                       <div className="flex items-center gap-1">
                         <RecipeEditPage recipe={recipe} User={User}></RecipeEditPage>
                         <DeleteRecipepage recipe={recipe} ></DeleteRecipepage>
-                        <Button onClick={()=> {redirect(`/Recipes/${recipe._id}`)}} isIconOnly size="sm" variant="tertiary">
-                         <MdOutlineRemoveRedEye />
-                        </Button>
+                       {
+                        featuredIds.includes(recipe._id) ? (<Button
+                           
+                            isIconOnly
+                            size="sm"
+                            variant="tertiary"
+                          >
+                            <GrCheckboxSelected />
+                          </Button>) : (
+                          <Button
+                            onClick={() => PostFeatured(recipe)}
+                            isIconOnly
+                            size="sm"
+                            variant="tertiary"
+                          >
+                            <MdOutlineFeaturedVideo />
+                          </Button>
+                        )
+                      }
                       </div>
                     </Table.Cell>
                 </Table.Row>                ))
