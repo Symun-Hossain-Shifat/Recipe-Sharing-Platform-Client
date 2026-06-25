@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Mail,
   MapPin,
@@ -11,20 +11,74 @@ import {
   LogOut,
 } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 import { Button } from '@heroui/react';
+import { EditUserInfo } from '@/lib/EditData/User';
+import toast from 'react-hot-toast';
+
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isSaved, setIsSaved] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
+    const [isPremium, setIsPremium] = useState(false);
+  const { data: session, isPending } = authClient.useSession();
 
-  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const [userData, setUserData] = useState(null);
 
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  
+  useEffect(() => {
+    if (session?.user) {
+      setUserData(session.user);
+    }
+  }, [session]);
+
+  if (!mounted || isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  const user = userData;
+
+  const GetNewUserData = async (e) => {
+    e.preventDefault();
+
+    const formData = e.target;
+
+    const name = formData.Name.value;
+    const image = formData.Image.value;
+
+    const result = await EditUserInfo(
+      { name, image },
+      user.email
+    );
+
+    if (result?.success || result) {
+      // UI instantly update
+      setUserData((prev) => ({
+        ...prev,
+        name,
+        image,
+      }));
+
+      toast.success('Profile Updated Successfully');
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        No User Found
+      </div>
+    );
+  }
+
 
   // LOGOUT FIX
   const handleLogout = async () => {
@@ -139,33 +193,35 @@ export default function ProfilePage() {
 
           {/* SETTINGS */}
           {activeTab === 'settings' && (
-            <form  className="space-y-4">
-
-              <input
-                className="w-full border border-orange-200 p-2 rounded"
-                type='text'
-                placeholder='Enter Your Name'
-                
-               
-              />
-
-              <input
-                className="w-full border border-orange-200 p-2 rounded"
-                placeholder='Enter Your Image URL'
-                type='url'
-                
-              />
-
-              <button className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
-                {isSaved ? (
-                  <>
-                    <Check size={14} /> Saved
-                  </>
-                ) : (
-                  'Save Changes'
-                )}
-              </button>
-            </form>
+             <form  onSubmit={GetNewUserData} className="space-y-4">
+            
+                          <input
+                            className="w-full border border-orange-200 p-2 rounded"
+                            type='text'
+                            placeholder='Enter Your Name' 
+                            name='Name'
+                            
+                           
+                          />
+            
+                          <input
+                            className="w-full border border-orange-200 p-2 rounded"
+                            placeholder='Enter Your Image URL'
+                            type='url' 
+                            name='Image'
+                            
+                          />
+            
+                          <button type='submit' className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                            {isSaved ? (
+                              <>
+                                <Check size={14} /> Saved
+                              </>
+                            ) : (
+                              'Save Changes'
+                            )}
+                          </button>
+                        </form>
           )}
 
           {/* PREMIUM */}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Mail,
   MapPin,
@@ -11,7 +11,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
-import { redirect, useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 import { Button } from '@heroui/react';
 import { EditUserInfo } from '@/lib/EditData/User';
 import toast from 'react-hot-toast';
@@ -19,31 +19,67 @@ import toast from 'react-hot-toast';
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isSaved, setIsSaved] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
+    const [isPremium, setIsPremium] = useState(false); 
+      const router = useRouter()
+  const { data: session, isPending } = authClient.useSession();
 
-  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const [userData, setUserData] = useState(null);
 
-  const { data: session } = authClient.useSession();
-  const user = session?.user; 
-  const email = user?.email
-  // console.log(user)
-  const GetNewUserData = async (e) => {
-   e.preventDefault() 
-   const formData = e.target 
-   const name = formData.Name.value 
-   const image = formData.Image.value 
-   const data = { 
-    name : name ,
-    image : image 
-   }
-   const result = await EditUserInfo( data , email ) 
-   if(result){
-    toast.success( ' Congratulation ! Your Profile Updated Successfull')
-    redirect('/Dashboard/Admin')   }
-  //  console.log(result)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (session?.user) {
+      setUserData(session.user);
+    }
+  }, [session]);
+
+  if (!mounted || isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
-  
+
+  const user = userData;
+
+  const GetNewUserData = async (e) => {
+    e.preventDefault();
+
+    const formData = e.target;
+
+    const name = formData.Name.value;
+    const image = formData.Image.value;
+
+    const result = await EditUserInfo(
+      { name, image },
+      user.email
+    );
+
+    if (result?.success || result) {
+      // UI instantly update
+      setUserData((prev) => ({
+        ...prev,
+        name,
+        image,
+      }));
+
+      toast.success('Profile Updated Successfully');
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        No User Found
+      </div>
+    );
+  }
+
 
   // LOGOUT FIX
   const handleLogout = async () => {
@@ -162,7 +198,8 @@ export default function ProfilePage() {
 
               <input
                 className="w-full border border-orange-200 p-2 rounded"
-                type='text'
+                type='text' 
+                required
                 placeholder='Enter Your Name' 
                 name='Name'
                 
@@ -173,6 +210,7 @@ export default function ProfilePage() {
                 className="w-full border border-orange-200 p-2 rounded"
                 placeholder='Enter Your Image URL'
                 type='url' 
+                required
                 name='Image'
                 
               />
