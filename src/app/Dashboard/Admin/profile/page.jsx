@@ -11,8 +11,11 @@ import {
   LogOut,
 } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { Button } from '@heroui/react';
+import { EditUserInfo } from '@/lib/EditData/User';
+import toast from 'react-hot-toast';
+
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -22,8 +25,24 @@ export default function ProfilePage() {
   const router = useRouter();
 
   const { data: session } = authClient.useSession();
-  const user = session?.user;
-
+  const user = session?.user; 
+  const email = user?.email
+  // console.log(user)
+  const GetNewUserData = async (e) => {
+   e.preventDefault() 
+   const formData = e.target 
+   const name = formData.Name.value 
+   const image = formData.Image.value 
+   const data = { 
+    name : name ,
+    image : image 
+   }
+   const result = await EditUserInfo( data , email ) 
+   if(result){
+    toast.success( ' Congratulation ! Your Profile Updated Successfull')
+    redirect('/Dashboard/Admin')   }
+  //  console.log(result)
+  }
   
 
   // LOGOUT FIX
@@ -139,12 +158,13 @@ export default function ProfilePage() {
 
           {/* SETTINGS */}
           {activeTab === 'settings' && (
-            <form  className="space-y-4">
+            <form  onSubmit={GetNewUserData} className="space-y-4">
 
               <input
                 className="w-full border border-orange-200 p-2 rounded"
                 type='text'
-                placeholder='Enter Your Name'
+                placeholder='Enter Your Name' 
+                name='Name'
                 
                
               />
@@ -152,11 +172,12 @@ export default function ProfilePage() {
               <input
                 className="w-full border border-orange-200 p-2 rounded"
                 placeholder='Enter Your Image URL'
-                type='url'
+                type='url' 
+                name='Image'
                 
               />
 
-              <button className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+              <button type='submit' className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
                 {isSaved ? (
                   <>
                     <Check size={14} /> Saved

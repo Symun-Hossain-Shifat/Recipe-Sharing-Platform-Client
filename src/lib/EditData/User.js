@@ -11,4 +11,4 @@ export const EditUserInfo = async (data, email) => {
   );
 
   return await res.json();
-};
+}; 
