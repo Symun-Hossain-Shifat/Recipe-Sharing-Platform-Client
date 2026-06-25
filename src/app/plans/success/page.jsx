@@ -40,7 +40,7 @@ export default async function Success({ searchParams }) {
       PlanID: metadata.planid, 
       AuthorName : metadata.name 
     };
-    const response = await EditUserInfo({ isPremium: "Premium" }, customerEmail); 
+    const response = await EditUserInfo({ isPremium: "Premium" , name : User?.name , image : User?.image }, customerEmail); 
     
     console.log(Data)
    const result = await PostPayment(Data) 
@@ -190,14 +190,14 @@ export default async function Success({ searchParams }) {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="/recipes"
+              href="/Recipes"
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-xl transition-all text-center"
             >
               Explore Recipes
             </Link>
 
             <Link
-              href="/Dashboard"
+              href={`/Dashboard/${User?.role}`}
               className="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-xl transition-all text-center"
             >
               Go to Dashboard

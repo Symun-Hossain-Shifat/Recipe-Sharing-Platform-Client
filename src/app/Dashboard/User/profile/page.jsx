@@ -20,7 +20,8 @@ import toast from 'react-hot-toast';
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
     const [isSaved, setIsSaved] = useState(false);
-    const [isPremium, setIsPremium] = useState(false);
+    const [isPremium, setIsPremium] = useState(false); 
+    const router = useRouter()
   const { data: session, isPending } = authClient.useSession();
 
   const [mounted, setMounted] = useState(false);
@@ -45,7 +46,8 @@ export default function ProfilePage() {
   }
 
   const user = userData;
-
+ 
+  
   const GetNewUserData = async (e) => {
     e.preventDefault();
 
@@ -53,10 +55,10 @@ export default function ProfilePage() {
 
     const name = formData.Name.value;
     const image = formData.Image.value;
-
+     const isPremium = user?.isPremium 
     const result = await EditUserInfo(
-      { name, image },
-      user.email
+      { name, image , isPremium  },
+      user?.email
     );
 
     if (result?.success || result) {

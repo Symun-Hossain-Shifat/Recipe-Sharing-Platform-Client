@@ -2,6 +2,7 @@
 import { DeleteRecipepage } from '@/app/Components/DeleteMyrecipe';
 import { RecipeEditPage } from '@/app/Components/RecipeEdit';
 import { Button, Table } from '@heroui/react'
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 
@@ -39,7 +40,19 @@ function MYRecipespage ({Data , User}) {
       
               
             </div>
-        <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
+            {
+              Data.length === 0 ? (
+                <div className='text-center my-10 '>
+                  <p className='text-3xl font-bold '>No Recipe Found ! Please Add Recipe </p>
+                  <Button className= 'p-2 m-5'>
+                    <Link href={'/Dashboard/User/addrecipe'}> 
+                     Add Recipe
+                    </Link>
+                   
+                  </Button>
+                </div>
+              ) : (
+                <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
       <Table.ScrollContainer>
         <Table.Content aria-label="Team members" className="min-w-[600px]">
           <Table.Header className= 'text-center '>
@@ -51,8 +64,8 @@ function MYRecipespage ({Data , User}) {
             <Table.Column>Action</Table.Column>
           </Table.Header>
           <Table.Body>
-            {
-                Data.map( recipe => (
+           
+                  { Data.map( recipe => (
     
                      <Table.Row key={recipe._id} className='font-semibold '>
               <Table.Cell>{recipe.recipeName}</Table.Cell>
@@ -70,14 +83,20 @@ function MYRecipespage ({Data , User}) {
                   </div>
                 </Table.Cell>
             </Table.Row>                ))
-                
+              
             }
+               
+                
+            
            
 
           </Table.Body>
         </Table.Content>
       </Table.ScrollContainer>
     </Table>
+              )
+            }
+        
 
     </section>
    
