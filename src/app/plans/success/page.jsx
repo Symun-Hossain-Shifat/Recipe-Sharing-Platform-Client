@@ -1,7 +1,7 @@
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { PostPayment } from "@/lib/PostData/Payment";
+import { PostPayment, PostRecipePayment } from "@/lib/PostData/Payment";
 import { EditUserInfo } from "@/lib/EditData/User";
 
 import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
@@ -30,11 +30,12 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === "complete") {
+    if(metadata.paymentType === 'premium'){
     const Data = {
       email: customerEmail,
       UserId : UserId , 
       amount : amount_total ,
-      recipeId : null ,
+     
     transactionId : payment_intent?.id  ,
       paymentStatus : 'Paid' ,
       PlanID: metadata.planid, 
@@ -217,7 +218,210 @@ export default async function Success({ searchParams }) {
         </div>
       </main>
     );
-  }
+  } if (metadata.paymentType === "recipe") { 
+    // console.log(metadata)
+  const Data = {
+    email: customerEmail,
+      UserId : UserId , 
+      recipeName: metadata.recipeName,
+      category : metadata.category ,
+       cuisineType: metadata.cuisineType,
+      difficultyLevel: metadata.difficultyLevel ,
+      preparationTime: metadata.preparationTime ,
+       AuthorName : metadata.name ,
+    
+    amount: amount_total,
+    transactionId: payment_intent?.id,
+    paymentStatus: "Paid",
+    
+   
+  };
+
+  await PostRecipePayment(Data);
+
+  const transactionRef =
+    payment_intent?.id?.slice(-8).toUpperCase() ?? "--------";
+
+  const amount = amount_total
+    ? `$${(amount_total / 100).toFixed(2)}`
+    : "—";
+
+  const date = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-yellow-50 flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-xl bg-white border border-gray-200 rounded-3xl p-8 md:p-10 shadow-2xl">
+
+        {/* Success Animation */}
+        <div className="relative flex justify-center mb-7">
+          <span className="absolute w-24 h-24 rounded-full bg-green-400 animate-ping opacity-20" />
+
+          <div className="relative w-20 h-20 rounded-full bg-green-50 border border-green-300 flex items-center justify-center">
+            <svg
+              className="w-10 h-10 text-green-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Header */}
+
+        <p className="text-[11px] tracking-[0.3em] uppercase text-orange-500 text-center mb-2">
+          Recipe Purchased Successfully
+        </p>
+
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-3">
+          Enjoy Your Premium Recipe 🍽️
+        </h1>
+
+        <p className="text-gray-600 text-sm leading-relaxed text-center mb-8">
+          Your payment has been completed successfully.
+          This premium recipe has been added to your account and can now be
+          accessed anytime.
+        </p>
+
+        {/* Stats */}
+
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          {[
+            {
+              label: "Recipe",
+              value: "Unlocked",
+            },
+            {
+              label: "Amount",
+              value: amount,
+            },
+            {
+              label: "Status",
+              value: "Paid",
+              active: true,
+            },
+          ].map(({ label, value, active }) => (
+            <div
+              key={label}
+              className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center"
+            >
+              <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-1">
+                {label}
+              </p>
+
+              <p
+                className={`text-sm font-semibold ${
+                  active
+                    ? "text-green-600 flex items-center justify-center gap-1"
+                    : "text-gray-900"
+                }`}
+              >
+                {active && (
+                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                )}
+
+                {value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Benefits */}
+
+        <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 mb-6">
+          <h3 className="text-gray-900 font-semibold mb-4">
+            What You Unlocked 🍳
+          </h3>
+
+          <ul className="space-y-3 text-sm text-gray-600">
+            <li>✓ Full Recipe Access</li>
+            <li>✓ Complete Ingredients List</li>
+            <li>✓ Step-by-Step Cooking Instructions</li>
+            <li>✓ Lifetime Access from Your Profile</li>
+            <li>✓ Revisit Anytime Without Repurchasing</li>
+          </ul>
+        </div>
+
+        {/* Purchase Details */}
+
+        <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden mb-6">
+          {[
+            {
+              label: "Purchased By",
+              value: customerEmail,
+            },
+            {
+              label: "Transaction ID",
+              value: transactionRef,
+            },
+            {
+              label: "Purchase Date",
+              value: date,
+            },
+          ].map(({ label, value }) => (
+            <div
+              key={label}
+              className="flex justify-between items-center px-4 py-3 border-b border-gray-200 last:border-b-0"
+            >
+              <span className="text-xs text-gray-500">
+                {label}
+              </span>
+
+              <span className="text-xs font-medium text-gray-800 truncate max-w-[180px]">
+                {value}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Buttons */}
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link
+            href={`/Recipes/${metadata.recipeId}`}
+            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-xl transition text-center"
+          >
+            View Recipe
+          </Link>
+
+          <Link
+            href="/Recipes"
+            className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-xl transition text-center"
+          >
+            Browse Recipes
+          </Link>
+        </div>
+
+        {/* Footer */}
+
+        <p className="text-xs text-gray-500 text-center mt-6">
+          Thank you for supporting RecipeHub ❤️
+          <br />
+          Happy Cooking!
+        </p>
+
+      </div>
+    </main>
+  );
+}
+  }  
+
+  
+ 
+ 
+ 
+
+
 
   return redirect("/");
 }

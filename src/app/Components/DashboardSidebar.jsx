@@ -41,7 +41,7 @@ const user =  Userinfo ;
       label: "My Recipes",
     },
     {
-      href: "/Dashboard/User/profitttt",
+      href: "/Dashboard/User/MyBuyrecipe",
       icon: CgShoppingCart,
       label: "Purchased Recipes",
     },

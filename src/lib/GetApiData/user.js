@@ -5,3 +5,10 @@ export const Getspecificuser = async (role) => {
   const result = await res.json();
   return result;
 };
+
+
+export const Getspecificuserbystatus = async (isPremium) => {
+  const res = await fetch(`${Baseurl}/api/user?isPremium=${isPremium}`);
+  const result = await res.json();
+  return result;
+};

@@ -4,9 +4,12 @@ import React from "react";
 import { MdPayments } from "react-icons/md";
 import { HiCurrencyBangladeshi } from "react-icons/hi";
 import { Table } from "@heroui/react";
+import { Getrecipespayment } from "@/lib/GetApiData/recipepayment";
 
-async function Homepage() {
-  const Datas = (await GetallPayments()) || [];
+async function Homepage() { 
+  const result = (await GetallPayments()) || []; 
+  const result2 = (await Getrecipespayment()) || [] ;
+  const Datas = [...result , ...result2]
 
   const totalRevenue = Datas.reduce(
     (total, payment) => total + Number(payment.amount || 0),

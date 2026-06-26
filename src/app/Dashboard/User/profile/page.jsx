@@ -203,6 +203,7 @@ export default function ProfilePage() {
                             type='text'
                             placeholder='Enter Your Name' 
                             name='Name'
+                            required
                             
                            
                           />
@@ -211,7 +212,8 @@ export default function ProfilePage() {
                             className="w-full border border-orange-200 p-2 rounded"
                             placeholder='Enter Your Image URL'
                             type='url' 
-                            name='Image'
+                            name='Image' 
+                            required
                             
                           />
             

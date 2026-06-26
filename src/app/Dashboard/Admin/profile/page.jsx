@@ -146,15 +146,7 @@ export default function ProfilePage() {
 
             <p className="text-gray-500">{user.email}</p>
           </div>
-{/* 
-        <Button
-           variant="danger-soft"
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-red-500 hover:text-red-600"
-          >
-            <LogOut size={16} />
-            Logout
-          </Button> */}
+
         </div>
 
         {/* TABS */}

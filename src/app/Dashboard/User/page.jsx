@@ -30,7 +30,7 @@ const Result = await Getspecificfavourites(id)
     )
     
   );
-    console.log( likes)
+    // console.log( likes)
  
 
   return (

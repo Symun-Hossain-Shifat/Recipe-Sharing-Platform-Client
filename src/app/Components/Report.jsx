@@ -6,6 +6,7 @@ import { PostReport } from "@/lib/PostData/report";
 
 import {Button,  Modal, Surface} from "@heroui/react";
 import { Flag } from "lucide-react";
+import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 import { MdReport } from "react-icons/md";
 
@@ -24,10 +25,10 @@ export function ReportPage ({recipe}) {
    status : recipe.status
   } 
   const result = await PostReport(Data)  
-  console.log(result)
+  // console.log(result)
    if(result){
           toast.success('Report Submited Successfully 🎉')
-          
+          redirect('/Recipes')
         }
  }
   return (

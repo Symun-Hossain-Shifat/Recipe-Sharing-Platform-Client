@@ -31,7 +31,8 @@ export default function Detailspage({
 }) {
   const { data: session, isPending } = authClient.useSession();
   const User = isPending ? null : session?.user;
-
+  const authorEmail = recipe.authorEmail 
+  const UserEmail = User?.email
   const [likes, setLikes] = useState(
     Number(recipe?.likesCount || 0)
   );
@@ -220,8 +221,21 @@ export default function Detailspage({
         </div>
 
         <div className="space-y-5">
-          <form action="/api/checkout_sessions" method="POST">
-            <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-emerald-500 text-white py-3 rounded-xl">
+          <form
+            action="/api/checkout_recipe"
+            method="POST"
+            onSubmit={(e) => {
+              if (UserEmail === authorEmail) {
+                e.preventDefault();
+                toast.error("You cannot buy your own recipe! Please select another one.");
+              }
+            }}
+          >
+             <input type="hidden" name="recipeId" value={recipe._id} />
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-emerald-500 text-white py-3 rounded-xl"
+            >
               <ShoppingCart />
               Buy Recipe
             </button>
