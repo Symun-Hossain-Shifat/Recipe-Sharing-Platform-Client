@@ -2,6 +2,7 @@
 
 import { DeleteRecipepage } from '@/app/Components/DeleteMyrecipe';
 import { RecipeEditPage } from '@/app/Components/RecipeEdit';
+import { EditRecipeInfo } from '@/lib/EditData/editRecipe';
 import { Postfeatures } from '@/lib/PostData/featured';
 
 import { Button, Table } from '@heroui/react';
@@ -14,17 +15,50 @@ import { MdOutlineFeaturedVideo, MdOutlineRemoveRedEye } from 'react-icons/md';
 function Recipesmanagepage ({  User , Datas }) { 
  const [featuredIds, setFeaturedIds] = useState([]);
  
- 
+
+
+
  const PostFeatured = async (recipe) => {
+  try {
    
-const result = await Postfeatures(recipe) 
-    if(result){
-      toast.success('Recipe Added In Featured Successfully') 
-            setFeaturedIds((prev) => [...prev, recipe._id]);
-    
+    if (featuredIds.includes(recipe._id)) {
+      toast("Recipe is already featured.");
+      return;
     }
-  }
+
+    const featuredResult = await Postfeatures(recipe);
+
+    if (!featuredResult) {
+      toast.error("Failed to add recipe to featured.");
+      return;
+    }
+
    
+    const updatedRecipe = {
+      ...recipe,
+      isFeatured: true,
+    };
+
+    const updateResult = await EditRecipeInfo(
+      updatedRecipe,
+      recipe._id
+    );
+
+    if (updateResult) {
+      setFeaturedIds((prev) => [...prev, recipe._id]);
+      toast.success("Recipe added to Featured successfully.");
+    } else {
+      toast.error("Recipe added, but update failed.");
+    }
+
+    console.log(featuredResult, updateResult);
+  } catch (error) {
+    console.error("PostFeatured Error:", error);
+    toast.error("Something went wrong.");
+  }
+};
+
+
   return (
      <section >
            <div className="flex flex-col md:flex-row md:items-center  gap-4 w-11/12 mx-auto text-left">
@@ -78,7 +112,7 @@ const result = await Postfeatures(recipe)
                         <RecipeEditPage recipe={recipe} User={User}></RecipeEditPage>
                         <DeleteRecipepage recipe={recipe} ></DeleteRecipepage>
                        {
-                        featuredIds.includes(recipe._id) ? (<Button
+                        recipe.isFeatured === true ? (<Button
                            
                             isIconOnly
                             size="sm"

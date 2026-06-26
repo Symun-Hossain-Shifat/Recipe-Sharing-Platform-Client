@@ -55,9 +55,10 @@ export default function ProfilePage() {
 
     const name = formData.Name.value;
     const image = formData.Image.value;
-     const isPremium = user?.isPremium 
+    const isPremium = user?.isPremium ;
+    const  isBlocked = user?.isBlocked 
     const result = await EditUserInfo(
-      { name, image , isPremium  },
+      { name, image , isPremium , isBlocked  },
       user?.email
     );
 

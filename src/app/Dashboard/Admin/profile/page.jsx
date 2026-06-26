@@ -52,12 +52,15 @@ export default function ProfilePage() {
 
     const formData = e.target;
 
-    const name = formData.Name.value;
-    const image = formData.Image.value;
-
+   
+       const name = formData.Name.value;
+       const image = formData.Image.value;
+       const isPremium = user?.isPremium ;
+       const  isBlocked = user?.isBlocked 
+       
     const result = await EditUserInfo(
-      { name, image },
-      user.email
+      { name, image , isPremium  , isBlocked },
+      user?.email
     );
 
     if (result?.success || result) {

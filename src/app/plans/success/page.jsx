@@ -40,7 +40,7 @@ export default async function Success({ searchParams }) {
       PlanID: metadata.planid, 
       AuthorName : metadata.name 
     };
-    const response = await EditUserInfo({ isPremium: "Premium" , name : User?.name , image : User?.image }, customerEmail); 
+    const response = await EditUserInfo({ isBlocked : User?.isBlocked , isPremium: "Premium" , name : User?.name , image : User?.image }, customerEmail); 
     
     console.log(Data)
    const result = await PostPayment(Data) 
