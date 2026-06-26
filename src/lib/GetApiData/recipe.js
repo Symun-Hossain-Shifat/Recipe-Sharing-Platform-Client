@@ -15,6 +15,13 @@ export const Getspecificrecipes = async (id) => {
 };
 
 
+export const Getspecificrecipesbylikes = async (likesCount) => {
+  const res = await fetch(`${Baseurl}/api/recipes?likesCount=${likesCount}`);
+  const result = await res.json();
+  return result;
+};
+
+
 export const GetspecificrecipesByuserEmail = async (email) => {
   const res = await fetch(`${Baseurl}/api/recipes?email=${email}`);
   const result = await res.json();

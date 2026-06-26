@@ -6,7 +6,7 @@ import Recipesmanagepage from './recipetable';
 
 async function Homepage () {
     const Datas = await Getallrecipes();
-    console.log(Datas) 
+    // console.log(Datas) 
     const User = await GetUserInserver()
   return (
      <Recipesmanagepage User={User} Datas={Datas}></Recipesmanagepage>
