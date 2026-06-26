@@ -170,7 +170,7 @@ const reviews = [
           Community Love
         </span>
 
-        <h2 className="text-4xl font-bold text-gray-900 mt-3">
+        <h2 className="text-4xl font-bold text-gray-700 mt-3">
           What Our Food Lovers Say
         </h2>
 

@@ -18,7 +18,7 @@ async function RecipesPage() {
   const Datas = await Getallrecipes()
   console.log(Datas)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br text-black dark:text-white dark:bg-black">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504674900247-0877df9cc836')] bg-cover bg-center opacity-10"></div>
@@ -45,7 +45,7 @@ async function RecipesPage() {
                   type="text"
                   placeholder="Search recipes, categories or cuisines..."
                   
-                  className="w-full bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl pl-12 pr-4 py-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-white/80 backdrop-blur-md border text-black border-gray-200 rounded-2xl pl-12 pr-4 py-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
             </div>
@@ -116,7 +116,7 @@ async function RecipesPage() {
                   </p>
 
                   {/* Info */}
-                  <div className="grid grid-cols-2 gap-3 bg-gray-50 rounded-2xl p-4 mb-5">
+                  <div className="grid grid-cols-2 gap-3 dark:text-black bg-gray-50 rounded-2xl p-4 mb-5">
                     <div className="flex items-center gap-2 text-sm">
                       <Clock size={16} />
                       <span>{recipe.preparationTime} min</span>

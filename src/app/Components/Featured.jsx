@@ -6,16 +6,16 @@ import React from 'react';
 async function FeaturedRecipes() { 
     const Datas = await GetallFeatures()
   return (
-    <section className="w-11/12 mx-auto py-10">
+    <section className="w-11/12 mx-auto py-10 text-black dark:text-white">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold">Featured Recipes</h2>
-        <p className="text-gray-500 mt-2">
+        <h2 className="text-3xl font-bold text-gray-600">Featured Recipes</h2>
+        <p className="text-gray-500  mt-2">
           Discover our hand-picked featured recipes.
         </p>
       </div>
       {
             Datas.length === 0 ? (
-                <div className="flex bg-orange-50 flex-col items-center justify-center py-20 text-center">
+                <div className="flex bg-orange-50 dark:bg-black  flex-col items-center justify-center py-20 text-center">
                 <div className="text-7xl mb-4">🍽️</div>
 
                 <h2 className="text-2xl font-bold mb-2">
@@ -33,7 +33,7 @@ async function FeaturedRecipes() {
         {Datas.map((recipe) => (
           <div
             key={recipe._id}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+            className="bg-white dark:bg-black rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
           >
             {/* Recipe Image */}
             <img

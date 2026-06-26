@@ -116,7 +116,7 @@ export default function Detailspage({
   };
 
   return (
-    <div className="w-11/12 p-7 rounded-md mx-auto my-5 bg-gradient-to-br from-orange-50 via-white to-emerald-50">
+    <div className="w-11/12 p-7 dark:bg-black  dark:text-black rounded-md mx-auto my-5 bg-gradient-to-br from-orange-50 via-white to-emerald-50">
       <Link href="/Recipes">
         <button className="flex items-center gap-2 mb-5 px-4 py-2 bg-white shadow rounded-xl hover:bg-gray-100 transition">
           <ArrowLeft size={18} />

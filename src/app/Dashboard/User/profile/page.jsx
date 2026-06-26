@@ -92,18 +92,18 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-orange-500">
+      <div className="min-h-screen flex items-center justify-center  text-orange-500">
         Loading profile...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-orange-50 p-6">
+    <div className="min-h-screen dark:bg-black bg-orange-50 p-6">
       <div className="max-w-5xl mx-auto space-y-6">
 
         {/* HEADER */}
-        <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-orange-100">
+        <div className="flex justify-between items-center  p-4 rounded-2xl border border-orange-100">
           <h1 className="text-xl font-bold text-orange-600">
             My Profile
           </h1>
@@ -119,7 +119,7 @@ export default function ProfilePage() {
         </div>
 
         {/* PROFILE CARD */}
-        <div className="bg-white rounded-2xl p-6 flex items-center gap-6 border border-orange-100">
+        <div className="rounded-2xl p-6 flex items-center gap-6 border border-orange-100">
 
           <div className="relative">
             <img
@@ -127,7 +127,7 @@ export default function ProfilePage() {
               className="w-24 h-24 rounded-full object-cover border-4 border-orange-200"
               alt="profile"
             />
-            <label className="absolute bottom-0 right-0 bg-orange-500 text-white p-1 rounded-full cursor-pointer">
+            <label className="absolute bottom-0 right-0  text-white dark: p-1 rounded-full cursor-pointer">
               <Camera size={14} />
             </label>
           </div>
@@ -157,7 +157,7 @@ export default function ProfilePage() {
         </div>
 
         {/* TABS */}
-        <div className="flex bg-white p-2 rounded-xl border border-orange-100">
+        <div className="flex  p-2 rounded-xl border border-orange-100">
           {['overview', 'settings', 'premium'].map((tab) => (
             <button
               key={tab}
@@ -174,7 +174,7 @@ export default function ProfilePage() {
         </div>
 
         {/* CONTENT */}
-        <div className="bg-white p-6 rounded-2xl border border-orange-100">
+        <div className=" p-6 rounded-2xl border border-orange-100">
 
           {/* OVERVIEW */}
           {activeTab === 'overview' && (
@@ -243,7 +243,7 @@ export default function ProfilePage() {
                 <li>✔ Priority listing</li>
               </ul>
 
-              {!isPremium === false ? (
+              { user?.isPremium === 'Free' ? (
                 <button
                   
                   className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"

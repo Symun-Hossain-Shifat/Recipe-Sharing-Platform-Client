@@ -96,7 +96,7 @@ const user =  Userinfo ;
       <nav className="flex flex-col gap-2">
 
         {/* User Card */}
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-orange-50 border border-orange-100 mb-4">
+       <div className="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white mb-4">
           
           <div className="w-15 h-15 rounded-full bg-orange-200 overflow-hidden">
             <img
@@ -107,10 +107,10 @@ const user =  Userinfo ;
           </div>
 
           <div>
-            <h1 className="font-semibold text-gray-800">
+            <h1 className="font-semibold text-white">
              {user?.name}
             </h1>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-white">
               Welcome back 👋
             </p>
           </div>
@@ -142,13 +142,13 @@ const user =  Userinfo ;
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 border-r border-gray-100 p-4 bg-white">
+      <aside className="hidden lg:block w-64 shrink-0 border-r border-gray-100 p-4 dark:bg-black bg-white">
         {Navmenu}
       </aside>
 
       {/* Mobile Drawer */}
       <Drawer>
-        <Button className="lg:hidden flex items-center gap-3 m-4 bg-orange-500 text-white">
+        <Button className="lg:hidden flex items-center gap-3 m-4 dark:bg-black bg-orange-500 text-white">
          <span><IoMenu /></span> Sidebar
         </Button>
 

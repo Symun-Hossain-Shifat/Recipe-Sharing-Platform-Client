@@ -60,7 +60,7 @@ export default async function Success({ searchParams }) {
     });
 
     return (
-      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-yellow-50 flex items-center justify-center px-4 py-10">
+      <main className="min-h-screen dark:bg-black flex items-center justify-center px-4 py-10">
         <div className="w-full max-w-lg bg-white border border-gray-200 rounded-3xl p-8 md:p-10 text-center shadow-2xl">
 
           {/* Success Animation */}
@@ -253,7 +253,7 @@ export default async function Success({ searchParams }) {
   });
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-yellow-50 flex items-center justify-center px-4 py-10">
+    <main className="min-h-screen  dark:bg-black flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-xl bg-white border border-gray-200 rounded-3xl p-8 md:p-10 shadow-2xl">
 
         {/* Success Animation */}

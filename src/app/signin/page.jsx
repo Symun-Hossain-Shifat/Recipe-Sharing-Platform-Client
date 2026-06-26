@@ -50,9 +50,13 @@ const router = useRouter()
   console.log(error)
   console.log(data )
     }
-
+ const HandleGoogleSignin = async() => {
+     await authClient.signIn.social({
+    provider: "google",
+  });
+  }
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-amber-50 px-4 py-10">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br  dark:bg-black py-10">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
         
         {/* Logo */}
@@ -147,7 +151,8 @@ const router = useRouter()
           </div>
 
           {/* Google Sign In */}
-          <button
+          <button 
+          onClick={HandleGoogleSignin}
             type="button"
             className="w-full border border-gray-200 bg-white py-3 rounded-xl flex items-center justify-center gap-3 text-gray-700 hover:bg-gray-50 transition-all duration-300"
           >

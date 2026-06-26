@@ -10,7 +10,7 @@ export default function PlansPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col items-center py-10 px-4">
+    <div className="min-h-screen  dark:bg-black flex flex-col items-center py-10 px-4">
 
       {/* Header */}
       <div className="text-center mb-10">

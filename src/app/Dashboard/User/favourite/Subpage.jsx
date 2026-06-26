@@ -22,7 +22,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
     }
    
   return (
-    <div>
+    <div className='p-5'>
        <div className="text-center mb-8">
             
             {/* Badge */}
@@ -40,13 +40,13 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
                 All the recipes you loved saved in one place 🍲
             </p>
             </div>
-                    <div className='grid grid-cols-1 px-10  md:px-0 md:grid-cols-2 gap-2'>
+                    <div className='grid grid-cols-1   md:px-0 md:grid-cols-2 gap-2'>
             {
         
         Datas.map( (recipe , index)  => (
             <div
                 key={index}
-                className="group bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden border border-white shadow-lg  transition-all duration-500"
+                className="group bg-white/80 dark:bg-black  backdrop-blur-md rounded-3xl overflow-hidden border border-white shadow-lg  transition-all duration-500"
               >
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden">
@@ -88,13 +88,13 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
                   </p>
 
                   {/* Info */}
-                  <div className="grid grid-cols-2 gap-3 bg-gray-50 rounded-2xl p-4 mb-5">
+                  <div className="grid grid-cols-2 gap-3 dark:text-black bg-gray-50 rounded-2xl p-4 mb-5">
                     <div className="flex items-center gap-2 text-sm">
                       <Clock size={16} />
                       <span>{recipe.preparationTime} min</span>
                     </div>
 
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center  dark:text-black gap-2 text-sm">
                       <BarChart size={16} />
                       <span
                         className={`font-semibold ${

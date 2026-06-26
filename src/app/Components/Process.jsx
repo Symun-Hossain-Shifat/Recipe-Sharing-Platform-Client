@@ -62,19 +62,19 @@ export default function Processpage() {
   ];
 
   return (
-    <section className="py-20 px-4 max-w-6xl mx-auto">
+    <section className="py-20 px-4 text-black dark:text-white max-w-6xl mx-auto">
 
       {/* Header */}
       <div className="text-center mb-14">
-        <span className="text-xs uppercase tracking-widest text-gray-400">
+        <span className="text-xs uppercase tracking-widest text-gray-600 ">
           Platform overview
         </span>
 
-        <h2 className="text-4xl font-semibold text-gray-900 mt-2">
+        <h2 className="text-4xl font-semibold text-gray-600 mt-2">
           How RecipeHub works
         </h2>
 
-        <p className="text-gray-500 mt-3 max-w-xl mx-auto">
+        <p className="text-gray-600 mt-3 max-w-xl mx-auto">
           From signup to sharing recipes — everything is simple, fast and community-driven.
         </p>
       </div>
@@ -84,7 +84,7 @@ export default function Processpage() {
         {highlights.map((item) => (
           <div
             key={item.label}
-            className="bg-orange-50 border border-orange-100 rounded-2xl p-5 text-center"
+            className="bg-orange-50 dark:bg-black dark:text-white border border-orange-100 rounded-2xl p-5 text-center"
           >
             <p className="text-2xl font-bold text-orange-600">
               {item.value}
@@ -106,7 +106,7 @@ export default function Processpage() {
 
             {/* Icon */}
             <div className="relative flex-shrink-0">
-              <div className="w-14 h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center group-hover:border-orange-200 transition">
+              <div className="w-14 h-14 rounded-2xl bg-white dark:bg-black  border border-gray-100 flex items-center justify-center group-hover:border-orange-200 transition">
                 {step.icon}
               </div>
 
@@ -116,15 +116,15 @@ export default function Processpage() {
             </div>
 
             {/* Content */}
-            <div className="flex-1 bg-white border border-gray-100 rounded-2xl p-5 hover:border-orange-200 transition">
+            <div className="flex-1 bg-white dark:bg-black border border-gray-100 rounded-2xl p-5 hover:border-orange-200 transition">
 
               <div className="flex justify-between flex-wrap gap-2 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-mono text-gray-300">
+                  <span className="text-[11px] font-mono  text-gray-300">
                     {step.number}
                   </span>
 
-                  <h3 className="text-base font-semibold text-gray-900">
+                  <h3 className="text-base font-semibold  text-gray-700">
                     {step.title}
                   </h3>
                 </div>
@@ -144,10 +144,10 @@ export default function Processpage() {
       </div>
 
       {/* CTA */}
-      <div className="mt-14 bg-orange-50 border border-orange-100 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="mt-14 bg-orange-50 dark:bg-black dark:text-white border border-orange-100 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
 
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+          <h3 className="text-lg font-semibold text-gray-700 mb-1">
             Ready to start cooking?
           </h3>
           <p className="text-sm text-gray-500">

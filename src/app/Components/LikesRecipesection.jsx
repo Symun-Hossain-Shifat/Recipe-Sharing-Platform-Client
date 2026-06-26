@@ -11,18 +11,18 @@ async function LikesRecipesection() {
     return (
       <section className="max-w-7xl mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold mb-6">🔥 Popular Recipes</h2>
-        <p className="text-gray-500">No popular recipes found.</p>
+        <p className="text-gray-500 dark:text-white">No popular recipes found.</p>
       </section>
     );
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10">
+    <section className="max-w-7xl mx-auto px-4 py-10 dark:text-white">
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold">
+        <h2 className="text-3xl md:text-4xl  font-bold text-gray-600 ">
           🔥 Popular Recipes
         </h2>
-        <p className="text-gray-500 mt-2">
+        <p className="text-gray-500 mt-2 text-gray-600">
           Show most liked recipes.
         </p>
       </div>
@@ -31,7 +31,7 @@ async function LikesRecipesection() {
         {recipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+            className="bg-white dark:bg-black rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
           >
             <div className="relative w-full h-56">
               <Image

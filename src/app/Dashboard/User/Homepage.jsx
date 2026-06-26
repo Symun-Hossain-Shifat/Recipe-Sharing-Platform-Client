@@ -8,6 +8,7 @@ import {
   BiLike,
   BiCrown,
 } from "react-icons/bi";
+import { GiFreedomDove } from "react-icons/gi";
 
 export default function DashboardOverview({Data , Datas , likes}) {
   // Dummy Data
@@ -15,7 +16,7 @@ export default function DashboardOverview({Data , Datas , likes}) {
     const { data: session } = authClient.useSession();
     const user = session?.user?.isPremium;
   
-  
+   console.log(user)
     const stats = {
     totalRecipes:  Data.length ,
     totalFavorites: Datas.length ,
@@ -33,15 +34,15 @@ export default function DashboardOverview({Data , Datas , likes}) {
             Welcome back! Here's a quick summary of your activity.
           </p>
         </div>
-
-        { user === false ? (
+        <div>
+           { user === 'Free' ? (
           <Chip color="warning" variant="shadow">
             <div className="flex items-center p-3 gap-2">
-              <BiCrown size={18} />
-              <span>Premium Member</span>
+              <GiFreedomDove size={18} />
+              <span>Free Member</span>
             </div>
           </Chip>
-        ) :(
+        ) : (
           <Chip color="warning" variant="shadow">
           <div className="flex items-center p-3 gap-2">
             <BiCrown size={18} />
@@ -49,6 +50,8 @@ export default function DashboardOverview({Data , Datas , likes}) {
           </div>
         </Chip>
         ) }
+        </div>
+       
       </div>
 
       {/* Stats Cards */}

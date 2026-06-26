@@ -100,11 +100,11 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-orange-50 p-6">
+    <div className="min-h-screen dark:bg-black p-6">
       <div className="max-w-5xl mx-auto space-y-6">
 
         {/* HEADER */}
-        <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-orange-100">
+        <div className="flex justify-between items-center  p-4 rounded-2xl border border-orange-100">
           <h1 className="text-xl font-bold text-orange-600">
             My Profile
           </h1>
@@ -120,7 +120,7 @@ export default function ProfilePage() {
         </div>
 
         {/* PROFILE CARD */}
-        <div className="bg-white rounded-2xl p-6 flex items-center gap-6 border border-orange-100">
+        <div className=" rounded-2xl p-6 flex items-center gap-6 border border-orange-100">
 
           <div className="relative">
             <img
@@ -150,7 +150,7 @@ export default function ProfilePage() {
         </div>
 
         {/* TABS */}
-        <div className="flex bg-white p-2 rounded-xl border border-orange-100">
+        <div className="flex  p-2 rounded-xl border border-orange-100">
           {['overview', 'settings', 'premium'].map((tab) => (
             <button
               key={tab}
@@ -167,7 +167,7 @@ export default function ProfilePage() {
         </div>
 
         {/* CONTENT */}
-        <div className="bg-white p-6 rounded-2xl border border-orange-100">
+        <div className=" p-6 rounded-2xl border border-orange-100">
 
           {/* OVERVIEW */}
           {activeTab === 'overview' && (

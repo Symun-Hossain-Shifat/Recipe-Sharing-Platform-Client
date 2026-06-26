@@ -103,7 +103,7 @@ export default function CreateRecipeForm() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-emerald-50 flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br dark:bg-black from-orange-50 via-white to-emerald-50 flex items-center justify-center px-4 py-10">
      <form className=" w-full   " onSubmit={handleSubmit}>
       <Card className=" w-full md:w-10/12 mx-auto   shadow-2xl rounded-2xl border border-gray-100 p-6 md:p-10 space-y-8">
 
