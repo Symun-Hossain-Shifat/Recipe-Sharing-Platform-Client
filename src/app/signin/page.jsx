@@ -2,12 +2,15 @@
 
 import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import React from 'react';
 import toast from 'react-hot-toast';
 import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa';
 
 function SigninPage() {
-
+ 
+const router = useRouter()
    const Handlesignin = async(e) => {
     e.preventDefault()
     const FormData = e.target 
@@ -20,11 +23,26 @@ function SigninPage() {
     email: email , // required
     password: password , // required
     rememberMe: false ,
-    callbackURL: "/",
-});
-  if (data?.user) {
+    
+}); 
+  
+  if(data?.user?.isBlocked === true){
+   toast.error(
+    "You cannot login! Your account has been blocked by the admin. Please wait until the admin unblocks your account.",
+    {
+      duration: 10000, // 10 seconds
+    }
+  );
+    setTimeout(async () => {
+      await authClient.signOut();
+      router.push("/"); 
+    }, 10000);
+
+    return;
+    
+  }else if (data?.user) {
     toast.success("Login Successful 🎉");
-    redirect('/signin')
+    router.push("/");
   } else if (error) {
     toast.error(`Login Failed! ${error?.message}`);
   }

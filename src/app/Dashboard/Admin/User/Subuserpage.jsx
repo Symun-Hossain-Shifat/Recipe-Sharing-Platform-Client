@@ -3,10 +3,11 @@
 import { EditUserInfo } from '@/lib/EditData/User'
 import { Button, Card } from '@heroui/react'
 
-import React from 'react'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 
 function SubUserpage ({result}) {
+  const [users, setUsers] = useState(result);
 
 const Blockuser = async (user) => {
   try {
@@ -21,7 +22,13 @@ const Blockuser = async (user) => {
 
     if (result.modifiedCount > 0) {
       toast.success("User blocked successfully"); 
-  
+       setUsers((prev) =>
+        prev.map((u) =>
+          u.email === user.email
+            ? { ...u, isBlocked: true }
+            : u
+        )
+      );
     } else {
       toast("No changes were made.");
     }
@@ -47,7 +54,13 @@ const unBlockuser = async (user) => {
 
     if (result.modifiedCount > 0) {
       toast.success("User unblocked successfully"); 
-  
+       setUsers((prev) =>
+        prev.map((u) =>
+          u.email === user.email
+            ? { ...u, isBlocked: false }
+            : u
+        )
+      );
     } else {
       toast("No changes were made.");
     }
@@ -61,7 +74,7 @@ const unBlockuser = async (user) => {
   return (
     <div>
       {
-        result.length === 0 ? (
+        users.length === 0 ? (
           <div className="text-center py-20">
             <h2 className="text-3xl font-bold text-gray-700">
               No User Found 😢
@@ -82,7 +95,7 @@ const unBlockuser = async (user) => {
           
        
             {
-              result.map( user => (
+              users.map( user => (
                 <Card key={user._id} className="p-5  rounded-2xl shadow-md space-y-3">
 
       {/* User Info */}
