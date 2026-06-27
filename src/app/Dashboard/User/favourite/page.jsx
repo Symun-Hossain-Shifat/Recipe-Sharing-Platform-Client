@@ -21,14 +21,8 @@ async function Homepage () {
     )
     
   );
-  const Datas = []
-      const recipesall = await Promise.all(
-    recipes.map(item =>
-      
-       Datas.push(item[0])
-    )
-    
-  );
+
+  const Datas = recipes.flatMap(item => item);
     console.log( Datas)
   return (
 <Favouritehomepage Datas={Datas}></Favouritehomepage>

@@ -1,6 +1,7 @@
 
 
 
+
 import { Getallrecipes } from "@/lib/GetApiData/recipe";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,9 +10,9 @@ import {
   BarChart,
   MapPin,
   Tag,
-  Search,
-  Heart,
+ 
 } from "lucide-react";
+import { Description, Label, ListBox , Select } from "@heroui/react";
 
 async function RecipesPage() {
   
@@ -34,21 +35,42 @@ async function RecipesPage() {
             </p>
 
             {/* Search Field */}
-            <div className="max-w-xl mx-auto mt-10">
-              <div className="relative">
-                <Search
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-
-                <input
-                  type="text"
-                  placeholder="Search recipes, categories or cuisines..."
-                  
-                  className="w-full bg-white/80 backdrop-blur-md border text-black border-gray-200 rounded-2xl pl-12 pr-4 py-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                />
-              </div>
+            <div className="max-w-2xl mx-auto mt-10">
+             
+                <Select className="w-8/10 mx-auto" placeholder="Select one">
+      
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="florida" textValue="Florida">
+            Breakfast
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="delaware" textValue="Delaware">
+            Lunch
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="california" textValue="California">
+            Dinner
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="texas" textValue="Texas">
+            Snack
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+         
+        </ListBox>
+      </Select.Popover>
+      <Description>Select your Category</Description>
+    </Select>
+         
+                 
             </div>
+                 
+            
           </div>
         </div>
       </div>

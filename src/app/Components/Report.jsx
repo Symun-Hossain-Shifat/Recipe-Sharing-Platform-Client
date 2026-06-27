@@ -6,7 +6,7 @@ import { PostReport } from "@/lib/PostData/report";
 
 import {Button,  Modal, Surface} from "@heroui/react";
 import { Flag } from "lucide-react";
-import { redirect } from "next/navigation";
+
 import toast from "react-hot-toast";
 import { MdReport } from "react-icons/md";
 
@@ -17,6 +17,13 @@ export function ReportPage ({recipe}) {
   
   
  e.preventDefault()
+
+  if ( user?.email === recipe.authorEmail) {
+    toast.error(
+      "You cannot report your own recipe! Please select another recipe."
+    );
+    return;
+  }
  const Formdata = e.target 
  const Data = {
   reason : Formdata.message.value ,
@@ -28,7 +35,7 @@ export function ReportPage ({recipe}) {
   // console.log(result)
    if(result){
           toast.success('Report Submited Successfully 🎉')
-          redirect('/Recipes')
+         
         }
  }
   return (
@@ -63,7 +70,7 @@ export function ReportPage ({recipe}) {
               <Button slot="close" variant="secondary">
                 Cancel
               </Button>
-              <Button  type="submit">Send Review</Button>
+              <Button  type="submit" slot= 'close' >Send Review</Button>
             </Modal.Footer>
                 </form>
               </Surface>

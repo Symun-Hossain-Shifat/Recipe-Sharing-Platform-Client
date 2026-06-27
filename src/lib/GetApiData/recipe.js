@@ -1,3 +1,5 @@
+
+
 const Baseurl = process.env.NEXT_PUBLIC_SERVER_URL
 
 
@@ -9,7 +11,7 @@ export const Getallrecipes = async () => {
 
 
 export const Getspecificrecipes = async (id) => {
-  const res = await fetch(`${Baseurl}/api/recipes?id=${id}`);
+  const res = await fetch(`${Baseurl}/api/recipes?id=${id}` );
   const result = await res.json();
   return result;
 };

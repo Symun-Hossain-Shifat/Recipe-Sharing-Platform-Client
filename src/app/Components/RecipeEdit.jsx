@@ -79,7 +79,7 @@ export function RecipeEditPage ({recipe , User}) {
           
           if(result){
             toast.success('Recipe Published Successfully 🎉')
-            redirect('/Dashboard/User')
+            redirect(`/Dashboard/${User?.role}`)
           }
           console.log(result);
     

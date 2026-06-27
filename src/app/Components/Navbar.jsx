@@ -14,7 +14,7 @@ import { IoMdClose } from "react-icons/io";
 export default function Navbarpage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-
+  
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 

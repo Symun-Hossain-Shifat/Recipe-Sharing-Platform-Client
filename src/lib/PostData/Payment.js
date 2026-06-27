@@ -1,10 +1,12 @@
+import { authHeaderPost } from "../GetUser/GetToken";
 
 export async  function PostPayment (Data) {
   // console.log(Data)
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments` , {
           method : 'POST', 
         headers : {
-          'content-type' : 'application/json' ,
+          'content-type' : 'application/json' , 
+            ...(await authHeaderPost())
           
         },
         body : JSON.stringify(Data)
@@ -20,7 +22,8 @@ export async  function PostRecipePayment (Data) {
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/recipepayments` , {
           method : 'POST', 
         headers : {
-          'content-type' : 'application/json' ,
+          'content-type' : 'application/json' , 
+            ...(await authHeaderPost())
           
         },
         body : JSON.stringify(Data)

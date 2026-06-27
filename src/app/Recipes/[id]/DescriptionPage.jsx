@@ -146,7 +146,17 @@ export default function Detailspage({
       {/* Action Bar */}
       <div className="flex gap-3 mt-5 flex-wrap">
         <button
-          onClick={HandleLike}
+          onClick={(e) => {
+            if (UserEmail === authorEmail) {
+              e.preventDefault();
+              toast.error(
+                "You cannot Like your own recipe ! Please select another one."
+              );
+              return;
+            }
+
+            HandleLike(e);
+          }}
           disabled={liked}
           className={`flex items-center gap-2 px-4 py-2 shadow rounded-xl ${
             liked
@@ -158,8 +168,18 @@ export default function Detailspage({
           {likes}
         </button>
 
-        <button
-          onClick={Handlefavourite}
+        <button 
+         onClick={(e) => {
+          if (UserEmail === authorEmail) {
+            e.preventDefault();
+            toast.error(
+              "You cannot add your own recipe to favourites! Please select another one."
+            );
+            return;
+          }
+
+          Handlefavourite(e);
+        }}
           className="flex items-center gap-2 px-4 py-2 bg-white shadow rounded-xl"
         >
           <Heart className="text-red-500" />

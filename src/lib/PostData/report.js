@@ -1,3 +1,4 @@
+import { authHeaderPost } from "../GetUser/GetToken";
 
 
 export async  function PostReport (Data) {
@@ -5,7 +6,8 @@ export async  function PostReport (Data) {
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/report` , {
           method : 'POST', 
         headers : {
-          'content-type' : 'application/json' ,
+          'content-type' : 'application/json' , 
+           ...(await authHeaderPost())
           
         },
         body : JSON.stringify(Data)

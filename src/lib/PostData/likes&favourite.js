@@ -1,6 +1,8 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
+import { authHeaderPost } from "../GetUser/GetToken";
+
 
 
 
@@ -9,7 +11,8 @@ export async  function Postlikescount (Data , id) {
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/likescount` , {
           method : 'POST', 
         headers : {
-          'content-type' : 'application/json' ,
+          'content-type' : 'application/json' , 
+             ...(await authHeaderPost())
           
         },
         body : JSON.stringify(Data)

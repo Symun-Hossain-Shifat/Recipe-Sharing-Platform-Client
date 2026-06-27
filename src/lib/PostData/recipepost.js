@@ -1,3 +1,4 @@
+import {authHeaderPost } from "../GetUser/GetToken";
 
 
 export async  function Postrecipes (Data) {
@@ -5,7 +6,8 @@ export async  function Postrecipes (Data) {
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/recipes` , {
           method : 'POST', 
         headers : {
-          'content-type' : 'application/json' ,
+          'content-type' : 'application/json' , 
+            ...(await authHeaderPost())
           
         },
         body : JSON.stringify(Data)
