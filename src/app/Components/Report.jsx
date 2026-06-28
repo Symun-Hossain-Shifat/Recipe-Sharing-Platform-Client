@@ -23,7 +23,11 @@ export function ReportPage ({recipe}) {
       "You cannot report your own recipe! Please select another recipe."
     );
     return;
-  }
+  } 
+     if(user?.role === 'Admin'){
+         toast.error("Admin Cannot post Report !");
+        return;
+      }
  const Formdata = e.target 
  const Data = {
   reason : Formdata.message.value ,

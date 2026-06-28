@@ -45,6 +45,10 @@ export default function Detailspage({
     if (!User) {
       toast.error("Please login first");
       return;
+    } 
+    if(User?.role === 'Admin'){
+       toast.error("Admin Cannot Add favourite any Item !");
+      return;
     }
 
     const Data = {
@@ -248,6 +252,9 @@ export default function Detailspage({
               if (UserEmail === authorEmail) {
                 e.preventDefault();
                 toast.error("You cannot buy your own recipe! Please select another one.");
+              }else if (User?.role === 'Admin'){
+                e.preventDefault()
+                toast.error('Admin Cannot Buy Recipe !')
               }
             }}
           >

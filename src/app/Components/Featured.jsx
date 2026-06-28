@@ -4,7 +4,8 @@ import { GetallFeatures } from '@/lib/GetApiData/featured';
 import React from 'react';
 
 async function FeaturedRecipes() { 
-    const Datas = await GetallFeatures()
+    const Datas = await GetallFeatures() 
+    console.log(Datas)
   return (
     <section className="w-11/12 mx-auto py-10 text-black dark:text-white">
       <div className="text-center mb-8">

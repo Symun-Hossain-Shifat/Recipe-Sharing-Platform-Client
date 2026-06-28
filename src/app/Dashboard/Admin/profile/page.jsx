@@ -71,13 +71,10 @@ export default function ProfilePage() {
         name,
         image,
       }));
-      await authClient.getSession({
-  query: {
-    disableCookieCache: true,
-  },
-});
-
-      toast.success('Profile Updated Successfully');
+      
+       await authClient.signOut();
+       router.push('/');
+      toast.success('Profile Updated Successfully ! You are Logged Out , Please Signin Again'); 
     }
   };
  

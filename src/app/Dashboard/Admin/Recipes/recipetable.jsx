@@ -6,6 +6,8 @@ import { EditRecipeInfo } from '@/lib/EditData/editRecipe';
 import { Postfeatures } from '@/lib/PostData/featured';
 
 import { Button, Table } from '@heroui/react';
+import { useRouter } from 'next/router';
+
 
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
@@ -14,7 +16,7 @@ import { MdOutlineFeaturedVideo, MdOutlineRemoveRedEye } from 'react-icons/md';
 
 function Recipesmanagepage ({  User , Datas }) { 
  const [featuredIds, setFeaturedIds] = useState([]);
- 
+ const router = useRouter()
 
 
 
@@ -46,6 +48,7 @@ function Recipesmanagepage ({  User , Datas }) {
 
     if (updateResult) {
       setFeaturedIds((prev) => [...prev, recipe._id]);
+      router.refresh()
       toast.success("Recipe added to Featured successfully.");
     } else {
       toast.error("Recipe added, but update failed.");
