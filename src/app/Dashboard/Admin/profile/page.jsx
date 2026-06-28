@@ -17,6 +17,8 @@ import { EditUserInfo } from '@/lib/EditData/User';
 import toast from 'react-hot-toast';
 
 
+
+
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('overview');
     const [isSaved, setIsSaved] = useState(false);
@@ -46,8 +48,7 @@ export default function ProfilePage() {
   }
 
   const user = userData;
-
-  const GetNewUserData = async (e) => {
+ const GetNewUserData = async (e) => {
     e.preventDefault();
 
     const formData = e.target;
@@ -70,10 +71,16 @@ export default function ProfilePage() {
         name,
         image,
       }));
+      await authClient.getSession({
+  query: {
+    disableCookieCache: true,
+  },
+});
 
       toast.success('Profile Updated Successfully');
     }
   };
+ 
 
   if (!user) {
     return (
@@ -189,7 +196,7 @@ export default function ProfilePage() {
 
           {/* SETTINGS */}
           {activeTab === 'settings' && (
-            <form  onSubmit={GetNewUserData} className="space-y-4">
+            <form onSubmit={GetNewUserData}  className="space-y-4">
 
               <input
                 className="w-full border border-orange-200 p-2 rounded"
@@ -210,15 +217,15 @@ export default function ProfilePage() {
                 
               />
 
-              <button type='submit' className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
-                {isSaved ? (
-                  <>
-                    <Check size={14} /> Saved
-                  </>
-                ) : (
-                  'Save Changes'
-                )}
-              </button>
+       <button type='submit' className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                                   {isSaved ? (
+                                     <>
+                                       <Check size={14} /> Saved
+                                     </>
+                                   ) : (
+                                     'Save Changes'
+                                   )}
+                                 </button>
             </form>
           )}
 

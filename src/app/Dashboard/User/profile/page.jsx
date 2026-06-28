@@ -69,6 +69,11 @@ export default function ProfilePage() {
         name,
         image,
       }));
+       await authClient.getSession({
+        query: {
+          disableCookieCache: true,
+        },
+      })
 
       toast.success('Profile Updated Successfully');
     }
