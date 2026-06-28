@@ -1,4 +1,4 @@
-import { authHeader, authHeaderPost } from "../GetUser/GetToken";
+
 
 export const EditUserInfo = async (data, email) => {
   const res = await fetch(
@@ -8,7 +8,7 @@ export const EditUserInfo = async (data, email) => {
       cache : "no-store" ,
       headers: {
         "content-type": "application/json", 
-         ...(await authHeaderPost())
+       
       },
       body: JSON.stringify(data),
     }

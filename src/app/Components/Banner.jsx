@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Banner from '@/assets/Banner1.jpg';
+import { GetJwtToken } from '@/lib/GetUser/GetToken';
 
-export default function BannerPage() {
+export default async function BannerPage() {
+  // console.log(await GetJwtToken())
   return (
     <section className="relative overflow-hidden my-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Background decorative circles */}

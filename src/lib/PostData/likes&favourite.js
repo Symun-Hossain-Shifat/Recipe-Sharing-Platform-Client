@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
-import { authHeaderPost } from "../GetUser/GetToken";
+
 
 
 
@@ -12,7 +12,7 @@ export async  function Postlikescount (Data , id) {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' , 
-             ...(await authHeaderPost())
+             
           
         },
         body : JSON.stringify(Data)

@@ -1,4 +1,4 @@
-import { authHeader, authHeaderPost } from "../GetUser/GetToken";
+
 
 export const EditRecipeInfo = async ( NewData, id) => {
   const res = await fetch(
@@ -7,7 +7,7 @@ export const EditRecipeInfo = async ( NewData, id) => {
       method: "PATCH",
       headers: {
         "content-type": "application/json", 
-         ...(await authHeaderPost())
+         
       },
       body: JSON.stringify(NewData),
     }

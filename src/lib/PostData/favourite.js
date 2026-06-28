@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
-import { authHeaderPost } from "../GetUser/GetToken";
+
 
 export async  function Postfavourite (Data , id) {
   // console.log(Data)
@@ -9,7 +9,7 @@ export async  function Postfavourite (Data , id) {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' , 
-           ...(await authHeaderPost())
+          
           
         },
         body : JSON.stringify(Data)

@@ -14,10 +14,11 @@ import {
 } from "lucide-react";
 import { Description, Label, ListBox , Select } from "@heroui/react";
 
-async function RecipesPage() {
+
+async function RecipesPage() { 
   
   const Datas = await Getallrecipes()
-  console.log(Datas)
+  // console.log(Datas)
   return (
     <div className="min-h-screen bg-gradient-to-br text-black dark:text-white dark:bg-black">
       {/* Hero Section */}
@@ -37,36 +38,44 @@ async function RecipesPage() {
             {/* Search Field */}
             <div className="max-w-2xl mx-auto mt-10">
              
-                <Select className="w-8/10 mx-auto" placeholder="Select one">
-      
+                <form>
+                 <Select
+      className="w-8/10 mx-auto"
+      placeholder="Select one"
+     
+    >
+     
+
       <Select.Trigger>
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
+
       <Select.Popover>
         <ListBox>
-          <ListBox.Item id="florida" textValue="Florida">
+          <ListBox.Item id="Breakfast">
             Breakfast
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="delaware" textValue="Delaware">
+
+          <ListBox.Item id="Lunch">
             Lunch
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="california" textValue="California">
+          <ListBox.Item id="Dinner">
             Dinner
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="texas" textValue="Texas">
-            Snack
+          <ListBox.Item id="Dinner">
+            snack
             <ListBox.ItemIndicator />
           </ListBox.Item>
-         
         </ListBox>
       </Select.Popover>
-      <Description>Select your Category</Description>
+
+      <Description>Select Category</Description>
     </Select>
-         
+              </form>
                  
             </div>
                  

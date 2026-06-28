@@ -1,13 +1,22 @@
 
 
+
 const Baseurl = process.env.NEXT_PUBLIC_SERVER_URL
 
+export const Getallrecipes = async (category) => {
+  let url = `${Baseurl}/api/recipes`;
 
-export const Getallrecipes = async () => {
- const res = await fetch(`${Baseurl}/api/recipes`)
- const result = await res.json()
- return result
-}
+  if (category) {
+    url += `?category=${category}`;
+  }
+
+  const res = await fetch(url, {
+    cache: "no-store"
+    
+  });
+
+  return await res.json();
+};
 
 
 export const Getspecificrecipes = async (id) => {

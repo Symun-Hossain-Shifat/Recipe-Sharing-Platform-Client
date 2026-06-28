@@ -1,4 +1,4 @@
-import { authHeaderPost } from "../GetUser/GetToken";
+
 
 export async  function PostPayment (Data) {
   // console.log(Data)
@@ -6,7 +6,7 @@ export async  function PostPayment (Data) {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' , 
-            ...(await authHeaderPost())
+          
           
         },
         body : JSON.stringify(Data)
@@ -23,7 +23,7 @@ export async  function PostRecipePayment (Data) {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' , 
-            ...(await authHeaderPost())
+           
           
         },
         body : JSON.stringify(Data)

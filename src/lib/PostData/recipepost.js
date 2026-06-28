@@ -1,4 +1,4 @@
-import {authHeaderPost } from "../GetUser/GetToken";
+
 
 
 export async  function Postrecipes (Data) {
@@ -7,7 +7,7 @@ export async  function Postrecipes (Data) {
           method : 'POST', 
         headers : {
           'content-type' : 'application/json' , 
-            ...(await authHeaderPost())
+           
           
         },
         body : JSON.stringify(Data)
