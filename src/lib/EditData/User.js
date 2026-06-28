@@ -1,3 +1,4 @@
+import { authHeader } from "../GetUser/GetToken";
 
 
 export const EditUserInfo = async (data, email) => {
@@ -7,6 +8,7 @@ export const EditUserInfo = async (data, email) => {
       method: "PATCH", 
       cache : "no-store" ,
       headers: {
+       ...await authHeader() ,
         "content-type": "application/json", 
        
       },

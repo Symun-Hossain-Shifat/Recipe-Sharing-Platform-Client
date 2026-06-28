@@ -8,8 +8,8 @@ export default function UnauthorizedPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gray-950 text-gray-100 px-4">
-      <div className="max-w-md w-full text-center space-y-6 p-8 rounded-2xl bg-[#18181b] border border-gray-800 shadow-xl">
+    <div className="min-h-[80vh] flex flex-col items-center dark:bg-black justify-center px-4">
+      <div className="max-w-md w-full text-red-700 text-center space-y-6 p-8 rounded-2xl -[#18181b] border  shadow-xl">
         
         {/* Animated Visual Icon */}
         <div className="flex justify-center">
@@ -18,12 +18,19 @@ export default function UnauthorizedPage() {
           </div>
         </div>
 
+
+        <div className="flex justify-center">
+          
+           <p className="text-3xl font-bold text-center">404</p>
+          
+        </div>
+         
         {/* Message */}
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-white">
-            Access Denied
+          <h1 className="text-3xl font-bold tracking-tight ">
+           Unauthorized access
           </h1>
-          <p className="text-sm text-gray-400 leading-relaxed">
+          <p className="text-sm  leading-relaxed">
             Oops! You don't have permission to access this page. It looks like you're signed in with an account that lacks the required credentials.
           </p>
         </div>

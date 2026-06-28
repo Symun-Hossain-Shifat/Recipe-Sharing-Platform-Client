@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
+import { authHeader } from "../GetUser/GetToken";
 
 
 export async  function Postfavourite (Data , id) {
@@ -8,6 +9,7 @@ export async  function Postfavourite (Data , id) {
      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/favourite` , {
           method : 'POST', 
         headers : {
+          ...await authHeader() ,
           'content-type' : 'application/json' , 
           
           
