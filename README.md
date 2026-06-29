@@ -187,6 +187,14 @@ recipehub-server/
 - GitHub: https://github.com/Symun-Hossain-Shifat
 - LinkedIn: http://www.linkedin.com/in/symun-hossain-shifat-35612338b
 
+- 
+# 👨‍💻 Admin Role
+
+
+
+- Email : symunhossain@gmail.com
+- password : Symun123
+
 ---
 
 
