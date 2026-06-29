@@ -11,7 +11,7 @@ async function Adminpage() {
     const Report = await Getallreport() 
     const isPremium = "Premium" 
     const PremiumMember = await Getspecificuserbystatus(isPremium) 
-    // console.log( Users , Recipe , Report , PremiumMember )
+    console.log( Users  )
 
   return (
     <DashboardOverview Users={Users} Recipe={Recipe} Report={Report} PremiumMember={PremiumMember}></DashboardOverview>

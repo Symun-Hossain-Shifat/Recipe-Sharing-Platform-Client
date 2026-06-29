@@ -216,7 +216,7 @@ export default function CreateRecipeForm() {
               </Select.Trigger>
               <Select.Popover>
                 <ListBox>
-                  <ListBox.Item id="true">Yes</ListBox.Item>
+                 
                   <ListBox.Item id="false">No</ListBox.Item>
                 </ListBox>
               </Select.Popover>
@@ -232,7 +232,7 @@ export default function CreateRecipeForm() {
               <Select.Popover>
                 <ListBox>
                   <ListBox.Item id="published">Published</ListBox.Item>
-                  <ListBox.Item id="draft">Draft</ListBox.Item>
+                  
                 </ListBox>
               </Select.Popover>
             </Select>

@@ -2,6 +2,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -52,11 +53,26 @@ function SigninPage() {
     console.log(error);
   };
 
-  const HandleGoogleSignin = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-    });
-  };
+const HandleGoogleSignin = async () => {
+  await authClient.signIn.social({
+    provider: "google",
+  });
+
+  const session = await authClient.getSession();
+
+  if (session.data?.user?.isBlocked) {
+    toast.error(
+      "You cannot login! Your account has been blocked by the admin.",
+      {
+        duration: 10000,
+      }
+    );
+
+    await authClient.signOut();
+
+    router.push("/");
+  }
+};
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 transition-colors duration-300 py-10 px-4">

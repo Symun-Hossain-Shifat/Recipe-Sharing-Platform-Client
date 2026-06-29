@@ -21,7 +21,7 @@ async function Homepage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between gap-6 mb-8">
         <div>
-          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-4xl font-extrabold  from-primary to-secondary bg-clip-text ">
             Transactions Management
           </h1>
           <p className="text-base-content/60 mt-2">

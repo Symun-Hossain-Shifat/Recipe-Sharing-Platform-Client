@@ -55,11 +55,26 @@ function Signuppage() {
   }
 };
 
-  const HandleGoogleSignin = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-    });
-  };
+const HandleGoogleSignin = async () => {
+  await authClient.signIn.social({
+    provider: "google",
+  });
+
+  const session = await authClient.getSession();
+
+  if (session.data?.user?.isBlocked) {
+    toast.error(
+      "You cannot login! Your account has been blocked by the admin.",
+      {
+        duration: 10000,
+      }
+    );
+
+    await authClient.signOut();
+
+    router.push("/");
+  }
+};
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 transition-colors duration-300 px-4 py-10">

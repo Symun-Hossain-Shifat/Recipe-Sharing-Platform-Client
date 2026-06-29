@@ -19,48 +19,52 @@ import { Getallrecipes } from "@/lib/GetApiData/recipe";
 function RecipeHomepage({Datas , user}) { 
 
 
-const [category, setCategory] = useState("all");
-const [data, setData] = useState(Datas);
+ const [category, setCategory] = useState("all");
+  const [data, setData] = useState(Datas);
 
-useEffect(() => {
-  const fetchRecipes = async () => {
-    if (category === "all") {
-      setData(Datas);
-    } else {
-      const result = await Getallrecipes(category.toLocaleLowerCase());
+  const [page, setPage] = useState(1);
+
+ const itemsPerPage = 5;
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      let result;
+
+      if (category === "all") {
+        result = await Getallrecipes("all", page, itemsPerPage);
+      } else {
+        result = await Getallrecipes(
+          category.toLowerCase(),
+          page,
+          itemsPerPage
+        );
+      }
+
       setData(result);
-    }
-  };
+    };
 
-  fetchRecipes();
-}, [category, Datas]);
+    fetchRecipes();
+  }, [category, page]);
  
 
-const [page, setPage] = useState(1);
-  
-  const itemsPerPage = 5 ;
-  const totalItems = data.length;
-  const totalPages = totalItems/itemsPerPage ;
-  const getPageNumbers = () => {
-    const pages  = [];
-    pages.push(1);
-    if (page > 3) {
-      pages.push("ellipsis");
-    }
-    const start = Math.max(2, page - 1);
-    const end = Math.min(totalPages - 1, page + 1);
-    for (let i = start; i <= end; i++) {
-      pages.push(i);
-    }
-    if (page < totalPages - 2) {
-      pages.push("ellipsis");
-    }
-    pages.push(totalPages);
-    return pages;
-  };
-  const startItem = (page - 1) * itemsPerPage + 1;
-  const endItem = Math.min(page * itemsPerPage, totalItems);
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
 
+  const totalItems = data.length;
+
+
+  
+  
+
+   const totalPages = Math.max(1, page + (data.length === itemsPerPage ? 1 : 0));
+
+  const getPageNumbers = () => {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  };
+
+  const startItem = (page - 1) * itemsPerPage + 1;
+  const endItem = startItem + data.length - 1;
   return (
      <div className="min-h-screen bg-gradient-to-br text-black dark:text-white dark:bg-black">
       {/* Hero Section */}
@@ -209,7 +213,7 @@ const [page, setPage] = useState(1);
               </div>
             ))}
           </div> 
-                <Pagination className="w-full">
+                <Pagination className="w-full mt-6">
             <Pagination.Summary>
               Showing {startItem}-{endItem} of {totalItems} results
             </Pagination.Summary>
