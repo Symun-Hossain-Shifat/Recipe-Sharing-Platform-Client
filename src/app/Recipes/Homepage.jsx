@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 
-import { Description, ListBox , Select} from "@heroui/react";
+import { Description, ListBox , Pagination, Select} from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Getallrecipes } from "@/lib/GetApiData/recipe";
 
@@ -34,7 +34,32 @@ useEffect(() => {
 
   fetchRecipes();
 }, [category, Datas]);
+ 
 
+const [page, setPage] = useState(1);
+  
+  const itemsPerPage = 5 ;
+  const totalItems = data.length;
+  const totalPages = totalItems/itemsPerPage ;
+  const getPageNumbers = () => {
+    const pages  = [];
+    pages.push(1);
+    if (page > 3) {
+      pages.push("ellipsis");
+    }
+    const start = Math.max(2, page - 1);
+    const end = Math.min(totalPages - 1, page + 1);
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    if (page < totalPages - 2) {
+      pages.push("ellipsis");
+    }
+    pages.push(totalPages);
+    return pages;
+  };
+  const startItem = (page - 1) * itemsPerPage + 1;
+  const endItem = Math.min(page * itemsPerPage, totalItems);
 
   return (
      <div className="min-h-screen bg-gradient-to-br text-black dark:text-white dark:bg-black">
@@ -103,6 +128,7 @@ useEffect(() => {
             </p>
           </div>
         ) : (
+          <> 
           <div className="grid sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-4">
             {data.map((recipe) => (
               <div
@@ -182,7 +208,41 @@ useEffect(() => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> 
+                <Pagination className="w-full">
+            <Pagination.Summary>
+              Showing {startItem}-{endItem} of {totalItems} results
+            </Pagination.Summary>
+            <Pagination.Content>
+              <Pagination.Item>
+                <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
+                  <Pagination.PreviousIcon />
+                  <span>Previous</span>
+                </Pagination.Previous>
+              </Pagination.Item>
+              {getPageNumbers().map((p, i) =>
+                p === "ellipsis" ? (
+                  <Pagination.Item key={`ellipsis-${i}`}>
+                    <Pagination.Ellipsis />
+                  </Pagination.Item>
+                ) : (
+                  <Pagination.Item key={p}>
+                    <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                      {p}
+                    </Pagination.Link>
+                  </Pagination.Item>
+                ),
+              )}
+              <Pagination.Item>
+                <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
+                  <span>Next</span>
+                  <Pagination.NextIcon />
+                </Pagination.Next>
+              </Pagination.Item>
+            </Pagination.Content>
+          </Pagination>
+          </>
+          
         )}
       </div>
     </div>
