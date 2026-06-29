@@ -1,36 +1,197 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍽️ RecipeHub - Recipe Sharing Platform
 
-## Getting Started
+RecipeHub is a modern full-stack recipe sharing platform where users can discover, create, manage, and share delicious recipes with people around the world. It provides a clean and responsive interface, secure authentication, recipe categorization, and an interactive user experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌐 Live Demo
+
+🔗 Client: https://recipehub-client-pi.vercel.app
+
+🔗 Server: https://recipehub-server-sigma.vercel.app
+
+
+---
+
+## 🚀 Features
+
+### 👨‍🍳 Authentication
+- Secure user authentication
+- Google Sign-In
+- Protected routes
+- Persistent user sessions
+- Logout functionality
+
+### 🍲 Recipe Management
+- Create new recipes
+- Update existing recipes
+- Delete recipes
+- View recipe details
+- Browse all recipes
+- Recipe categorization
+- Rich recipe information
+
+### ❤️ User Interaction
+- Like recipes
+- Prevent duplicate likes
+- View total likes
+- Responsive recipe cards
+- Beautiful recipe details page
+
+### 🔍 Search & Filtering
+- Filter recipes by category
+- Server-side pagination
+- Dynamic recipe loading
+- Fast data fetching
+
+### 📊 Dashboard
+- Manage personal recipes
+- Update profile information
+- Delete recipes
+- User-specific dashboard
+
+### 🎨 User Experience
+- Fully responsive design
+- Dark & Light mode
+- Loading spinners
+- Toast notifications
+- Smooth animations
+- Clean UI/UX
+
+---
+
+# 🛠️ Technologies Used
+
+## Frontend
+
+- Next.js 15
+- React 19
+- Tailwind CSS
+- DaisyUI
+- React Icons
+- React Hot Toast
+- Better Auth
+- Framer Motion
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Better Auth
+- REST API
+
+---
+
+## Database
+
+- MongoDB Atlas
+
+---
+
+## Deployment
+
+- Vercel (Client)
+- Vercel (Server)
+
+---
+
+# 📂 Project Structure
+
+```
+recipehub-client/
+│
+├── app/
+├── components/
+├── lib/
+├── hooks/
+├── services/
+├── public/
+└── ...
+
+recipehub-server/
+│
+├── controllers/
+├── routes/
+├── models/
+├── middleware/
+├── utils/
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 📡 API Features
 
-## Learn More
+- User Authentication
+- Recipe CRUD Operations
+- Category Filtering
+- Pagination
+- Like System
+- User-specific Recipes
+- Protected APIs
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 💡 Key Functionalities
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Secure Authentication using Better Auth
+- Google Login
+- Protected Dashboard
+- Recipe CRUD
+- Category Filter
+- Pagination
+- Responsive Design
+- Dark/Light Theme
+- Toast Notifications
+- Session Management
+- RESTful API
+- MongoDB Integration
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 🎯 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Recipe comments
+- Recipe bookmarking
+- User profiles
+- Recipe ratings
+- Admin dashboard
+- Email verification
+- Password reset
+- Advanced search
+- Recipe recommendations
+- AI recipe suggestions
+
+---
+
+# 📈 Performance
+
+- Server-side rendering with Next.js
+- Optimized image loading
+- Fast API responses
+- Efficient MongoDB queries
+- Lazy loading
+- Responsive layouts
+
+---
+
+# 👨‍💻 Author
+
+**Saymon Shifat**
+
+- GitHub: https://github.com/Symun-Hossain-Shifat
+- LinkedIn: http://www.linkedin.com/in/symun-hossain-shifat-35612338b
+
+---
+
+
+# ⭐ Support
+
+If you like this project, don't forget to give it a ⭐ on GitHub!
+
+Happy Coding 🚀
