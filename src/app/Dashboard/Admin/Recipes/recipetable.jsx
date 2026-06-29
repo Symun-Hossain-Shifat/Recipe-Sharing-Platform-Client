@@ -6,7 +6,9 @@ import { EditRecipeInfo } from '@/lib/EditData/editRecipe';
 import { Postfeatures } from '@/lib/PostData/featured';
 
 import { Button, Table } from '@heroui/react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+
+
 
 
 import React, { useState } from 'react'

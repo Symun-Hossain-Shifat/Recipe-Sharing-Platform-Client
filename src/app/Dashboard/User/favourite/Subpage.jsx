@@ -111,13 +111,26 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
                 
                   </div>
                        {/* Button */}
-                  <Button
+                       <div className='flex items-center justify-between'> 
+
+
+                         <Link
+                  href={`/Recipes/${recipe._id}`}
+                  className="bg-orange-500 rounded-4xl hover:bg-orange-600 text-white px-4 py-2 transition"
+                >
+                  View Details
+                </Link>
+                         <Button
                     onClick={() => DeleteFavourite(recipe._id)}
-                    className=" w-full flex gap-3 items-center justify-center py-3 rounded-2xl bg-red-500 text-white font-semibold  transition-all"
+                    className=" flex gap-3 items-center justify-center py-3 rounded-2xl bg-red-500 text-white font-semibold  transition-all"
                   >
                     <RiDeleteBin6Line />
-                   Delete
-                  </Button>
+                   Delete Now
+                  </Button> 
+                   
+
+                       </div>
+                 
 
                 </div>
               </div>

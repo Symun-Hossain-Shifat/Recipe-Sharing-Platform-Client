@@ -16,34 +16,44 @@ import { PiBracketsCurlyBold } from "react-icons/pi";
 function Signuppage() {
   const router = useRouter();
 
-  const Handlesignup = async (e) => {
-    e.preventDefault();
+ const Handlesignup = async (e) => {
+  e.preventDefault();
 
-    const FormData = e.target;
+  const FormData = e.target;
 
-    const name = FormData.Name.value;
-    const email = FormData.Email.value;
-    const image = FormData.Image.value;
-    const password = FormData.Password.value;
+  const name = FormData.Name.value;
+  const email = FormData.Email.value;
+  const image = FormData.Image.value;
+  const password = FormData.Password.value;
 
-    const { data, error } = await authClient.signUp.email({
-      name,
-      email,
-      password,
-      image,
-      callbackURL: "/signin",
-    });
+  // Password Validation
+  if (password.length < 6) {
+    return toast.error("Password must be at least 6 characters.");
+  }
 
-    if (data?.user) {
-      toast.success("Registration Successful 🎉");
-      router.push("/signin");
-    } else if (error) {
-      toast.error(`Registration Failed! ${error.message}`);
-    }
+  if (!/[A-Z]/.test(password)) {
+    return toast.error("Password must contain at least one uppercase letter.");
+  }
 
-    console.log(data);
-    console.log(error);
-  };
+  if (!/[a-z]/.test(password)) {
+    return toast.error("Password must contain at least one lowercase letter.");
+  }
+
+  const { data, error } = await authClient.signUp.email({
+    name,
+    email,
+    password,
+    image,
+    callbackURL: "/signin",
+  });
+
+  if (data?.user) {
+    toast.success("Registration Successful 🎉");
+    router.push("/signin");
+  } else if (error) {
+    toast.error(`Registration Failed! ${error.message}`);
+  }
+};
 
   const HandleGoogleSignin = async () => {
     await authClient.signIn.social({
@@ -132,24 +142,29 @@ function Signuppage() {
             </div>
           </div>
 
-          {/* Password */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Password
-            </label>
+        <div>
+  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+    Password
+  </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <FaLock className="mr-3 text-gray-400 dark:text-gray-500" />
+  <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
+    <FaLock className="mr-3 text-gray-400 dark:text-gray-500" />
 
-              <input
-                name="Password"
-                type="password"
-                required
-                placeholder="Create a strong password"
-                className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
-              />
-            </div>
-          </div> 
+    <input
+      name="Password"
+      type="password"
+      required
+      placeholder="Create a strong password"
+      className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+    />
+  </div>
+
+  <ul className="mt-2 ml-2 list-disc text-xs text-gray-500 dark:text-gray-400 space-y-1">
+    <li>Minimum 6 characters</li>
+    <li>At least one uppercase letter (A-Z)</li>
+    <li>At least one lowercase letter (a-z)</li>
+  </ul>
+</div>
                     {/* Terms */}
           <label className="flex cursor-pointer items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
             <input

@@ -1,6 +1,6 @@
 'use client';
 
-import { authClient } from "@/lib/auth-client";
+
 import { Card, Chip } from "@heroui/react";
 import {
   BiBookOpen,
@@ -10,12 +10,11 @@ import {
 } from "react-icons/bi";
 import { GiFreedomDove } from "react-icons/gi";
 
-export default function DashboardOverview({Data , Datas , likes}) {
+export default function DashboardOverview({Data , Datas , likes , User}) {
   // Dummy Data
   
-    const { data: session } = authClient.useSession();
-    const user = session?.user?.isPremium;
   
+    const user = User?.isPremium
    console.log(user)
     const stats = {
     totalRecipes:  Data.length ,

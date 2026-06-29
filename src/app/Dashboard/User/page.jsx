@@ -35,7 +35,7 @@ const Result = await Getspecificfavourites(id)
 
   return (
     <div>
-    <DashboardOverview Data={Data} Datas={Datas} likes={likes}></DashboardOverview>
+    <DashboardOverview Data={Data} Datas={Datas} likes={likes} User={User}></DashboardOverview>
     </div>
   )
 }

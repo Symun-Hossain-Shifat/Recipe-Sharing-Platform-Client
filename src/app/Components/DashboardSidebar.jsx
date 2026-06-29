@@ -18,12 +18,12 @@ import { AiOutlineTransaction } from "react-icons/ai";
 
 
 export function SideNavigation({plan , Userinfo}) { 
-  // console.log(plan)
+  console.log(plan)
   const pathname = usePathname();
 
 
 const user =  Userinfo ;
-    // console.log(user?.role)
+    console.log( user?.isPremium )
   const UserNavItems = [
     {
       href: "/Dashboard/User",
