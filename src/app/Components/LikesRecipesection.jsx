@@ -3,8 +3,10 @@ import Link from "next/link";
 import { AiOutlineLike } from "react-icons/ai";
 import { Getspecificrecipesbylikes } from "@/lib/GetApiData/recipe";
 import { ChefHat, SearchX } from "lucide-react";
+import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
 
-async function LikesRecipesection() {
+async function LikesRecipesection() { 
+  const user = await GetUserInserver();
   const likesCount = 4;
   const recipes = await Getspecificrecipesbylikes(likesCount);
 
@@ -90,7 +92,7 @@ async function LikesRecipesection() {
                 </div>
 
                 <Link
-                  href={`/Recipes/${recipe._id}`}
+                  href= { user?.email ? `/Recipes/${recipe._id}` : '/unauthorized'}
                   className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition"
                 >
                   View

@@ -228,7 +228,7 @@ export function RecipeEditPage ({recipe , User}) {
                      </Select.Trigger>
                      <Select.Popover>
                        <ListBox>
-                         <ListBox.Item id="true">Yes</ListBox.Item>
+                        
                          <ListBox.Item id="false">No</ListBox.Item>
                        </ListBox>
                      </Select.Popover>
@@ -244,7 +244,7 @@ export function RecipeEditPage ({recipe , User}) {
                      <Select.Popover>
                        <ListBox>
                          <ListBox.Item id="published">Published</ListBox.Item>
-                         <ListBox.Item id="draft">Draft</ListBox.Item>
+                        
                        </ListBox>
                      </Select.Popover>
                    </Select>
