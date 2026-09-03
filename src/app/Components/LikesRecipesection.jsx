@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineLike } from "react-icons/ai";
 import { Getspecificrecipesbylikes } from "@/lib/GetApiData/recipe";
-import { ChefHat, SearchX } from "lucide-react";
+import { ChefHat, ChefHatIcon, SearchX } from "lucide-react";
 import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
 
-async function LikesRecipesection() { 
+async function LikesRecipesection() {
   const user = await GetUserInserver();
   const likesCount = 4;
   const recipes = await Getspecificrecipesbylikes(likesCount);
@@ -13,37 +13,37 @@ async function LikesRecipesection() {
   if (!recipes || recipes.length === 0) {
     return (
       <section className="max-w-7xl mx-auto px-4 py-20">
-  <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-orange-50 to-amber-100 dark:from-zinc-900 dark:to-zinc-800 rounded-3xl shadow-xl border border-orange-200 dark:border-zinc-700 p-10 md:p-16">
-    
-    <div className="relative mb-6">
-      <div className="absolute inset-0 bg-orange-400 blur-3xl opacity-30 rounded-full"></div>
-      <div className="relative w-24 h-24 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-2xl">
-        <ChefHat size={48} />
-      </div>
-    </div>
+        <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-orange-50 to-amber-100 dark:from-zinc-900 dark:to-zinc-800 rounded-3xl shadow-xl border border-orange-200 dark:border-zinc-700 p-10 md:p-16">
 
-    <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-      🍽️ Popular Recipes
-    </h2>
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-orange-400 blur-3xl opacity-30 rounded-full"></div>
+            <div className="relative w-24 h-24 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-2xl">
+              <ChefHat size={48} />
+            </div>
+          </div>
 
-    <p className="max-w-lg text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
-      We couldn't find any popular recipes at the moment.
-      New trending dishes will appear here as users discover and love them.
-    </p>
+          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+            🍽️ Popular Recipes
+          </h2>
 
-    <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-6 py-3 rounded-full shadow-lg border border-orange-200 dark:border-zinc-700">
-      <SearchX className="text-orange-500" size={22} />
-      <span className="font-medium text-gray-700 dark:text-gray-200">
-        No Popular Recipes Found
-      </span>
-    </div>
+          <p className="max-w-lg text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
+            We couldn't find any popular recipes at the moment.
+            New trending dishes will appear here as users discover and love them.
+          </p>
 
-    <button className="mt-8 px-8 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105">
-      Explore All Recipes
-    </button>
+          <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-6 py-3 rounded-full shadow-lg border border-orange-200 dark:border-zinc-700">
+            <SearchX className="text-orange-500" size={22} />
+            <span className="font-medium text-gray-700 dark:text-gray-200">
+              No Popular Recipes Found
+            </span>
+          </div>
 
-  </div>
-</section>
+          <button className="mt-8 px-8 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105">
+            Explore All Recipes
+          </button>
+
+        </div>
+      </section>
     );
   }
 
@@ -92,7 +92,7 @@ async function LikesRecipesection() {
                 </div>
 
                 <Link
-                  href= { user?.email ? `/Recipes/${recipe._id}` : '/unauthorized'}
+                  href={user?.email ? `/Recipes/${recipe._id}` : '/unauthorized'}
                   className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition"
                 >
                   View
@@ -102,6 +102,20 @@ async function LikesRecipesection() {
           </div>
         ))}
       </div>
+      <div className="flex justify-center my-10">
+        <Link href="/Recipes">
+          <button
+            className="group relative flex items-center gap-2 px-8 py-3 bg-[#2B2420] text-[#FBF7EF] text-sm font-medium border-2 border-[#2B2420] hover:bg-[#FBF7EF] hover:text-[#2B2420] transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <ChefHatIcon
+              size={16}
+              className="group-hover:rotate-12 transition-transform duration-300"
+            />
+            View more recipes
+          </button>
+        </Link>
+      </div>
+
     </section>
   );
 }
