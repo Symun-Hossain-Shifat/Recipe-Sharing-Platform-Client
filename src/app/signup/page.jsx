@@ -16,225 +16,225 @@ import { PiBracketsCurlyBold } from "react-icons/pi";
 function Signuppage() {
   const router = useRouter();
 
- const Handlesignup = async (e) => {
-  e.preventDefault();
+  const Handlesignup = async (e) => {
+    e.preventDefault();
 
-  const FormData = e.target;
+    const FormData = e.target;
 
-  const name = FormData.Name.value;
-  const email = FormData.Email.value;
-  const image = FormData.Image.value;
-  const password = FormData.Password.value;
+    const name = FormData.Name.value;
+    const email = FormData.Email.value;
+    const image = FormData.Image.value;
+    const password = FormData.Password.value;
 
-  // Password Validation
-  if (password.length < 6) {
-    return toast.error("Password must be at least 6 characters.");
-  }
+    if (password.length < 6) {
+      return toast.error("Password must be at least 6 characters.");
+    }
 
-  if (!/[A-Z]/.test(password)) {
-    return toast.error("Password must contain at least one uppercase letter.");
-  }
+    if (!/[A-Z]/.test(password)) {
+      return toast.error("Password must contain at least one uppercase letter.");
+    }
 
-  if (!/[a-z]/.test(password)) {
-    return toast.error("Password must contain at least one lowercase letter.");
-  }
+    if (!/[a-z]/.test(password)) {
+      return toast.error("Password must contain at least one lowercase letter.");
+    }
 
-  const { data, error } = await authClient.signUp.email({
-    name,
-    email,
-    password,
-    image,
-    callbackURL: "/signin",
-  });
+    const { data, error } = await authClient.signUp.email({
+      name,
+      email,
+      password,
+      image,
+      callbackURL: "/signin",
+    });
 
-  if (data?.user) {
-    toast.success("Registration Successful 🎉");
-    router.push("/signin");
-  } else if (error) {
-    toast.error(`Registration Failed! ${error.message}`);
-  }
-};
+    if (data?.user) {
+      toast.success("Registration Successful 🎉");
+      router.push("/signin");
+    } else if (error) {
+      toast.error(`Registration Failed! ${error.message}`);
+    }
+  };
 
-const HandleGoogleSignin = async () => {
-  await authClient.signIn.social({
-    provider: "google",
-  });
+  const HandleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
 
-  const session = await authClient.getSession();
+    const session = await authClient.getSession();
 
-  if (session.data?.user?.isBlocked) {
-    toast.error(
-      "You cannot login! Your account has been blocked by the admin.",
-      {
-        duration: 10000,
-      }
-    );
+    if (session.data?.user?.isBlocked) {
+      toast.error(
+        "You cannot login! Your account has been blocked by the admin.",
+        {
+          duration: 10000,
+        }
+      );
 
-    await authClient.signOut();
+      await authClient.signOut();
 
-    router.push("/");
-  }
-};
+      router.push("/");
+    }
+  };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 transition-colors duration-300 px-4 py-10">
-      <div className="w-full max-w-md rounded-3xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl transition-colors duration-300 p-8">
+    <section className="min-h-screen flex items-center justify-center bg-black py-12 px-4">
+      <div className="w-full max-w-md rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl p-8 sm:p-10">
 
-        {/* Logo */}
+        {/* Logo Icon */}
         <div className="mb-6 flex justify-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-100 dark:bg-orange-500/20 text-3xl">
-            🍽️
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-950 border border-zinc-800 text-3xl shadow-inner">
+            🍳
           </div>
         </div>
 
         {/* Heading */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">
             Create Account
           </h1>
 
-          <p className="mt-2 text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-sm text-zinc-400">
             Join RecipeHub and start sharing delicious recipes
           </p>
         </div>
 
-        <form onSubmit={Handlesignup} className="space-y-5">
+        <form onSubmit={Handlesignup} className="space-y-4">
 
           {/* Name */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Full Name
             </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <FaUser className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-colors">
+              <FaUser className="mr-3 text-zinc-500 shrink-0" />
 
               <input
                 name="Name"
                 type="text"
                 required
                 placeholder="Enter your full name"
-                className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="w-full bg-transparent outline-none text-white text-sm placeholder:text-zinc-600"
               />
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Email Address
             </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <FaEnvelope className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-colors">
+              <FaEnvelope className="mr-3 text-zinc-500 shrink-0" />
 
               <input
                 name="Email"
                 type="email"
                 required
-                placeholder="Enter your email"
-                className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                placeholder="Enter your email address"
+                className="w-full bg-transparent outline-none text-white text-sm placeholder:text-zinc-600"
               />
             </div>
           </div>
 
           {/* Profile Image */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Profile Image URL
             </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <PiBracketsCurlyBold className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-colors">
+              <PiBracketsCurlyBold className="mr-3 text-zinc-500 shrink-0" />
 
               <input
                 name="Image"
                 type="url"
                 required
-                placeholder="Enter profile image URL"
-                className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                placeholder="https://example.com/avatar.jpg"
+                className="w-full bg-transparent outline-none text-white text-sm placeholder:text-zinc-600"
               />
             </div>
           </div>
 
-        <div>
-  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-    Password
-  </label>
+          {/* Password */}
+          <div>
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
+              Password
+            </label>
 
-  <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-    <FaLock className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-colors">
+              <FaLock className="mr-3 text-zinc-500 shrink-0" />
 
-    <input
-      name="Password"
-      type="password"
-      required
-      placeholder="Create a strong password"
-      className="w-full bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
-    />
-  </div>
+              <input
+                name="Password"
+                type="password"
+                required
+                placeholder="Create a password"
+                className="w-full bg-transparent outline-none text-white text-sm placeholder:text-zinc-600"
+              />
+            </div>
 
-  <ul className="mt-2 ml-2 list-disc text-xs text-gray-500 dark:text-gray-400 space-y-1">
-    <li>Minimum 6 characters</li>
-    <li>At least one uppercase letter (A-Z)</li>
-    <li>At least one lowercase letter (a-z)</li>
-  </ul>
-</div>
-                    {/* Terms */}
-          <label className="flex cursor-pointer items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <ul className="mt-2 ml-2 list-disc text-xs text-zinc-500 space-y-0.5">
+              <li>Minimum 6 characters</li>
+              <li>At least one uppercase letter (A-Z)</li>
+              <li>At least one lowercase letter (a-z)</li>
+            </ul>
+          </div>
+
+          {/* Terms */}
+          <label className="flex cursor-pointer items-start gap-2 text-xs text-zinc-400 pt-1">
             <input
               type="checkbox"
               required
-              className="mt-1 accent-orange-500"
+              className="mt-0.5 rounded border-zinc-700 bg-zinc-950 accent-emerald-500"
             />
 
             <span>
               I agree to the{" "}
-              <span className="font-medium text-orange-500 hover:text-orange-600">
-                Terms &amp; Conditions
+              <span className="font-medium text-emerald-400 hover:underline">
+                Terms of Service
               </span>{" "}
               and{" "}
-              <span className="font-medium text-orange-500 hover:text-orange-600">
+              <span className="font-medium text-emerald-400 hover:underline">
                 Privacy Policy
               </span>
             </span>
           </label>
 
-          {/* Create Account */}
+          {/* Create Account Button */}
           <button
             type="submit"
-            className="w-full rounded-xl bg-orange-500 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:bg-orange-600 hover:shadow-xl"
+            className="w-full rounded-xl bg-emerald-600 py-3.5 font-semibold text-white text-sm shadow-lg shadow-emerald-950/50 transition-colors hover:bg-emerald-500 mt-2"
           >
             Create Account
           </button>
 
           {/* Divider */}
           <div className="relative flex items-center justify-center py-2">
-
-
-            <span className="relative   px-4 text-sm text-orange-500 ">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-800"></div>
+            </div>
+            <span className="relative bg-zinc-900 px-3 text-xs text-zinc-500 uppercase tracking-wider">
               Or continue with
             </span>
           </div>
+
           {/* Google Signup */}
           <button
             type="button"
             onClick={HandleGoogleSignin}
-            className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 py-3 text-gray-700 dark:text-gray-200 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-zinc-700"
+            className="flex w-full items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-950 py-3 text-zinc-200 text-sm font-medium transition-colors hover:bg-zinc-800"
           >
-            <FaGoogle className="text-red-500" />
-
-            <span className="font-medium">
-              Continue with Google
-            </span>
+            <FaGoogle className="text-red-400" />
+            <span>Continue with Google</span>
           </button>
 
-          {/* Sign In */}
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+          {/* Sign In Redirect */}
+          <p className="text-center text-xs text-zinc-400 pt-2">
             Already have an account?{" "}
             <Link
               href="/signin"
-              className="font-semibold text-orange-500 transition hover:text-orange-600"
+              className="font-semibold text-emerald-400 transition hover:underline"
             >
               Sign In
             </Link>

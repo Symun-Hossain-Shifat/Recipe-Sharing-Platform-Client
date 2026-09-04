@@ -12,35 +12,35 @@ async function LikesRecipesection() {
 
   if (!recipes || recipes.length === 0) {
     return (
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-orange-50 to-amber-100 dark:from-zinc-900 dark:to-zinc-800 rounded-3xl shadow-xl border border-orange-200 dark:border-zinc-700 p-10 md:p-16">
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <div className="flex flex-col items-center justify-center text-center bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-8 sm:p-14">
 
           <div className="relative mb-6">
-            <div className="absolute inset-0 bg-orange-400 blur-3xl opacity-30 rounded-full"></div>
-            <div className="relative w-24 h-24 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-2xl">
-              <ChefHat size={48} />
+            <div className="w-20 h-20 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400 flex items-center justify-center shadow-xl">
+              <ChefHat size={40} />
             </div>
           </div>
 
-          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-            🍽️ Popular Recipes
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
+            Popular Recipes
           </h2>
 
-          <p className="max-w-lg text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
-            We couldn't find any popular recipes at the moment.
-            New trending dishes will appear here as users discover and love them.
+          <p className="max-w-lg text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+            No popular recipes found at the moment. New trending dishes will appear here as the community likes and shares them.
           </p>
 
-          <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-6 py-3 rounded-full shadow-lg border border-orange-200 dark:border-zinc-700">
-            <SearchX className="text-orange-500" size={22} />
-            <span className="font-medium text-gray-700 dark:text-gray-200">
-              No Popular Recipes Found
+          <div className="flex items-center gap-2 bg-zinc-950 px-5 py-2.5 rounded-full border border-zinc-800 mb-6">
+            <SearchX className="text-emerald-400" size={18} />
+            <span className="text-xs font-medium text-zinc-300">
+              No Trending Recipes Found
             </span>
           </div>
 
-          <button className="mt-8 px-8 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105">
-            Explore All Recipes
-          </button>
+          <Link href="/Recipes">
+            <button className="px-7 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm shadow-lg shadow-emerald-950/50 transition-all">
+              Explore All Recipes
+            </button>
+          </Link>
 
         </div>
       </section>
@@ -48,70 +48,76 @@ async function LikesRecipesection() {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10 dark:text-white">
+    <section className="max-w-7xl mx-auto px-4 py-12 text-white">
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl  font-bold text-gray-600 ">
-          🔥 Popular Recipes
+        <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold px-3 py-1 bg-emerald-950/60 border border-emerald-800/50 rounded-full">
+          Community Favorites
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">
+          🔥 Most Popular Recipes
         </h2>
-        <p className="text-gray-500 mt-2 text-gray-600">
-          Show most liked recipes.
+        <p className="text-zinc-400 mt-2 text-sm sm:text-base max-w-md mx-auto">
+          Discover top-rated recipes loved and recommended by home chefs around the world.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {recipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="bg-white dark:bg-black rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+            className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all duration-300 flex flex-col group shadow-xl"
           >
-            <div className="relative w-full h-56">
+            <div className="relative w-full h-52 overflow-hidden bg-zinc-950">
               <Image
                 src={recipe.recipeImage}
                 alt={recipe.recipeName}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
+              <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-zinc-700/60 flex items-center gap-1.5 text-xs text-white">
+                <AiOutlineLike className="text-emerald-400" />
+                <span className="font-semibold">{recipe.likesCount || 0}</span>
+              </div>
             </div>
 
-            <div className="p-5 space-y-3">
-              <h3 className="text-xl font-bold">
-                {recipe.recipeName}
-              </h3>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <h3 className="text-lg font-bold text-white line-clamp-1 group-hover:text-emerald-400 transition-colors">
+                  {recipe.recipeName}
+                </h3>
 
-              <p className="text-gray-600">
-                <span className="font-semibold">Author:</span>{" "}
-                {recipe.authorName}
-              </p>
+                <p className="text-xs text-zinc-400 mt-1">
+                  By <span className="text-zinc-200 font-medium">{recipe.authorName}</span>
+                </p>
+              </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-red-500">
-                  <AiOutlineLike size={22} />
-                  <span className="font-semibold">
-                    {recipe.likesCount} Likes
-                  </span>
-                </div>
+              <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
+                <span className="text-xs text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded-lg">
+                  {recipe.category || 'Recipe'}
+                </span>
 
                 <Link
                   href={user?.email ? `/Recipes/${recipe._id}` : '/unauthorized'}
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-colors shadow-md"
                 >
-                  View
+                  View Details
                 </Link>
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex justify-center my-10">
+
+      <div className="flex justify-center mt-12">
         <Link href="/Recipes">
           <button
-            className="group relative flex items-center gap-2 px-8 py-3 bg-[#2B2420] text-[#FBF7EF] text-sm font-medium border-2 border-[#2B2420] hover:bg-[#FBF7EF] hover:text-[#2B2420] transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="group flex items-center gap-2.5 px-8 py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold rounded-2xl border border-zinc-800 hover:border-zinc-700 transition-all shadow-xl"
           >
             <ChefHatIcon
-              size={16}
-              className="group-hover:rotate-12 transition-transform duration-300"
+              size={18}
+              className="text-emerald-400 group-hover:rotate-12 transition-transform duration-300"
             />
-            View more recipes
+            Explore All Recipes
           </button>
         </Link>
       </div>

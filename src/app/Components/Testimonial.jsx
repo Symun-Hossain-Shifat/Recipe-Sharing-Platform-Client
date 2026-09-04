@@ -1,5 +1,3 @@
- 
-
 "use client";
 
 import React from "react";
@@ -9,19 +7,16 @@ import { FaRegStar } from "react-icons/fa";
 import { MdWorkspacePremium } from "react-icons/md";
 import { TbFreeRights } from "react-icons/tb";
 
-
-
-
 export const sectionVariant = {
   hidden: {
     opacity: 0,
-    y: 60,
+    y: 40,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.6,
       ease: "easeOut",
     },
   },
@@ -30,13 +25,13 @@ export const sectionVariant = {
 export const headingVariant = {
   hidden: {
     opacity: 0,
-    y: 30,
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
     },
   },
 };
@@ -45,7 +40,7 @@ export const containerVariant = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.18,
+      staggerChildren: 0.12,
     },
   },
 };
@@ -53,8 +48,8 @@ export const containerVariant = {
 export const cardVariant = {
   hidden: {
     opacity: 0,
-    y: 40,
-    scale: 0.95,
+    y: 30,
+    scale: 0.96,
   },
   visible: {
     opacity: 1,
@@ -68,160 +63,108 @@ export const cardVariant = {
   },
 };
 
-
-
 function StarRating({ rating }) {
   return (
     <div className="flex items-center gap-1">
       {[...Array(5)].map((_, index) => (
-        <motion.span
+        <span
           key={index}
-          initial={{
-            scale: 0,
-            rotate: -180,
-          }}
-          whileInView={{
-            scale: 1,
-            rotate: 0,
-          }}
-          viewport={{ once: true }}
-          transition={{
-            delay: index * 0.08,
-            type: "spring",
-            stiffness: 300,
-          }}
           className={
             index < rating
               ? "text-amber-400"
-              : "text-gray-200"
+              : "text-zinc-700"
           }
         >
-          <FaRegStar />
-        </motion.span>
+          <FaRegStar className="text-xs sm:text-sm" />
+        </span>
       ))}
 
-      <span className="ml-1 text-xs text-gray-400">
+      <span className="ml-1.5 text-xs font-mono text-zinc-400">
         {rating}.0
       </span>
     </div>
   );
 }
 
-
 function PlanBadge({ plan }) {
   const isPremium = plan === "Premium";
 
   return (
-    <motion.span
-      whileHover={{
-        scale: 1.08,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-      }}
-      className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-medium mt-1 ${
+    <span
+      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold mt-1 ${
         isPremium
-          ? "bg-violet-100 text-violet-700"
-          : "bg-emerald-100 text-emerald-700"
+          ? "bg-amber-950/70 border border-amber-800/50 text-amber-400"
+          : "bg-zinc-800 border border-zinc-700 text-zinc-300"
       }`}
     >
       {isPremium ? (
-        <span className="flex items-center gap-1">
-          <MdWorkspacePremium />
+        <>
+          <MdWorkspacePremium className="text-amber-400 text-xs" />
           Premium
-        </span>
+        </>
       ) : (
-        <span className="flex items-center gap-1">
-          <TbFreeRights />
-          Free
-        </span>
+        <>
+          <TbFreeRights className="text-zinc-400 text-xs" />
+          Free User
+        </>
       )}
-    </motion.span>
+    </span>
   );
 }
-
-
 
 function ReviewCard({ review }) {
   return (
     <motion.div
       variants={cardVariant}
       whileHover={{
-        y: -10,
-        scale: 1.03,
+        y: -6,
       }}
       transition={{
         type: "spring",
         stiffness: 250,
         damping: 18,
       }}
-      className={`bg-white rounded-2xl p-5 shadow-sm hover:shadow-xl flex flex-col h-full ${
+      className={`bg-zinc-900 rounded-2xl p-6 shadow-xl flex flex-col h-full ${
         review.featured
-          ? "border-2 border-orange-400"
-          : "border border-gray-100"
+          ? "border-2 border-emerald-500/80 bg-zinc-900/95"
+          : "border border-zinc-800"
       }`}
     >
       {/* Badge */}
-
-      <div className="h-8 mb-3">
-        {review.featured && (
-          <motion.span
-            initial={{
-              scale: 0,
-            }}
-            whileInView={{
-              scale: 1,
-            }}
-            viewport={{ once: true }}
-            transition={{
-              type: "spring",
-              stiffness: 250,
-            }}
-            className="inline-flex gap-1 items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600"
-          >
-            <FaRegStar />
-            Top Review
-          </motion.span>
+      <div className="h-7 mb-2 flex items-center justify-between">
+        {review.featured ? (
+          <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-950/80 border border-emerald-800/60 text-emerald-400">
+            <FaRegStar className="text-xs" />
+            Featured Review
+          </span>
+        ) : (
+          <span />
         )}
       </div>
 
       {/* Rating */}
-
       <StarRating rating={review.rating} />
 
       {/* Review Text */}
-
-      <div className="h-28 mt-3 overflow-hidden">
-        <p className="text-sm text-gray-600 leading-relaxed">
+      <div className="my-4 flex-1">
+        <p className="text-sm text-zinc-300 leading-relaxed italic">
           "{review.text}"
         </p>
       </div>
 
       {/* Footer */}
-
-      <div className="mt-auto border-t pt-4">
+      <div className="mt-auto border-t border-zinc-800/80 pt-4">
         <div className="flex items-center gap-3">
-          <motion.div
-            whileHover={{
-              scale: 1.12,
-              rotate: 8,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-            }}
-            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${review.avatarColor}`}
-          >
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm bg-zinc-800 border border-zinc-700 ${review.avatarColor}`}>
             {review.initials}
-          </motion.div>
+          </div>
 
           <div>
-            <h4 className="font-medium text-gray-900">
+            <h4 className="font-semibold text-sm text-white">
               {review.name}
             </h4>
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-zinc-400">
               {review.role}
             </p>
 
@@ -232,73 +175,74 @@ function ReviewCard({ review }) {
     </motion.div>
   );
 } 
+
 export default function TestimonialsSection() {
   const reviews = [
     {
       id: 1,
       rating: 5,
-      text: "RecipeHub has made cooking so much more fun. I discover something new every day and the community is absolutely amazing!",
+      text: "RecipeHub has made cooking so much more fun! I discover something new every day and the community is helpful.",
       name: "Sadia Ahmed",
-      role: "Home Cook · Dhaka",
+      role: "Home Chef · Dhaka",
       initials: "SA",
       plan: "Premium",
       featured: true,
-      avatarColor: "bg-violet-100 text-violet-700",
+      avatarColor: "text-emerald-400",
     },
     {
       id: 2,
       rating: 5,
-      text: "After getting Premium membership I can share unlimited recipes. It is the perfect platform for my food blog!",
+      text: "With Premium membership I can share unlimited recipes. It is the perfect platform for growing my culinary audience!",
       name: "Rahim Khan",
       role: "Food Blogger · Chittagong",
       initials: "RK",
       plan: "Premium",
       featured: false,
-      avatarColor: "bg-emerald-100 text-emerald-700",
+      avatarColor: "text-amber-400",
     },
     {
       id: 3,
       rating: 4,
-      text: "Filtering by prep time makes finding quick recipes super easy. As a working mom this feature is an absolute life-saver!",
+      text: "Filtering by prep time makes finding quick recipes super easy. As a working parent this feature is an absolute life-saver!",
       name: "Nusrat Islam",
-      role: "Working Mom · Sylhet",
+      role: "Working Parent · Sylhet",
       initials: "NI",
       plan: "Free",
       featured: false,
-      avatarColor: "bg-orange-100 text-orange-700",
+      avatarColor: "text-blue-400",
     },
     {
       id: 4,
       rating: 5,
-      text: "Saving favourite recipes is brilliant. I can access them any time I want. The UI is clean, simple, and very easy to use.",
+      text: "Saving favorite recipes is brilliant. I can access them anytime I want. The dark user interface is super clean and sleek.",
       name: "Marium Begum",
-      role: "Housewife · Rajshahi",
+      role: "Recipe Collector · Rajshahi",
       initials: "MB",
       plan: "Free",
       featured: false,
-      avatarColor: "bg-pink-100 text-pink-700",
+      avatarColor: "text-purple-400",
     },
     {
       id: 5,
       rating: 5,
-      text: "Filtering by cuisine lets me find Bangladeshi, Italian, Thai recipes all in one place. Incredible experience overall!",
+      text: "Filtering by cuisine lets me find Bangladeshi, Italian, and Thai recipes all in one place. Incredible experience overall!",
       name: "Tanvir Hasan",
-      role: "Chef · Cumilla",
+      role: "Executive Chef · Cumilla",
       initials: "TH",
       plan: "Premium",
       featured: false,
-      avatarColor: "bg-blue-100 text-blue-700",
+      avatarColor: "text-emerald-400",
     },
     {
       id: 6,
       rating: 4,
-      text: "Updating my profile was very easy. I can present myself to the community and recipe sharing has become truly enjoyable.",
+      text: "Updating my profile was very seamless. Managing my uploaded recipes and seeing community feedback is truly rewarding.",
       name: "Zara Akter",
-      role: "Student · Khulna",
+      role: "Culinary Student · Khulna",
       initials: "ZA",
       plan: "Free",
       featured: false,
-      avatarColor: "bg-green-100 text-green-700",
+      avatarColor: "text-pink-400",
     },
   ];
 
@@ -308,76 +252,48 @@ export default function TestimonialsSection() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative overflow-hidden max-w-7xl mx-auto px-4 py-20"
+      className="relative overflow-hidden max-w-7xl mx-auto px-4 py-16 text-white"
     >
-      {/* Floating Background */}
-
-      <motion.div
-        animate={{
-          x: [0, 40, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-orange-300/20 blur-3xl"
-      />
-
-      <motion.div
-        animate={{
-          x: [0, -30, 0],
-          y: [0, 40, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-violet-300/20 blur-3xl"
-      />
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Header */}
-
       <motion.div
         variants={headingVariant}
-        className="text-center mb-14 relative z-10"
+        className="text-center mb-12 relative z-10"
       >
-        <span className="text-orange-500 text-sm font-semibold uppercase tracking-wider">
-          Community Love
+        <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold px-3 py-1 bg-emerald-950/60 border border-emerald-800/50 rounded-full">
+          Community Feedback
         </span>
 
-        <h2 className="text-4xl font-bold text-gray-700 mt-3">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mt-4 tracking-tight">
           What Our Food Lovers Say
         </h2>
 
-        <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+        <p className="text-zinc-400 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
           Thousands of food enthusiasts use RecipeHub every day to discover,
-          save, and share amazing recipes.
+          save, and share amazing recipes around the globe.
         </p>
       </motion.div>
 
       {/* Review Grid */}
-
       <motion.div
         variants={containerVariant}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr relative z-10"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10"
       >
         {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </motion.div>
 
-      {/* Footer */}
-
+      {/* Footer Rating Summary */}
       <motion.div
         initial={{
           opacity: 0,
-          y: 30,
+          y: 20,
         }}
         whileInView={{
           opacity: 1,
@@ -385,41 +301,23 @@ export default function TestimonialsSection() {
         }}
         viewport={{ once: true }}
         transition={{
-          delay: 0.5,
-          duration: 0.7,
+          delay: 0.3,
+          duration: 0.5,
         }}
         className="text-center mt-12 relative z-10"
       >
-        <div className="text-amber-400 text-xl flex justify-center gap-1 mb-2">
+        <div className="text-amber-400 text-lg flex justify-center gap-1 mb-2">
           {[...Array(5)].map((_, index) => (
-            <motion.span
-              key={index}
-              initial={{
-                scale: 0,
-                rotate: -180,
-              }}
-              whileInView={{
-                scale: 1,
-                rotate: 0,
-              }}
-              viewport={{ once: true }}
-              transition={{
-                delay: index * 0.08,
-                type: "spring",
-                stiffness: 300,
-              }}
-            >
-              <FaRegStar />
-            </motion.span>
+            <FaRegStar key={index} />
           ))}
         </div>
 
-        <p className="font-medium text-gray-800">
-          4.8 out of 5 rating
+        <p className="font-bold text-white text-base">
+          4.9 out of 5 Rating
         </p>
 
-        <p className="text-sm text-gray-500 mt-1">
-          Based on 3,200+ reviews from real RecipeHub users
+        <p className="text-xs text-zinc-400 mt-1">
+          Based on 3,200+ reviews from active RecipeHub chefs and food lovers
         </p>
       </motion.div>
     </motion.section>

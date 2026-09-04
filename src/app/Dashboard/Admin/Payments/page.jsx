@@ -17,53 +17,50 @@ async function Homepage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-200 via-base-100 to-base-200 p-6">
+    <div className="min-h-screen bg-black text-white p-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between gap-6 mb-8">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 pb-6 border-b border-zinc-800 max-w-6xl mx-auto">
         <div>
-          <h1 className="text-4xl font-extrabold  from-primary to-secondary bg-clip-text ">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Transactions Management
           </h1>
-          <p className="text-base-content/60 mt-2">
-            Monitor all premium subscription payments and revenue.
+          <p className="text-zinc-400 text-sm mt-1">
+            Monitor all premium subscription payments, recipe purchases, and revenue metrics.
           </p>
         </div>
 
         {/* Stats */}
         <div className="flex flex-wrap gap-4">
-          <div className="bg-base-100 rounded-3xl shadow-xl border border-primary/20 p-5 min-w-[220px] hover:scale-105 transition-all duration-300">
-            <div className="flex items-center justify-between">
+          <div className="bg-zinc-900 rounded-3xl border border-zinc-800 p-5 min-w-[200px] shadow-xl">
+            <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-base-content/60">
+                <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">
                   Total Transactions
                 </p>
-                <h2 className="text-3xl font-bold text-primary mt-1">
+                <h2 className="text-3xl font-extrabold text-emerald-400 mt-1">
                   {Datas.length}
                 </h2>
               </div>
 
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                <MdPayments size={30} className="text-primary" />
+              <div className="w-12 h-12 rounded-2xl bg-emerald-950/80 border border-emerald-800/50 flex items-center justify-center text-emerald-400">
+                <MdPayments size={26} />
               </div>
             </div>
           </div>
 
-          <div className="bg-base-100 rounded-3xl shadow-xl border border-success/20 p-5 min-w-[220px] hover:scale-105 transition-all duration-300">
-            <div className="flex items-center justify-between">
+          <div className="bg-zinc-900 rounded-3xl border border-zinc-800 p-5 min-w-[220px] shadow-xl">
+            <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-base-content/60">
+                <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">
                   Total Revenue
                 </p>
-                <h2 className="text-3xl font-bold text-success mt-1">
-                  ৳ {totalRevenue.toLocaleString("en-BD")}
+                <h2 className="text-3xl font-extrabold text-emerald-400 mt-1 font-mono">
+                  ${(totalRevenue / 100).toFixed(2)}
                 </h2>
               </div>
 
-              <div className="w-14 h-14 rounded-2xl bg-success/10 flex items-center justify-center">
-                <HiCurrencyBangladeshi
-                  size={30}
-                  className="text-success"
-                />
+              <div className="w-12 h-12 rounded-2xl bg-amber-950/80 border border-amber-800/50 flex items-center justify-center text-amber-400">
+                <HiCurrencyBangladeshi size={26} />
               </div>
             </div>
           </div>
@@ -71,68 +68,45 @@ async function Homepage() {
       </div>
 
       {Datas.length === 0 ? (
-        <div className="bg-base-100 rounded-3xl shadow-xl border border-dashed border-primary/30 p-16 text-center">
-          <MdPayments
-            size={80}
-            className="mx-auto text-primary opacity-30"
-          />
-
-          <h2 className="text-2xl font-bold mt-5">
-            No Transactions Found
-          </h2>
-
-          <p className="text-base-content/60 mt-2">
-            Payment history will appear here once users subscribe.
-          </p>
+        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-16 text-center max-w-lg mx-auto shadow-2xl">
+          <MdPayments size={64} className="mx-auto text-zinc-600 mb-4" />
+          <h2 className="text-2xl font-bold text-white mb-2">No Transactions Found</h2>
+          <p className="text-zinc-400 text-sm">Payment records will appear here once users purchase plans or recipes.</p>
         </div>
       ) : (
-        <div className="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
-          <div className="overflow-x-auto">
-            <Table className='w-11/12 mx-auto m-5 p-5 text-left'>
-                      <Table.ScrollContainer>
-                        <Table.Content aria-label="Team members" className="min-w-[600px]">
-                          <Table.Header className= 'text-center '>
-                            <Table.Column isRowHeader>User Name </Table.Column>
-                            <Table.Column>Amount</Table.Column>
-                            <Table.Column>Date</Table.Column>
-                            <Table.Column>Payment Status</Table.Column>
-                            <Table.Column>Transaction ID</Table.Column>
-                            </Table.Header>
-                          <Table.Body>
-                            {
-                                Datas.map( recipe => (
-                    
-                              <Table.Row key={recipe._id} className='font-semibold '>
-                              <Table.Cell>{recipe.AuthorName}</Table.Cell>
-                              <Table.Cell>{recipe.amount}</Table.Cell>
-                              <Table.Cell>
-                                 {recipe.updatedAt ? (
-                                  <span className="font-medium">
-                                    {new Date(
-                                      recipe.updatedAt
-                                    ).toLocaleDateString("en-GB", {
-                                      day: "numeric",
-                                      month: "short",
-                                      year: "numeric",
-                                    })}
-                                  </span>
-                                ) : (
-                                  "N/A"
-                                )}
-                              </Table.Cell>
-                              <Table.Cell>{recipe.paymentStatus}</Table.Cell>
-                              <Table.Cell>{recipe.transactionId}</Table.Cell>
-                              
-                            </Table.Row>                ))
-                                
-                            }
-                           
-                
-                          </Table.Body>
-                        </Table.Content>
-                      </Table.ScrollContainer>
-                    </Table>
-          </div>
+        <div className="max-w-6xl mx-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden">
+          <Table className="w-full text-left text-sm text-zinc-300">
+            <Table.ScrollContainer>
+              <Table.Content aria-label="Transactions list" className="min-w-[650px]">
+                <Table.Header className="bg-zinc-950 border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wider">
+                  <Table.Column isRowHeader className="py-3 px-4 text-white">User / Buyer Name</Table.Column>
+                  <Table.Column className="py-3 px-4">Amount</Table.Column>
+                  <Table.Column className="py-3 px-4">Date</Table.Column>
+                  <Table.Column className="py-3 px-4">Payment Status</Table.Column>
+                  <Table.Column className="py-3 px-4">Transaction ID</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {Datas.map((recipe) => (
+                    <Table.Row key={recipe._id} className="border-b border-zinc-800/60 hover:bg-zinc-800/40 transition-colors font-medium">
+                      <Table.Cell className="py-4 px-4 font-semibold text-white">{recipe.AuthorName || 'User'}</Table.Cell>
+                      <Table.Cell className="py-4 px-4 font-mono text-emerald-400 font-bold">
+                        ${recipe.amount ? (recipe.amount / 100).toFixed(2) : '0.00'}
+                      </Table.Cell>
+                      <Table.Cell className="py-4 px-4 text-zinc-400 text-xs font-mono">
+                        {recipe.updatedAt ? new Date(recipe.updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }) : "N/A"}
+                      </Table.Cell>
+                      <Table.Cell className="py-4 px-4">
+                        <span className="bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 px-2.5 py-1 rounded-full text-xs font-semibold">
+                          {recipe.paymentStatus || 'Paid'}
+                        </span>
+                      </Table.Cell>
+                      <Table.Cell className="py-4 px-4 text-zinc-500 font-mono text-xs">{recipe.transactionId}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Content>
+            </Table.ScrollContainer>
+          </Table>
         </div>
       )}
     </div>

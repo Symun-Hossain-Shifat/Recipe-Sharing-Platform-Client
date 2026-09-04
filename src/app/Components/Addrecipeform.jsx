@@ -103,156 +103,145 @@ export default function CreateRecipeForm() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br dark:bg-black from-orange-50 via-white to-emerald-50 flex items-center justify-center px-4 py-10">
-     <form className=" w-full   " onSubmit={handleSubmit}>
-      <Card className=" w-full md:w-10/12 mx-auto   shadow-2xl rounded-2xl border border-gray-100 p-6 md:p-10 space-y-8">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
+      <form className="w-full max-w-4xl" onSubmit={handleSubmit}>
+        <Card className="w-full bg-zinc-900 border border-zinc-800 text-white shadow-2xl rounded-3xl p-6 sm:p-10 space-y-8">
 
-        {/* HEADER */}
-        <CardHeader className="flex flex-col text-center space-y-2 p-0">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            🍽️ Create Your Recipe
-          </h1>
-          <p className="text-gray-500 text-sm">
-            Share your delicious recipe with the world
-          </p>
-        </CardHeader>
+          {/* HEADER */}
+          <CardHeader className="flex flex-col text-center space-y-2 p-0">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+              🍽️ Create Your Recipe
+            </h1>
+            <p className="text-zinc-400 text-sm sm:text-base">
+              Share your culinary masterpiece with the global food community
+            </p>
+          </CardHeader>
 
-        <div className="space-y-8 p-0">
+          <div className="space-y-8 p-0">
 
-          {/* GRID 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* GRID 1 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-            <Input label="Recipe Name" required type="text" name="recipename" placeholder="e.g. Vegetable Fried Rice" />
+              <Input label="Recipe Name" required type="text" name="recipename" placeholder="e.g. Vegetable Fried Rice" />
 
-            <Input
-          label="Recipe Image" required
-          type="file"
-          name="recipeimage"
-          accept="image/*"
-        />
-            {/* CATEGORY */}
-            <Select className="w-full" required name="category" placeholder="Select category">
-              <Label>Category</Label>
-              <Select.Trigger>
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox>
-                  <ListBox.Item id="breakfast">Breakfast</ListBox.Item>
-                  <ListBox.Item id="lunch">Lunch</ListBox.Item>
-                  <ListBox.Item id="dinner">Dinner</ListBox.Item>
-                  <ListBox.Item id="snack">Snack</ListBox.Item>
-                </ListBox>
-              </Select.Popover>
-            </Select>
+              <Input
+                label="Recipe Image" required
+                type="file"
+                name="recipeimage"
+                accept="image/*"
+              />
+              {/* CATEGORY */}
+              <Select className="w-full" required name="category" placeholder="Select category">
+                <Label>Category</Label>
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item id="breakfast">Breakfast</ListBox.Item>
+                    <ListBox.Item id="lunch">Lunch</ListBox.Item>
+                    <ListBox.Item id="dinner">Dinner</ListBox.Item>
+                    <ListBox.Item id="snack">Snack</ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
 
-            <Input label="Cuisine Type" required name="type" placeholder="e.g. Chinese, Indian" />
+              <Input label="Cuisine Type" required name="type" placeholder="e.g. Chinese, Indian" />
 
-            {/* DIFFICULTY */}
-            <Select className="w-full" required name="difficulty" placeholder="Select difficulty">
-              <Label>Difficulty Level</Label>
-              <Select.Trigger>
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox>
-                  <ListBox.Item id="easy">Easy</ListBox.Item>
-                  <ListBox.Item id="medium">Medium</ListBox.Item>
-                  <ListBox.Item id="hard">Hard</ListBox.Item>
-                </ListBox>
-              </Select.Popover>
-            </Select>
+              {/* DIFFICULTY */}
+              <Select className="w-full" required name="difficulty" placeholder="Select difficulty">
+                <Label>Difficulty Level</Label>
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item id="easy">Easy</ListBox.Item>
+                    <ListBox.Item id="medium">Medium</ListBox.Item>
+                    <ListBox.Item id="hard">Hard</ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
 
-            <Input
-              label="Preparation Time (minutes)" required
-              name="preparation"
-              placeholder="e.g. 30"
-              type="number"
-            />
-          </div>
-
-        <div>
-            <label className="block mb-2 font-medium">
-                Ingredients
-            </label>
-
-            <textarea
-            name="ingrediants" required
-                placeholder="e.g. Rice, Vegetables, Soy sauce..."
-                rows={3}
-                className="w-full border rounded-xl p-3"
-            />
+              <Input
+                label="Preparation Time (minutes)" required
+                name="preparation"
+                placeholder="e.g. 30"
+                type="number"
+              />
             </div>
 
             <div>
-            <label className="block mb-2 font-medium">
-                Cooking Instructions
-            </label>
+              <label className="block mb-2 font-medium text-xs uppercase tracking-wider text-zinc-300">
+                Ingredients
+              </label>
 
-            <textarea
-            name="steps" required
-                placeholder="Write step by step cooking guide..."
-                rows={5}
-                className="w-full border rounded-xl p-3"
-            />
+              <textarea
+                name="ingrediants" required
+                placeholder="e.g. Rice, Vegetables, Soy sauce..."
+                rows={4}
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 text-white placeholder:text-zinc-600 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm transition-colors"
+              />
             </div>
-             
-            
-         
 
-          {/* GRID 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label className="block mb-2 font-medium text-xs uppercase tracking-wider text-zinc-300">
+                Cooking Instructions
+              </label>
 
-           
+              <textarea
+                name="steps" required
+                placeholder="Write step-by-step cooking guide..."
+                rows={6}
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 text-white placeholder:text-zinc-600 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm transition-colors"
+              />
+            </div>
 
-            {/* FEATURED */}
-            <Select name="featured" required  className="w-full" placeholder="Select">
-              <Label>Featured Recipe</Label>
-              <Select.Trigger>
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox>
-                 
-                  <ListBox.Item id="false">No</ListBox.Item>
-                </ListBox>
-              </Select.Popover>
-            </Select>
+            {/* GRID 2 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-            {/* STATUS */}
-            <Select name="status"  required className="w-full" placeholder="Select status">
-              <Label>Status</Label>
-              <Select.Trigger>
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox>
-                  <ListBox.Item id="published">Published</ListBox.Item>
-                  
-                </ListBox>
-              </Select.Popover>
-            </Select>
+              {/* FEATURED */}
+              <Select name="featured" required className="w-full" placeholder="Select">
+                <Label>Featured Recipe</Label>
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item id="false">No</ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+
+              {/* STATUS */}
+              <Select name="status" required className="w-full" placeholder="Select status">
+                <Label>Status</Label>
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item id="published">Published</ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+            </div>
+
           </div>
 
-        </div>
+          {/* BUTTONS */}
+          <CardFooter className="flex flex-col md:flex-row gap-4 pt-4 p-0">
+            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-emerald-950/50 transition-colors">
+              Publish Recipe 🎉
+            </Button>
+          </CardFooter>
 
-        {/* BUTTONS */}
-        <CardFooter  className="flex flex-col md:flex-row gap-4 pt-4 p-0">
-
-          <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-emerald-500 text-white font-semibold py-3 rounded-xl">
-            Submit Recipe
-          </Button>
-
-        
-        </CardFooter>
-
-      </Card>
-     </form>
-     
+        </Card>
+      </form>
     </div>
   );
 }

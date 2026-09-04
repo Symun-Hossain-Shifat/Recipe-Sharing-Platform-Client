@@ -9,10 +9,9 @@ export default async function DashboardLayout({ children }) {
   const plan = await GetspecificrecipesByuserEmail(email) 
 
   return (
-    <div className=" md:flex   min-h-screen">
+    <div className="md:flex min-h-screen bg-black text-white">
       <SideNavigation plan={plan} Userinfo={Userinfo}></SideNavigation>
-      <main className="flex-1">{children}</main>
-      
+      <main className="flex-1 bg-black">{children}</main>
     </div>
   );
 }

@@ -17,28 +17,28 @@ export function DeleteRecipepage ({recipe}) {
   }
   return (
     <AlertDialog>
-      <Button isIconOnly size="sm" className= 'text-red-600' variant="tertiary">
-                              <AiOutlineDelete />
-        </Button>
-      <AlertDialog.Backdrop>
+      <Button isIconOnly size="sm" className="text-rose-500 hover:text-rose-400 hover:bg-zinc-800" variant="tertiary">
+        <AiOutlineDelete size={18} />
+      </Button>
+      <AlertDialog.Backdrop className="bg-black/80 backdrop-blur-sm">
         <AlertDialog.Container>
-          <AlertDialog.Dialog className="sm:max-w-[400px]">
+          <AlertDialog.Dialog className="sm:max-w-[400px] bg-zinc-900 border border-zinc-800 text-white rounded-3xl p-6">
             <AlertDialog.CloseTrigger />
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Delete Recipe permanently?</AlertDialog.Heading>
+              <AlertDialog.Heading className="text-white font-bold">Delete Recipe permanently?</AlertDialog.Heading>
             </AlertDialog.Header>
-            <AlertDialog.Body>
+            <AlertDialog.Body className="text-zinc-400 text-sm">
               <p>
-                This will permanently delete <strong>My Awesome Project</strong> and all of its
+                This will permanently delete <strong className="text-white">{recipe?.recipeName || 'this recipe'}</strong> and all of its
                 data. This action cannot be undone.
               </p>
             </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button slot="close" variant="tertiary">
+            <AlertDialog.Footer className="pt-4 flex gap-2">
+              <Button slot="close" variant="tertiary" className="text-zinc-300 bg-zinc-800 hover:bg-zinc-700">
                 Cancel
               </Button>
-              <Button onClick={Handledelete} slot="close" variant="danger">
+              <Button onClick={Handledelete} slot="close" variant="danger" className="bg-rose-600 hover:bg-rose-500 text-white">
                 Delete Recipe
               </Button>
             </AlertDialog.Footer>

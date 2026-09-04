@@ -22,125 +22,107 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
     }
    
   return (
-    <div className='p-5'>
-       <div className="text-center mb-8">
-            
-            {/* Badge */}
-            <span className="inline-flex items-center px-4 py-1 text-xs font-medium bg-orange-100 text-orange-600 rounded-full mb-3">
-                ❤️ My Personal Collection
-            </span>
+    <div className="p-6 bg-black min-h-screen text-white">
+      <div className="text-center mb-10 max-w-xl mx-auto">
+        <span className="inline-flex items-center gap-1 px-4 py-1 text-xs font-semibold bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 rounded-full mb-3">
+          ❤️ My Personal Collection
+        </span>
 
-            {/* Main Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-                My Favourite Recipes {Datas.length}
-            </h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          My Favorite Recipes ({Datas.length})
+        </h1>
 
-            {/* Subtitle */}
-            <p className="text-gray-500 mt-2 text-sm md:text-base">
-                All the recipes you loved saved in one place 🍲
-            </p>
+        <p className="text-zinc-400 mt-2 text-sm sm:text-base">
+          All your saved culinary favorites stored in one place 🍲
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        {Datas.map((recipe, index) => (
+          <div
+            key={index}
+            className="group bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 shadow-xl hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between"
+          >
+            {/* Image */}
+            <div className="relative h-56 overflow-hidden bg-zinc-950">
+              <Image
+                src={recipe.recipeImage || "/fallback.jpg"}
+                alt={recipe.recipeName || "recipe"}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
-                    <div className='grid grid-cols-1   md:px-0 md:grid-cols-2 gap-2'>
-            {
-        
-        Datas.map( (recipe , index)  => (
-            <div
-                key={index}
-                className="group bg-white/80 dark:bg-black  backdrop-blur-md rounded-3xl overflow-hidden border border-white shadow-lg  transition-all duration-500"
-              >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden">
-                <Image
-                        src={recipe.recipeImage || "/fallback.jpg"}
-                        alt={recipe.recipeName || "recipe"}
-                        fill
-                         className="object-cover group-hover:scale-110 transition duration-700"
-                        />
-                   
-                
 
-                 
+            {/* Content */}
+            <div className="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="flex items-center gap-1 text-xs bg-emerald-950/80 text-emerald-400 border border-emerald-800/50 px-3 py-1 rounded-full font-medium">
+                    <Tag size={12} />
+                    {recipe.category}
+                  </span>
+
+                  <span className="flex items-center gap-1 text-xs bg-zinc-800 text-zinc-300 border border-zinc-700 px-3 py-1 rounded-full font-medium">
+                    <MapPin size={12} />
+                    {recipe.cuisineType}
+                  </span>
                 </div>
 
-                {/* Content */}
-                <div className="p-5">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="flex items-center gap-1 text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full">
-                      <Tag size={12} />
-                      {recipe.category}
-                    </span>
+                <h2 className="text-xl font-bold text-white line-clamp-1 mb-1 group-hover:text-emerald-400 transition-colors">
+                  {recipe.recipeName}
+                </h2>
 
-                    <span className="flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-                      <MapPin size={12} />
-                      {recipe.cuisineType}
-                    </span>
+                <p className="text-xs text-zinc-400 mb-5">
+                  By <span className="font-semibold text-zinc-200">{recipe.authorName}</span>
+                </p>
+
+                {/* Info */}
+                <div className="grid grid-cols-2 gap-3 bg-zinc-950 rounded-2xl p-4 mb-6 border border-zinc-800">
+                  <div className="flex items-center gap-2 text-xs text-zinc-300">
+                    <Clock size={16} className="text-emerald-400 shrink-0" />
+                    <span>{recipe.preparationTime} min</span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-gray-800 line-clamp-1 mb-2">
-                    {recipe.recipeName}
-                  </h2>
-
-                  <p className="text-sm text-gray-500 mb-5">
-                    By{" "}
-                    <span className="font-semibold text-gray-700">
-                      {recipe.authorName}
+                  <div className="flex items-center gap-2 text-xs text-zinc-300">
+                    <BarChart size={16} className="text-emerald-400 shrink-0" />
+                    <span
+                      className={`font-semibold ${
+                        recipe.difficultyLevel === "Easy"
+                          ? "text-emerald-400"
+                          : recipe.difficultyLevel === "Medium"
+                          ? "text-amber-400"
+                          : "text-rose-400"
+                      }`}
+                    >
+                      {recipe.difficultyLevel}
                     </span>
-                  </p>
-
-                  {/* Info */}
-                  <div className="grid grid-cols-2 gap-3 dark:text-black bg-gray-50 rounded-2xl p-4 mb-5">
-                    <div className="flex items-center gap-2 text-sm">
-                      <Clock size={16} />
-                      <span>{recipe.preparationTime} min</span>
-                    </div>
-
-                    <div className="flex items-center  dark:text-black gap-2 text-sm">
-                      <BarChart size={16} />
-                      <span
-                        className={`font-semibold ${
-                          recipe.difficultyLevel === "Easy"
-                            ? "text-green-600"
-                            : recipe.difficultyLevel === "Medium"
-                            ? "text-yellow-600"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {recipe.difficultyLevel}
-                      </span>
-                    </div>
-                
                   </div>
-                       {/* Button */}
-                       <div className='flex items-center justify-between'> 
+                </div>
+              </div>
 
-
-                         <Link
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between gap-3 pt-3 border-t border-zinc-800"> 
+                <Link
                   href={`/Recipes/${recipe._id}`}
-                  className="bg-orange-500 rounded-4xl hover:bg-orange-600 text-white px-4 py-2 transition"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-colors shadow-md"
                 >
                   View Details
                 </Link>
-                         <Button
-                    onClick={() => DeleteFavourite(recipe._id)}
-                    className=" flex gap-3 items-center justify-center py-3 rounded-2xl bg-red-500 text-white font-semibold  transition-all"
-                  >
-                    <RiDeleteBin6Line />
-                   Delete Now
-                  </Button> 
-                   
 
-                       </div>
-                 
-
-                </div>
+                <Button
+                  onClick={() => DeleteFavourite(recipe._id)}
+                  className="flex gap-2 items-center justify-center px-4 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-800/60 text-rose-300 font-semibold text-xs transition-colors"
+                >
+                  <RiDeleteBin6Line size={16} />
+                  <span>Remove</span>
+                </Button> 
               </div>
-        ))
-        
-        }
-        </div>
-       
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
 export default Favouritehomepage 

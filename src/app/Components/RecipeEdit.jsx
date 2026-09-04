@@ -89,197 +89,171 @@ export function RecipeEditPage ({recipe , User}) {
 
   return (
     <Modal>
-      <Button isIconOnly size="sm" variant="tertiary">
-                          <FaEdit size={30} />  
-                          </Button>
-      <Modal.Backdrop>
+      <Button isIconOnly size="sm" variant="tertiary" className="text-zinc-300 hover:text-white hover:bg-zinc-800">
+        <FaEdit size={18} />  
+      </Button>
+      <Modal.Backdrop className="bg-black/80 backdrop-blur-sm">
         <Modal.Container placement="auto">
-          <Modal.Dialog  className="w-[95vw] max-w-5xl max-h-[90vh] overflow-y-auto">
-            <span className="text-red-600 m-5">
-          <Modal.CloseTrigger />
+          <Modal.Dialog className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-2">
+            <span className="text-red-400 m-3 inline-block">
+              <Modal.CloseTrigger />
             </span>
           
-             <form className=" w-full " onSubmit={handleeditRecipe} >
-             <Card className="
-                w-full
-                shadow-2xl
-                rounded-2xl
-                border
-                border-gray-100
-                p-4
-                md:p-8
-                space-y-6
-            ">
+            <form className="w-full" onSubmit={handleeditRecipe}>
+              <Card className="w-full bg-zinc-900 text-white border-0 p-4 md:p-8 space-y-6">
        
-               {/* HEADER */}
-               <CardHeader className="flex flex-col text-center space-y-2 p-0">
-                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-                   🍽️ Edit Your Recipe
-                 </h1>
-                 <p className="text-gray-500 text-sm">
-                   Customized your delicious recipe with the world
-                 </p>
-               </CardHeader>
-       
-               <div className="space-y-8 p-0">
-       
-                 {/* GRID 1 */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-       
-                   <Input label="Recipe Name"  type="text" name="recipename" defaultValue={recipe.recipeName} />
-       
-                   {/* CATEGORY */}
-                   <Select className="w-full"   name="category" placeholder={recipe.category}>
-                     <Label>Category</Label>
-                     <Select.Trigger>
-                       <Select.Value />
-                       <Select.Indicator />
-                     </Select.Trigger>
-                     <Select.Popover>
-                       <ListBox>
-                         <ListBox.Item id="breakfast">Breakfast</ListBox.Item>
-                         <ListBox.Item id="lunch">Lunch</ListBox.Item>
-                         <ListBox.Item id="dinner">Dinner</ListBox.Item>
-                         <ListBox.Item id="snack">Snack</ListBox.Item>
-                       </ListBox>
-                     </Select.Popover>
-                   </Select>
-       
-                   <Input label="Cuisine Type" defaultValue={recipe.cuisineType}  name="type" placeholder="e.g. Chinese, Indian" />
-       
-                   {/* DIFFICULTY */}
-                   <Select className="w-full"  name="difficulty" placeholder={recipe.difficultyLevel}>
-                     <Label>Difficulty Level</Label>
-                     <Select.Trigger>
-                       <Select.Value />
-                       <Select.Indicator />
-                     </Select.Trigger>
-                     <Select.Popover>
-                       <ListBox>
-                         <ListBox.Item id="easy">Easy</ListBox.Item>
-                         <ListBox.Item id="medium">Medium</ListBox.Item>
-                         <ListBox.Item id="hard">Hard</ListBox.Item>
-                       </ListBox>
-                     </Select.Popover>
-                   </Select>
-       
-                   <Input
-                     label="Preparation Time (minutes)" 
-                     defaultValue={recipe.preparationTime}
-                     name="preparation"
-                     placeholder="e.g. 30"
-                     type="number"
-                   />
-                 </div>
-       
-               <div>
-                   <label className="block mb-2 font-medium">
-                       Ingredients
-                   </label>
-       
-                   <textarea
-                   name="ingrediants" 
-                       placeholder="e.g. Rice, Vegetables, Soy sauce..."
-                       defaultValue={recipe.ingredients}
-                       rows={4}
-                       className="w-full border rounded-xl p-3"
-                   />
-                   </div>
-       
-                   <div>
-                   <label className="block mb-2 font-medium">
-                       Cooking Instructions
-                   </label>
-       
-                   <textarea
-                   name="steps" 
-                       placeholder="Write step by step cooking guide..."
-                       rows={6}
-                       defaultValue={recipe.instructions}
-                       className="w-full border rounded-xl p-3"
-                   />
-                   </div>
-                  <div className="space-y-3">
-                        <img
-                            src={recipe.recipeImage}
-                            alt={recipe.recipeName}
-                            className="w-32 h-32 object-cover rounded-lg"
-                        />
+                {/* HEADER */}
+                <CardHeader className="flex flex-col text-center space-y-2 p-0">
+                  <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    🍽️ Edit Your Recipe
+                  </h1>
+                  <p className="text-zinc-400 text-sm">
+                    Customize your recipe details and cooking steps
+                  </p>
+                </CardHeader>
+        
+                <div className="space-y-8 p-0">
+        
+                  {/* GRID 1 */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+                    <Input label="Recipe Name" type="text" name="recipename" defaultValue={recipe.recipeName} />
+        
+                    {/* CATEGORY */}
+                    <Select className="w-full" name="category" placeholder={recipe.category}>
+                      <Label>Category</Label>
+                      <Select.Trigger>
+                        <Select.Value />
+                        <Select.Indicator />
+                      </Select.Trigger>
+                      <Select.Popover>
+                        <ListBox>
+                          <ListBox.Item id="breakfast">Breakfast</ListBox.Item>
+                          <ListBox.Item id="lunch">Lunch</ListBox.Item>
+                          <ListBox.Item id="dinner">Dinner</ListBox.Item>
+                          <ListBox.Item id="snack">Snack</ListBox.Item>
+                        </ListBox>
+                      </Select.Popover>
+                    </Select>
+        
+                    <Input label="Cuisine Type" defaultValue={recipe.cuisineType} name="type" placeholder="e.g. Chinese, Indian" />
+        
+                    {/* DIFFICULTY */}
+                    <Select className="w-full" name="difficulty" placeholder={recipe.difficultyLevel}>
+                      <Label>Difficulty Level</Label>
+                      <Select.Trigger>
+                        <Select.Value />
+                        <Select.Indicator />
+                      </Select.Trigger>
+                      <Select.Popover>
+                        <ListBox>
+                          <ListBox.Item id="easy">Easy</ListBox.Item>
+                          <ListBox.Item id="medium">Medium</ListBox.Item>
+                          <ListBox.Item id="hard">Hard</ListBox.Item>
+                        </ListBox>
+                      </Select.Popover>
+                    </Select>
+        
+                    <Input
+                      label="Preparation Time (minutes)" 
+                      defaultValue={recipe.preparationTime}
+                      name="preparation"
+                      placeholder="e.g. 30"
+                      type="number"
+                    />
+                  </div>
+        
+                  <div>
+                    <label className="block mb-2 font-medium text-xs uppercase tracking-wider text-zinc-300">
+                      Ingredients
+                    </label>
+        
+                    <textarea
+                      name="ingrediants" 
+                      placeholder="e.g. Rice, Vegetables, Soy sauce..."
+                      defaultValue={recipe.ingredients}
+                      rows={4}
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 text-white placeholder:text-zinc-600 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm transition-colors"
+                    />
+                  </div>
+        
+                  <div>
+                    <label className="block mb-2 font-medium text-xs uppercase tracking-wider text-zinc-300">
+                      Cooking Instructions
+                    </label>
+        
+                    <textarea
+                      name="steps" 
+                      placeholder="Write step-by-step cooking guide..."
+                      rows={6}
+                      defaultValue={recipe.instructions}
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 text-white placeholder:text-zinc-600 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm transition-colors"
+                    />
+                  </div>
 
-                        <Input
-                            label="Change Recipe Image (Optional)"
-                            type="file"
-                            name="recipeimage"
-                            accept="image/*"
-                        />
-                        </div>
-       
-                 {/* GRID 2 */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-       
-                  
-       
-                   {/* FEATURED */}
-                   <Select name="featured"  className="w-full" placeholder={recipe.isFeatured}>
-                     <Label>Featured Recipe</Label>
-                     <Select.Trigger>
-                       <Select.Value />
-                       <Select.Indicator />
-                     </Select.Trigger>
-                     <Select.Popover>
-                       <ListBox>
-                        
-                         <ListBox.Item id="false">No</ListBox.Item>
-                       </ListBox>
-                     </Select.Popover>
-                   </Select>
-       
-                   {/* STATUS */}
-                   <Select name="status"  className="w-full" placeholder={recipe.status}>
-                     <Label>Status</Label>
-                     <Select.Trigger>
-                       <Select.Value />
-                       <Select.Indicator />
-                     </Select.Trigger>
-                     <Select.Popover>
-                       <ListBox>
-                         <ListBox.Item id="published">Published</ListBox.Item>
-                        
-                       </ListBox>
-                     </Select.Popover>
-                   </Select>
-                 </div>
-       
-               </div>
-       
-               {/* BUTTONS */}
-               <CardFooter  className="flex flex-col md:flex-row gap-4 pt-4 p-0">
-       
-                 <Button type="submit"  className="
-                    w-full
-                  
-                    flex items-center justify-center
-                    md:w-auto
-                    md:min-w-[220px]
-                    bg-gradient-to-r
-                    from-orange-500
-                    to-emerald-500
-                    text-white
-                ">
-                    <FiEdit size={30} />
-                   Edit Recipe
-                 </Button>
-       
-               
-               </CardFooter>
-       
-             </Card>
+                  <div className="space-y-3 p-4 bg-zinc-950 rounded-2xl border border-zinc-800">
+                    <p className="text-xs uppercase tracking-wider font-semibold text-zinc-400">Current Image</p>
+                    <img
+                      src={recipe.recipeImage}
+                      alt={recipe.recipeName}
+                      className="w-32 h-32 object-cover rounded-xl border border-zinc-800"
+                    />
+
+                    <Input
+                      label="Change Recipe Image (Optional)"
+                      type="file"
+                      name="recipeimage"
+                      accept="image/*"
+                    />
+                  </div>
+        
+                  {/* GRID 2 */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+                    {/* FEATURED */}
+                    <Select name="featured" className="w-full" placeholder={recipe.isFeatured ? "Yes" : "No"}>
+                      <Label>Featured Recipe</Label>
+                      <Select.Trigger>
+                        <Select.Value />
+                        <Select.Indicator />
+                      </Select.Trigger>
+                      <Select.Popover>
+                        <ListBox>
+                          <ListBox.Item id="false">No</ListBox.Item>
+                        </ListBox>
+                      </Select.Popover>
+                    </Select>
+        
+                    {/* STATUS */}
+                    <Select name="status" className="w-full" placeholder={recipe.status}>
+                      <Label>Status</Label>
+                      <Select.Trigger>
+                        <Select.Value />
+                        <Select.Indicator />
+                      </Select.Trigger>
+                      <Select.Popover>
+                        <ListBox>
+                          <ListBox.Item id="published">Published</ListBox.Item>
+                        </ListBox>
+                      </Select.Popover>
+                    </Select>
+                  </div>
+        
+                </div>
+        
+                {/* BUTTONS */}
+                <CardFooter className="flex flex-col md:flex-row gap-4 pt-4 p-0">
+                  <Button type="submit" className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3.5 rounded-xl shadow-lg transition-colors">
+                    <FiEdit size={18} />
+                    <span>Save Changes</span>
+                  </Button>
+                </CardFooter>
+        
+              </Card>
             </form>
           </Modal.Dialog>
         </Modal.Container>
-            
       </Modal.Backdrop>
     </Modal>
   );
 }
-

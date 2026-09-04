@@ -1,4 +1,3 @@
-
 "use client";
 
 import { authClient } from "@/lib/auth-client";
@@ -53,44 +52,44 @@ function SigninPage() {
     console.log(error);
   };
 
-const HandleGoogleSignin = async () => {
-  await authClient.signIn.social({
-    provider: "google",
-  });
+  const HandleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
 
-  const session = await authClient.getSession();
+    const session = await authClient.getSession();
 
-  if (session.data?.user?.isBlocked) {
-    toast.error(
-      "You cannot login! Your account has been blocked by the admin.",
-      {
-        duration: 10000,
-      }
-    );
+    if (session.data?.user?.isBlocked) {
+      toast.error(
+        "You cannot login! Your account has been blocked by the admin.",
+        {
+          duration: 10000,
+        }
+      );
 
-    await authClient.signOut();
+      await authClient.signOut();
 
-    router.push("/");
-  }
-};
+      router.push("/");
+    }
+  };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 transition-colors duration-300 py-10 px-4">
-      <div className="w-full max-w-md rounded-3xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-2xl transition-colors duration-300 p-8">
-        {/* Logo */}
+    <section className="min-h-screen flex items-center justify-center bg-black py-12 px-4">
+      <div className="w-full max-w-md rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl p-8 sm:p-10">
+        {/* Logo Icon */}
         <div className="flex justify-center mb-6">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-100 text-3xl dark:bg-orange-500/20">
-            🍽️
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-950 border border-zinc-800 text-3xl shadow-inner">
+            🍳
           </div>
         </div>
 
         {/* Heading */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">
             Welcome Back
           </h1>
 
-          <p className="mt-2 text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-sm text-zinc-400">
             Sign in to access your RecipeHub account
           </p>
         </div>
@@ -98,92 +97,89 @@ const HandleGoogleSignin = async () => {
         <form onSubmit={Handlesignin} className="space-y-5">
           {/* Email */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Email Address
             </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <FaEnvelope className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 transition-colors focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500">
+              <FaEnvelope className="mr-3 text-zinc-500 shrink-0" />
 
               <input
                 type="email"
                 name="Email"
+                required
                 placeholder="Enter your email"
-                className="w-full bg-transparent text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none"
+                className="w-full bg-transparent text-white placeholder:text-zinc-600 text-sm outline-none"
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Password
             </label>
 
-            <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 px-4 py-3 transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
-              <FaLock className="mr-3 text-gray-400 dark:text-gray-500" />
+            <div className="flex items-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 transition-colors focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500">
+              <FaLock className="mr-3 text-zinc-500 shrink-0" />
 
               <input
                 type="password"
                 name="Password"
+                required
                 placeholder="Enter your password"
-                className="w-full bg-transparent text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none"
+                className="w-full bg-transparent text-white placeholder:text-zinc-600 text-sm outline-none"
               />
             </div>
           </div>
 
-          {/* Remember + Forgot */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex cursor-pointer items-center gap-2 text-gray-600 dark:text-gray-400">
+          {/* Remember */}
+          <div className="flex items-center justify-between text-xs">
+            <label className="flex cursor-pointer items-center gap-2 text-zinc-400">
               <input
                 type="checkbox"
-                className="h-4 w-4 accent-orange-500"
+                className="h-4 w-4 rounded border-zinc-700 bg-zinc-950 accent-emerald-500"
               />
               Remember me
             </label>
-
-            <Link
-              href="/forgot-password"
-              className="font-medium text-orange-500 hover:text-orange-600 transition"
-            >
-              Forgot Password?
-            </Link>
           </div>
 
-          {/* Sign In */}
+          {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full rounded-xl bg-orange-500 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:bg-orange-600 hover:shadow-xl"
+            className="w-full rounded-xl bg-emerald-600 py-3.5 font-semibold text-white text-sm shadow-lg shadow-emerald-950/50 transition-colors hover:bg-emerald-500"
           >
             Sign In
           </button>
 
           {/* Divider */}
           <div className="relative flex items-center justify-center py-2">
-
-
-            <span className="relative   px-4 text-sm text-orange-500 ">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-800"></div>
+            </div>
+            <span className="relative bg-zinc-900 px-3 text-xs text-zinc-500 uppercase tracking-wider">
               Or continue with
             </span>
           </div>
 
-          {/* Google */}
+          {/* Google Button */}
           <button
             type="button"
             onClick={HandleGoogleSignin}
-            className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 py-3 text-gray-700 dark:text-gray-200 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-zinc-700"
+            className="flex w-full items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-950 py-3 text-zinc-200 text-sm font-medium transition-colors hover:bg-zinc-800"
           >
-            <FaGoogle className="text-red-500" />
-            <span className="font-medium">Continue with Google</span>
-          </button> 
-                    {/* Sign Up */}
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+            <FaGoogle className="text-red-400" />
+            <span>Continue with Google</span>
+          </button>
+
+          {/* Sign Up Redirect */}
+          <p className="text-center text-xs text-zinc-400 pt-2">
             Don't have an account?{" "}
             <Link
               href="/signup"
-              className="font-semibold text-orange-500 transition hover:text-orange-600"
+              className="font-semibold text-emerald-400 transition hover:underline"
             >
-              Create Account
+              Create Free Account
             </Link>
           </p>
         </form>

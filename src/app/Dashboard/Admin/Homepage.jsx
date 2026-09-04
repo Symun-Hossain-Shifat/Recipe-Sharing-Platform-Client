@@ -27,88 +27,80 @@ export default function DashboardOverview({Users , Recipe , Report , PremiumMemb
   };
 
   return (
-    <div className="space-y-6 p-5">
+    <div className="space-y-8 p-6 bg-black text-white min-h-screen">
       {/* Header */}
-      <div >
-        <div>
-          <h1 className="text-3xl font-bold">Dashboard Overview</h1>
-          <p className="text-default-500">
-            Welcome back! Here's a quick summary of your activity.
-          </p>
-        </div>
-
-       
+      <div className="pb-6 border-b border-zinc-800">
+        <h1 className="text-3xl font-extrabold text-white tracking-tight">Admin Overview</h1>
+        <p className="text-zinc-400 text-sm mt-1">
+          System overview and platform performance statistics.
+        </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Total Recipes */}
-        <Card className="shadow-lg border">
-          <div className="flex flex-row items-center justify-between p-6">
+        <Card className="bg-zinc-900 border border-zinc-800 rounded-3xl shadow-xl hover:border-zinc-700 transition-all p-6 text-white">
+          <div className="flex flex-row items-center justify-between">
             <div>
-              <p className="text-default-500">Total Recipes</p>
-              <h2 className="text-3xl font-bold">
+              <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">Total Recipes</p>
+              <h2 className="text-3xl font-extrabold text-white mt-2">
                 {stats.Recipe}
               </h2>
             </div>
 
-            <div className="p-4 rounded-2xl bg-orange-100">
-              <BiBookOpen size={32} />
+            <div className="p-3.5 rounded-2xl bg-emerald-950/80 border border-emerald-800/50 text-emerald-400">
+              <BiBookOpen size={28} />
             </div>
           </div>
         </Card>
 
-        {/* Total report */}
-        <Card className="shadow-lg border">
-          <div className="flex flex-row items-center justify-between p-6">
+        {/* Total Report */}
+        <Card className="bg-zinc-900 border border-zinc-800 rounded-3xl shadow-xl hover:border-zinc-700 transition-all p-6 text-white">
+          <div className="flex flex-row items-center justify-between">
             <div>
-              <p className="text-default-500">Total Report</p>
-              <h2 className="text-3xl font-bold">
+              <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">Flagged Reports</p>
+              <h2 className="text-3xl font-extrabold text-white mt-2">
                 {stats.Report}
               </h2>
             </div>
 
-            <div className="p-4 rounded-2xl bg-pink-100">
-              <MdReport size={32} />
+            <div className="p-3.5 rounded-2xl bg-rose-950/80 border border-rose-800/50 text-rose-400">
+              <MdReport size={28} />
             </div>
           </div>
         </Card>
 
         {/* Total User */}
-        <Card className="shadow-lg border">
-          <div className="flex flex-row items-center justify-between p-6">
+        <Card className="bg-zinc-900 border border-zinc-800 rounded-3xl shadow-xl hover:border-zinc-700 transition-all p-6 text-white">
+          <div className="flex flex-row items-center justify-between">
             <div>
-              <p className="text-default-500">Total User</p>
-              <h2 className="text-3xl font-bold">
+              <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">Total Users</p>
+              <h2 className="text-3xl font-extrabold text-white mt-2">
                 {stats.Users}
               </h2>
             </div>
 
-            <div className="p-4 rounded-2xl bg-blue-100">
-              <FaUserShield size={32} />
+            <div className="p-3.5 rounded-2xl bg-blue-950/80 border border-blue-800/50 text-blue-400">
+              <FaUserShield size={28} />
             </div>
           </div>
         </Card>
 
-
-         {/* Total Premium Member */}
-        <Card className="shadow-lg border">
-          <div className="flex flex-row items-center justify-between p-6">
+        {/* Total Premium Member */}
+        <Card className="bg-zinc-900 border border-zinc-800 rounded-3xl shadow-xl hover:border-zinc-700 transition-all p-6 text-white">
+          <div className="flex flex-row items-center justify-between">
             <div>
-              <p className="text-default-500">Total Premium User</p>
-              <h2 className="text-3xl font-bold">
+              <p className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">Premium Users</p>
+              <h2 className="text-3xl font-extrabold text-white mt-2">
                 {stats.PremiumMember}
               </h2>
             </div>
 
-            <div className="p-4 rounded-2xl bg-blue-100">
-              <MdOutlineWorkspacePremium size={32} />
+            <div className="p-3.5 rounded-2xl bg-amber-950/80 border border-amber-800/50 text-amber-400">
+              <MdOutlineWorkspacePremium size={28} />
             </div>
           </div>
         </Card>
-
-
-
       </div>
     </div>
   );

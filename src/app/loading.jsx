@@ -4,10 +4,10 @@ import { Spinner } from "@heroui/react";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen  flex flex-col items-center justify-center gap-6">
-      <Spinner size="lg" color="primary" />
-      <p className="text-black dark:text-white text-sm tracking-widest uppercase">
-        Loading...
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-4 px-4">
+      <Spinner size="lg" color="success" />
+      <p className="text-zinc-400 text-xs font-medium tracking-widest uppercase animate-pulse">
+        Loading RecipeHub...
       </p>
     </div>
   );

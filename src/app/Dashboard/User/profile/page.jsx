@@ -101,19 +101,19 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen dark:bg-black bg-orange-50 p-6">
+    <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-5xl mx-auto space-y-6">
 
         {/* HEADER */}
-        <div className="flex justify-between items-center  p-4 rounded-2xl border border-orange-100">
-          <h1 className="text-xl font-bold text-orange-600">
+        <div className="flex justify-between items-center bg-zinc-900 p-4 sm:p-6 rounded-3xl border border-zinc-800 shadow-xl">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
             My Profile
           </h1>
 
           <Button
-           variant="danger-soft"
+            variant="danger-soft"
             onClick={handleLogout}
-            className="flex items-center gap-2 text-red-500 hover:text-red-600"
+            className="flex items-center gap-2 bg-rose-950/80 hover:bg-rose-900 border border-rose-800/60 text-rose-300 px-4 py-2 rounded-xl text-xs font-semibold transition-colors"
           >
             <LogOut size={16} />
             Logout
@@ -121,141 +121,143 @@ export default function ProfilePage() {
         </div>
 
         {/* PROFILE CARD */}
-        <div className="rounded-2xl p-6 flex items-center gap-6 border border-orange-100">
+        <div className="bg-zinc-900 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 border border-zinc-800 shadow-xl">
 
-          <div className="relative">
+          <div className="relative shrink-0">
             <img
               src={user.image || 'https://via.placeholder.com/100'}
-              className="w-24 h-24 rounded-full object-cover border-4 border-orange-200"
+              className="w-24 h-24 rounded-full object-cover border-4 border-zinc-800 shadow-lg"
               alt="profile"
             />
-            <label className="absolute bottom-0 right-0  text-white dark: p-1 rounded-full cursor-pointer">
+            <label className="absolute bottom-0 right-0 bg-emerald-600 text-white p-2 rounded-full cursor-pointer shadow-md">
               <Camera size={14} />
             </label>
           </div>
 
-          <div className="flex-1">
-            <h2 className="text-xl font-bold flex items-center gap-2">
+          <div className="flex-1 text-center sm:text-left">
+            <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center justify-center sm:justify-start gap-2">
               {user.name}
               {isPremium && (
-                <span className="text-orange-500 flex items-center gap-1 text-sm">
-                  <Crown size={16} />
+                <span className="text-amber-400 flex items-center gap-1 text-xs font-semibold bg-amber-950/70 border border-amber-800/60 px-2.5 py-0.5 rounded-full">
+                  <Crown size={14} />
                   Premium
                 </span>
               )}
             </h2>
 
-            <p className="text-gray-500">{user.email}</p>
+            <p className="text-zinc-400 text-sm mt-1">{user.email}</p>
           </div>
-{/* 
-        <Button
-           variant="danger-soft"
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-red-500 hover:text-red-600"
-          >
-            <LogOut size={16} />
-            Logout
-          </Button> */}
         </div>
 
         {/* TABS */}
-        <div className="flex  p-2 rounded-xl border border-orange-100">
+        <div className="flex bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800">
           {['overview', 'settings', 'premium'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 p-2 rounded-lg text-sm font-medium ${
+              className={`flex-1 py-2.5 rounded-xl text-xs font-semibold transition-colors uppercase tracking-wider ${
                 activeTab === tab
-                  ? 'bg-orange-500 text-white'
-                  : 'text-gray-600 hover:bg-orange-50'
+                  ? 'bg-emerald-600 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
               }`}
             >
-              {tab.toUpperCase()}
+              {tab}
             </button>
           ))}
         </div>
 
         {/* CONTENT */}
-        <div className=" p-6 rounded-2xl border border-orange-100">
+        <div className="bg-zinc-900 p-6 sm:p-8 rounded-3xl border border-zinc-800 shadow-xl">
 
           {/* OVERVIEW */}
           {activeTab === 'overview' && (
-            <div className="space-y-2">
-              <p className="text-gray-600">
-                {user.name}
-              </p>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Account Name</p>
+                <p className="text-lg font-bold text-white mt-1">{user.name}</p>
+              </div>
 
-              <div className="flex gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1">
-                  <MapPin size={14} />
-                  {user.location || 'Not Found'}
+              <div className="flex flex-wrap gap-4 pt-4 border-t border-zinc-800 text-sm text-zinc-400">
+                <span className="flex items-center gap-2 bg-zinc-950 px-4 py-2 rounded-xl border border-zinc-800">
+                  <Mail size={16} className="text-emerald-400" />
+                  <span>{user.email}</span>
                 </span>
-
-              
+                <span className="flex items-center gap-2 bg-zinc-950 px-4 py-2 rounded-xl border border-zinc-800">
+                  <MapPin size={16} className="text-emerald-400" />
+                  <span>{user.location || 'Location Not Specified'}</span>
+                </span>
               </div>
             </div>
           )}
 
           {/* SETTINGS */}
           {activeTab === 'settings' && (
-             <form  onSubmit={GetNewUserData} className="space-y-4">
-            
-                          <input
-                            className="w-full border border-orange-200 p-2 rounded"
-                            type='text'
-                            placeholder='Enter Your Name' 
-                            name='Name'
-                            required
-                            
-                           
-                          />
-            
-                          <input
-                            className="w-full border border-orange-200 p-2 rounded"
-                            placeholder='Enter Your Image URL'
-                            type='url' 
-                            name='Image' 
-                            required
-                            
-                          />
-            
-                          <button type='submit' className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
-                            {isSaved ? (
-                              <>
-                                <Check size={14} /> Saved
-                              </>
-                            ) : (
-                              'Save Changes'
-                            )}
-                          </button>
-                        </form>
+            <form onSubmit={GetNewUserData} className="space-y-4 max-w-lg">
+              <div>
+                <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                  Full Name
+                </label>
+                <input
+                  className="w-full bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-600 p-3 rounded-xl outline-none focus:border-emerald-500 text-sm transition-colors"
+                  type="text"
+                  placeholder="Enter Your Name" 
+                  name="Name"
+                  defaultValue={user.name}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                  Profile Image URL
+                </label>
+                <input
+                  className="w-full bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-600 p-3 rounded-xl outline-none focus:border-emerald-500 text-sm transition-colors"
+                  placeholder="Enter Your Image URL"
+                  type="url" 
+                  name="Image"
+                  defaultValue={user.image}
+                  required
+                />
+              </div>
+
+              <button type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors shadow-lg shadow-emerald-950/40">
+                {isSaved ? (
+                  <span className="flex items-center gap-2">
+                    <Check size={16} /> Saved
+                  </span>
+                ) : (
+                  'Save Changes'
+                )}
+              </button>
+            </form>
           )}
 
           {/* PREMIUM */}
           {activeTab === 'premium' && (
-            <div className="space-y-3">
-
-              <h2 className="text-lg font-bold text-orange-600">
+            <div className="space-y-4">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 Upgrade to Premium 👑
               </h2>
 
-              <ul className="text-sm text-gray-600">
-                <li>✔ Unlimited recipe upload</li>
-                <li>✔ Premium badge</li>
-                <li>✔ Priority listing</li>
+              <ul className="text-sm text-zinc-300 space-y-2">
+                <li className="flex items-center gap-2"><Check size={16} className="text-emerald-400" /> Unlimited recipe uploads</li>
+                <li className="flex items-center gap-2"><Check size={16} className="text-emerald-400" /> Verified chef badge</li>
+                <li className="flex items-center gap-2"><Check size={16} className="text-emerald-400" /> Priority recipe search listing</li>
               </ul>
 
               { user?.isPremium === 'Free' ? (
                 <button
-                  
-                  className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+                  onClick={() => router.push('/plans')}
+                  className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 rounded-xl text-sm transition-colors shadow-lg shadow-amber-950/40"
                 >
-                  Pay with Stripe
+                  Upgrade to Premium
                 </button>
               ) : (
-                <p className="text-green-600">
-                  You are already Premium 🎉
-                </p>
+                <div className="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 px-4 py-2 rounded-xl text-sm font-semibold">
+                  <Check size={16} />
+                  <span>You are already a Premium Member 🎉</span>
+                </div>
               )}
             </div>
           )}

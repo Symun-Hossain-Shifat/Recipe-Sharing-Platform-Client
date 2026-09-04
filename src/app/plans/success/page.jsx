@@ -60,16 +60,16 @@ export default async function Success({ searchParams }) {
     });
 
     return (
-      <main className="min-h-screen dark:bg-black flex items-center justify-center px-4 py-10">
-        <div className="w-full max-w-lg bg-white border border-gray-200 rounded-3xl p-8 md:p-10 text-center shadow-2xl">
+      <main className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-3xl p-8 md:p-10 text-center shadow-2xl">
 
           {/* Success Animation */}
           <div className="relative inline-flex items-center justify-center mb-7">
-            <span className="absolute w-24 h-24 rounded-full bg-green-400 animate-ping opacity-20" />
+            <span className="absolute w-24 h-24 rounded-full bg-emerald-400 animate-ping opacity-20" />
 
-            <div className="relative w-20 h-20 rounded-full bg-green-50 border border-green-300 flex items-center justify-center">
+            <div className="relative w-20 h-20 rounded-full bg-emerald-950/80 border border-emerald-800 flex items-center justify-center shadow-xl">
               <svg
-                className="w-10 h-10 text-green-600"
+                className="w-10 h-10 text-emerald-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -85,18 +85,18 @@ export default async function Success({ searchParams }) {
           </div>
 
           {/* Header */}
-          <p className="text-[11px] tracking-[0.3em] uppercase text-orange-500 mb-2">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
             Premium Activated
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-3">
             Welcome to RecipeHub Premium 🎉
           </h1>
 
-          <p className="text-gray-600 text-sm leading-relaxed mb-8">
+          <p className="text-zinc-400 text-sm leading-relaxed mb-8">
             Your premium membership has been successfully activated.
             A confirmation has been sent to{" "}
-            <span className="text-gray-900 font-medium">
+            <span className="text-zinc-200 font-medium">
               {customerEmail}
             </span>
           </p>
@@ -120,21 +120,21 @@ export default async function Success({ searchParams }) {
             ].map(({ label, value, active }) => (
               <div
                 key={label}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-3"
+                className="bg-zinc-950 border border-zinc-800 rounded-xl p-3"
               >
-                <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-1">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-500 mb-1">
                   {label}
                 </p>
 
                 <p
                   className={`text-sm font-semibold ${
                     active
-                      ? "text-green-600 flex items-center justify-center gap-1"
-                      : "text-gray-900"
+                      ? "text-emerald-400 flex items-center justify-center gap-1"
+                      : "text-white"
                   }`}
                 >
                   {active && (
-                    <span className="w-2 h-2 rounded-full bg-green-500" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
                   )}
                   {value}
                 </p>
@@ -143,12 +143,12 @@ export default async function Success({ searchParams }) {
           </div>
 
           {/* Premium Benefits */}
-          <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 mb-5 text-left">
-            <h3 className="text-gray-900 font-semibold mb-4">
+          <div className="bg-emerald-950/40 border border-emerald-800/40 rounded-2xl p-5 mb-5 text-left">
+            <h3 className="text-emerald-400 font-semibold mb-4 text-sm">
               Premium Benefits Unlocked 🚀
             </h3>
 
-            <ul className="space-y-3 text-sm text-gray-600">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-300">
               <li>✓ Create & Share Unlimited Recipes</li>
               <li>✓ Premium Member Badge</li>
               <li>✓ Enhanced Recipe Visibility</li>
@@ -158,7 +158,7 @@ export default async function Success({ searchParams }) {
           </div>
 
           {/* Details */}
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden mb-6">
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden mb-6">
             {[
               {
                 label: "Premium Account",
@@ -175,13 +175,13 @@ export default async function Success({ searchParams }) {
             ].map(({ label, value }) => (
               <div
                 key={label}
-                className="flex justify-between items-center px-4 py-3 border-b border-gray-200 last:border-b-0"
+                className="flex justify-between items-center px-4 py-3 border-b border-zinc-800 last:border-b-0"
               >
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-zinc-500">
                   {label}
                 </span>
 
-                <span className="text-xs text-gray-800 truncate max-w-[180px]">
+                <span className="text-xs text-zinc-300 truncate max-w-[180px]">
                   {value}
                 </span>
               </div>
@@ -192,25 +192,25 @@ export default async function Success({ searchParams }) {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/Recipes"
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-xl transition-all text-center"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 px-4 rounded-xl transition-all text-center text-sm shadow-lg shadow-emerald-950/40"
             >
               Explore Recipes
             </Link>
 
             <Link
               href={`/Dashboard/${User?.role}`}
-              className="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-xl transition-all text-center"
+              className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-medium py-3 px-4 rounded-xl transition-all text-center text-sm"
             >
               Go to Dashboard
             </Link>
           </div>
 
           {/* Footer */}
-          <p className="text-xs text-gray-500 mt-6">
+          <p className="text-xs text-zinc-500 mt-6">
             Need help? Contact{" "}
             <a
               href="mailto:support@recipehub.com"
-              className="text-orange-500 hover:underline"
+              className="text-emerald-400 hover:underline"
             >
               support@recipehub.com
             </a>
@@ -253,16 +253,16 @@ export default async function Success({ searchParams }) {
   });
 
   return (
-    <main className="min-h-screen  dark:bg-black flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-xl bg-white border border-gray-200 rounded-3xl p-8 md:p-10 shadow-2xl">
+    <main className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-xl bg-zinc-900 border border-zinc-800 rounded-3xl p-8 md:p-10 shadow-2xl">
 
         {/* Success Animation */}
         <div className="relative flex justify-center mb-7">
-          <span className="absolute w-24 h-24 rounded-full bg-green-400 animate-ping opacity-20" />
+          <span className="absolute w-24 h-24 rounded-full bg-emerald-400 animate-ping opacity-20" />
 
-          <div className="relative w-20 h-20 rounded-full bg-green-50 border border-green-300 flex items-center justify-center">
+          <div className="relative w-20 h-20 rounded-full bg-emerald-950/80 border border-emerald-800 flex items-center justify-center shadow-xl">
             <svg
-              className="w-10 h-10 text-green-600"
+              className="w-10 h-10 text-emerald-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -279,15 +279,15 @@ export default async function Success({ searchParams }) {
 
         {/* Header */}
 
-        <p className="text-[11px] tracking-[0.3em] uppercase text-orange-500 text-center mb-2">
+        <p className="text-[11px] tracking-[0.3em] uppercase text-emerald-400 font-bold text-center mb-2">
           Recipe Purchased Successfully
         </p>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-white mb-3">
           Enjoy Your Premium Recipe 🍽️
         </h1>
 
-        <p className="text-gray-600 text-sm leading-relaxed text-center mb-8">
+        <p className="text-zinc-400 text-sm leading-relaxed text-center mb-8">
           Your payment has been completed successfully.
           This premium recipe has been added to your account and can now be
           accessed anytime.
@@ -313,21 +313,21 @@ export default async function Success({ searchParams }) {
           ].map(({ label, value, active }) => (
             <div
               key={label}
-              className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center"
+              className="bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-center"
             >
-              <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-1">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 mb-1">
                 {label}
               </p>
 
               <p
                 className={`text-sm font-semibold ${
                   active
-                    ? "text-green-600 flex items-center justify-center gap-1"
-                    : "text-gray-900"
+                    ? "text-emerald-400 flex items-center justify-center gap-1"
+                    : "text-white"
                 }`}
               >
                 {active && (
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 )}
 
                 {value}
@@ -338,12 +338,12 @@ export default async function Success({ searchParams }) {
 
         {/* Benefits */}
 
-        <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 mb-6">
-          <h3 className="text-gray-900 font-semibold mb-4">
+        <div className="bg-emerald-950/40 border border-emerald-800/40 rounded-2xl p-5 mb-6">
+          <h3 className="text-emerald-400 font-semibold mb-4 text-sm">
             What You Unlocked 🍳
           </h3>
 
-          <ul className="space-y-3 text-sm text-gray-600">
+          <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-300">
             <li>✓ Full Recipe Access</li>
             <li>✓ Complete Ingredients List</li>
             <li>✓ Step-by-Step Cooking Instructions</li>
@@ -354,7 +354,7 @@ export default async function Success({ searchParams }) {
 
         {/* Purchase Details */}
 
-        <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden mb-6">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden mb-6">
           {[
             {
               label: "Purchased By",
@@ -371,13 +371,13 @@ export default async function Success({ searchParams }) {
           ].map(({ label, value }) => (
             <div
               key={label}
-              className="flex justify-between items-center px-4 py-3 border-b border-gray-200 last:border-b-0"
+              className="flex justify-between items-center px-4 py-3 border-b border-zinc-800 last:border-b-0"
             >
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-zinc-500">
                 {label}
               </span>
 
-              <span className="text-xs font-medium text-gray-800 truncate max-w-[180px]">
+              <span className="text-xs font-medium text-zinc-300 truncate max-w-[180px]">
                 {value}
               </span>
             </div>
@@ -389,14 +389,14 @@ export default async function Success({ searchParams }) {
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href={`/Recipes/${metadata.recipeId}`}
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-xl transition text-center"
+            className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-xl transition text-center text-sm shadow-lg shadow-emerald-950/40"
           >
             View Recipe
           </Link>
 
           <Link
             href="/Recipes"
-            className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-xl transition text-center"
+            className="flex-1 border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium py-3 rounded-xl transition text-center text-sm"
           >
             Browse Recipes
           </Link>
@@ -404,7 +404,7 @@ export default async function Success({ searchParams }) {
 
         {/* Footer */}
 
-        <p className="text-xs text-gray-500 text-center mt-6">
+        <p className="text-xs text-zinc-500 text-center mt-6">
           Thank you for supporting RecipeHub ❤️
           <br />
           Happy Cooking!
