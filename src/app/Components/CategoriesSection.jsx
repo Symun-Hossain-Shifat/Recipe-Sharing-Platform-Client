@@ -1,7 +1,35 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Utensils, Flame, Leaf, Cake, Soup, Timer, ArrowRight, Sparkles } from "lucide-react";
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+    scale: 0.96,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 110,
+      damping: 15,
+    },
+  },
+};
 
 export default function CategoriesSection() {
   const categories = [
@@ -64,14 +92,31 @@ export default function CategoriesSection() {
   return (
     <section className="py-20 bg-black text-white relative overflow-hidden">
       {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.05, 0.12, 0.05],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+        >
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} />
               <span>Explore Cuisines</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
@@ -82,54 +127,70 @@ export default function CategoriesSection() {
             </p>
           </div>
 
-          <Link
-            href="/Recipes"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 text-zinc-200 hover:text-white text-sm font-semibold transition-all duration-300 group self-start md:self-auto"
-          >
-            <span>View All Categories</span>
-            <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+          <Link href="/Recipes">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 text-zinc-200 hover:text-white text-sm font-semibold transition-all duration-300 group self-start md:self-auto shadow-md"
+            >
+              <span>View All Categories</span>
+              <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (
-              <Link
-                key={cat.id}
-                href="/Recipes"
-                className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-emerald-500/50 hover:bg-zinc-900/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/30"
-              >
-                <div>
-                  {/* Top Bar inside Card */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className={`p-3.5 rounded-xl bg-gradient-to-br ${cat.color} border`}>
-                      <Icon className="w-6 h-6" />
+              <Link key={cat.id} href="/Recipes" className="block">
+                <motion.div
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 250, damping: 18 }}
+                  className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-emerald-500/50 hover:bg-zinc-900/90 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-950/30 h-full"
+                >
+                  <div>
+                    {/* Top Bar inside Card */}
+                    <div className="flex items-center justify-between mb-5">
+                      <motion.div
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className={`p-3.5 rounded-xl bg-gradient-to-br ${cat.color} border`}
+                      >
+                        <Icon className="w-6 h-6" />
+                      </motion.div>
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800 group-hover:border-zinc-700 transition-colors">
+                        {cat.count}
+                      </span>
                     </div>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800 group-hover:border-zinc-700 transition-colors">
-                      {cat.count}
-                    </span>
+
+                    {/* Title & Description */}
+                    <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                      {cat.title}
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                      {cat.description}
+                    </p>
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
-                    {cat.title}
-                  </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                    {cat.description}
-                  </p>
-                </div>
-
-                {/* Card Footer Link Hint */}
-                <div className="flex items-center text-xs font-semibold text-zinc-500 group-hover:text-emerald-400 transition-colors pt-4 border-t border-zinc-900 group-hover:border-zinc-800/60">
-                  <span>Explore recipes</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1.5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </div>
+                  {/* Card Footer Link Hint */}
+                  <div className="flex items-center text-xs font-semibold text-zinc-500 group-hover:text-emerald-400 transition-colors pt-4 border-t border-zinc-900 group-hover:border-zinc-800/60">
+                    <span>Explore recipes</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                  </div>
+                </motion.div>
               </Link>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

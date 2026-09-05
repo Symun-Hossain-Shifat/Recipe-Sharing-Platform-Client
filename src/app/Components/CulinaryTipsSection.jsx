@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChefHat, Lightbulb, Clock, BookOpen, CheckCircle2, ChevronRight, Award } from "lucide-react";
 
 export default function CulinaryTipsSection() {
@@ -17,9 +18,9 @@ export default function CulinaryTipsSection() {
       keyTakeaways: [
         "Preheat stainless steel pans dry until water drops dance (Leidenfrost effect).",
         "Pat all meat completely dry with paper towels before seasoning.",
-        "Avoid crowding the pan to allow steam to escape rather than boiling."
+        "Avoid crowding the pan to allow steam to escape rather than boiling.",
       ],
-      proTip: "Never flip protein too early; when the sear is ready, it naturally releases from the pan surface."
+      proTip: "Never flip protein too early; when the sear is ready, it naturally releases from the pan surface.",
     },
     {
       id: "herb-storage",
@@ -31,9 +32,9 @@ export default function CulinaryTipsSection() {
       keyTakeaways: [
         "Trim stems and place tender herbs in a small glass jar with 1 inch of water.",
         "Cover loosely with a reusable silicone bag or plastic wrapping in the fridge.",
-        "Keep basil at room temperature away from direct sunlight."
+        "Keep basil at room temperature away from direct sunlight.",
       ],
-      proTip: "Freeze woodier herbs (rosemary, thyme) in olive oil using ice cube trays for instant cooking bases."
+      proTip: "Freeze woodier herbs (rosemary, thyme) in olive oil using ice cube trays for instant cooking bases.",
     },
     {
       id: "flavor-balancing",
@@ -45,9 +46,9 @@ export default function CulinaryTipsSection() {
       keyTakeaways: [
         "Too salty? Add a raw potato slice or splash of cream/acid to balance.",
         "Too acidic? Balance with a tiny pinch of baking soda or honey.",
-        "Too spicy? Dairy (yogurt, coconut milk) or peanut butter neutralizes capsaicin."
+        "Too spicy? Dairy (yogurt, coconut milk) or peanut butter neutralizes capsaicin.",
       ],
-      proTip: "Always taste at room temperature near the end of cooking — cold dulls flavors, heat intensifies saltiness."
+      proTip: "Always taste at room temperature near the end of cooking — cold dulls flavors, heat intensifies saltiness.",
     },
     {
       id: "knife-skills",
@@ -59,42 +60,71 @@ export default function CulinaryTipsSection() {
       keyTakeaways: [
         "Stack leaves flat, roll them tightly like a cigar, and slice crosswise thinly.",
         "Keep your chef's knife blade razor sharp so it cuts rather than crushes cell walls.",
-        "Slice once through; repeatedly rocking the knife over chopped herbs causes browning."
+        "Slice once through; repeatedly rocking the knife over chopped herbs causes browning.",
       ],
-      proTip: "Dry herbs completely after washing before touching them with a knife blade."
-    }
+      proTip: "Dry herbs completely after washing before touching them with a knife blade.",
+    },
   ];
 
   return (
     <section className="py-20 bg-black text-white relative border-t border-zinc-900 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/5 blur-[100px] rounded-full pointer-events-none" />
+      <motion.div
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.05, 0.15, 0.05],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/10 blur-[100px] rounded-full pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-teal-400 text-xs font-semibold uppercase tracking-wider mb-4">
             <ChefHat className="w-3.5 h-3.5" />
             <span>Chef's Academy</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-            Culinary Tips & <span className="bg-gradient-to-r from-teal-400 to-emerald-300 bg-clip-text text-transparent">Kitchen Hacks</span>
+            Culinary Tips &{" "}
+            <span className="bg-gradient-to-r from-teal-400 to-emerald-300 bg-clip-text text-transparent">
+              Kitchen Hacks
+            </span>
           </h2>
           <p className="mt-4 text-zinc-400 text-base sm:text-lg">
-            Master fundamental cooking secrets and techniques shared by passionate home cooks and professional chefs.
+            Master fundamental cooking secrets and techniques shared by passionate home cooks and
+            professional chefs.
           </p>
-        </div>
+        </motion.div>
 
         {/* Responsive Interactive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Navigation Buttons / List */}
-          <div className="lg:col-span-5 flex flex-col gap-3">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 flex flex-col gap-3"
+          >
             {tips.map((tip, idx) => {
               const isSelected = activeTab === idx;
               return (
-                <button
+                <motion.button
                   key={tip.id}
                   onClick={() => setActiveTab(idx)}
+                  whileHover={{ x: 6 }}
+                  whileTap={{ scale: 0.98 }}
                   className={`text-left p-5 rounded-2xl border transition-all duration-300 flex items-start justify-between group ${
                     isSelected
                       ? "bg-zinc-900 border-emerald-500/60 shadow-lg shadow-emerald-950/20 text-white"
@@ -103,9 +133,13 @@ export default function CulinaryTipsSection() {
                 >
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
-                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-md ${
-                        isSelected ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" : "bg-zinc-900 text-zinc-500"
-                      }`}>
+                      <span
+                        className={`text-xs font-semibold px-2 py-0.5 rounded-md ${
+                          isSelected
+                            ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                            : "bg-zinc-900 text-zinc-500"
+                        }`}
+                      >
                         {tip.category}
                       </span>
                       <span className="text-xs text-zinc-500 flex items-center gap-1">
@@ -118,68 +152,102 @@ export default function CulinaryTipsSection() {
                     </h3>
                   </div>
 
-                  <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${
-                    isSelected ? "translate-x-1 text-emerald-400" : "text-zinc-600 group-hover:text-zinc-400"
-                  }`} />
-                </button>
+                  <ChevronRight
+                    className={`w-5 h-5 transition-transform duration-300 ${
+                      isSelected
+                        ? "translate-x-1 text-emerald-400"
+                        : "text-zinc-600 group-hover:text-zinc-400"
+                    }`}
+                  />
+                </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
-          {/* Right Featured Tip Active Card */}
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 relative flex flex-col justify-between min-h-[420px]">
-            <div>
-              {/* Card Meta */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-zinc-800">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <Lightbulb className="w-5 h-5" />
+          {/* Right Featured Tip Active Card with AnimatePresence */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 relative flex flex-col justify-between min-h-[420px] shadow-xl overflow-hidden"
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tips[activeTab].id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col justify-between h-full"
+              >
+                <div>
+                  {/* Card Meta */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-zinc-800">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <Lightbulb className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">
+                          {tips[activeTab].category} Guide
+                        </span>
+                        <h4 className="text-lg font-bold text-white">
+                          {tips[activeTab].title}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800 text-xs font-medium text-zinc-300">
+                      <Award className="w-3.5 h-3.5 text-amber-400" />
+                      <span>{tips[activeTab].level}</span>
+                    </div>
                   </div>
+
+                  {/* Summary */}
+                  <p className="my-6 text-zinc-300 text-base leading-relaxed italic border-l-2 border-emerald-500 pl-4 py-1 bg-zinc-950/40 rounded-r-xl">
+                    "{tips[activeTab].summary}"
+                  </p>
+
+                  {/* Key Takeaways Checklist */}
+                  <div className="space-y-3 mb-8">
+                    <h5 className="text-xs uppercase tracking-wider font-semibold text-zinc-400 flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+                      Key Action Steps
+                    </h5>
+                    {tips[activeTab].keyTakeaways.map((step, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1, duration: 0.3 }}
+                        className="flex items-start gap-3 text-sm text-zinc-200"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>{step}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pro Tip Highlight Footer Box */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3, duration: 0.3 }}
+                  className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-xs sm:text-sm flex items-start gap-3"
+                >
+                  <ChefHat className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">
-                      {tips[activeTab].category} Guide
+                    <span className="font-bold text-emerald-400 uppercase text-[11px] tracking-wider block mb-0.5">
+                      Chef's Secret Pro Tip
                     </span>
-                    <h4 className="text-lg font-bold text-white">
-                      {tips[activeTab].title}
-                    </h4>
+                    <p className="text-emerald-100/90">{tips[activeTab].proTip}</p>
                   </div>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-950 border border-zinc-800 text-xs font-medium text-zinc-300">
-                  <Award className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{tips[activeTab].level}</span>
-                </div>
-              </div>
-
-              {/* Summary */}
-              <p className="my-6 text-zinc-300 text-base leading-relaxed italic border-l-2 border-emerald-500 pl-4 py-1 bg-zinc-950/40 rounded-r-xl">
-                "{tips[activeTab].summary}"
-              </p>
-
-              {/* Key Takeaways Checklist */}
-              <div className="space-y-3 mb-8">
-                <h5 className="text-xs uppercase tracking-wider font-semibold text-zinc-400 flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
-                  Key Action Steps
-                </h5>
-                {tips[activeTab].keyTakeaways.map((step, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-zinc-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{step}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Pro Tip Highlight Footer Box */}
-            <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs sm:text-sm flex items-start gap-3">
-              <ChefHat className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold text-emerald-400 uppercase text-[11px] tracking-wider block mb-0.5">Chef's Secret Pro Tip</span>
-                <p className="text-emerald-100/90">{tips[activeTab].proTip}</p>
-              </div>
-            </div>
-          </div>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineLike } from "react-icons/ai";
 import { Getspecificrecipesbylikes } from "@/lib/GetApiData/recipe";
-import { ChefHat, ChefHatIcon, SearchX } from "lucide-react";
+import { ChefHat, SearchX } from "lucide-react";
 import { GetUserInserver } from "@/lib/GetUser/Getuserinfo";
+import AnimatedLikesGrid from "./AnimatedLikesGrid";
 
 async function LikesRecipesection() {
   const user = await GetUserInserver();
@@ -61,67 +60,7 @@ async function LikesRecipesection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {recipes.map((recipe) => (
-          <div
-            key={recipe._id}
-            className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all duration-300 flex flex-col group shadow-xl"
-          >
-            <div className="relative w-full h-52 overflow-hidden bg-zinc-950">
-              <Image
-                src={recipe.recipeImage}
-                alt={recipe.recipeName}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-zinc-700/60 flex items-center gap-1.5 text-xs text-white">
-                <AiOutlineLike className="text-emerald-400" />
-                <span className="font-semibold">{recipe.likesCount || 0}</span>
-              </div>
-            </div>
-
-            <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-              <div>
-                <h3 className="text-lg font-bold text-white line-clamp-1 group-hover:text-emerald-400 transition-colors">
-                  {recipe.recipeName}
-                </h3>
-
-                <p className="text-xs text-zinc-400 mt-1">
-                  By <span className="text-zinc-200 font-medium">{recipe.authorName}</span>
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
-                <span className="text-xs text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded-lg">
-                  {recipe.category || 'Recipe'}
-                </span>
-
-                <Link
-                  href={user?.email ? `/Recipes/${recipe._id}` : '/unauthorized'}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-colors shadow-md"
-                >
-                  View Details
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-12">
-        <Link href="/Recipes">
-          <button
-            className="group flex items-center gap-2.5 px-8 py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold rounded-2xl border border-zinc-800 hover:border-zinc-700 transition-all shadow-xl"
-          >
-            <ChefHatIcon
-              size={18}
-              className="text-emerald-400 group-hover:rotate-12 transition-transform duration-300"
-            />
-            Explore All Recipes
-          </button>
-        </Link>
-      </div>
-
+      <AnimatedLikesGrid recipes={recipes} user={user} />
     </section>
   );
 }
